@@ -14,44 +14,42 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="./js/jquery-2.1.4.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
+    <style>
+        img{
 
+            opacity: 0.4;
+
+        }
+
+    </style>
+	
 </head>
 
-<body onload="drawBoard();">
+<body onload="init()">
     <div class="container marketing">
         <div class="row">
-            <div class="col-lg-3">
-                <img class="img-circle" src="ruler.png" alt="ruler" width="50" height="50" onclick ="showRuler()";
-              >
-                <h2>Ruler</h2>
-                <button id="showRuler" class="btn btn-default">Show</button>
-                <button id="hideRuler" class="btn btn-default">Hide</button>
+            <div class="row">
                 
-
             </div>
-            <!-- /.col-lg-4 -->
-            <div class="col-lg-3">
-                <img class="img-circle" src="compass.png" alt="Generic placeholder image" width="50" height="50">
-                <h2>Compass</h2>
-				<button id="showCompass" class="btn btn-default">Show</button>
-                <button id="hideCompass" class="btn btn-default">Hide</button>
-
-
-            </div>
-            <!-- /.col-lg-4 -->
-            <div class="col-lg-3">
-                <img class="img-circle" src="label.png" alt="Generic placeholder image" width="50" height="50">
-                <h2>Label</h2>
-				<button id="showLabel" class="btn btn-default">Show</button>
-                <button id="hideLabel" class="btn btn-default">Hide</button>
-
-            </div>
-            <!-- /.col-lg-4 -->
-        </div>
-        <div class="row">
             <div class="col-lg-9">
                 <canvas id="canvas" width="800" height="500" style="border:1px solid #d3d3d3;" ></canvas>
+            </div> 
+            <div class="col-lg-1">
+            <img class="img-circle" id="ir" src="ruler.png" alt="ruler"  width="50" height="50" onclick="showRuler()">
+                <h4>Ruler</h4>
             </div>
+            
+            <div class="col-lg-1">
+                <img class="img-circle" id="ic" src="compass.png" alt="Generic placeholder image"  width="50" height="50" onclick ="showCompass()">
+                <h4>Compass</h4>
+            </div>
+           
+            <div class="col-lg-1">
+                <img class="img-circle"   id="il" src="label.png" alt="Generic placeholder image" width="50" height="50" onclick ="showLabel()">
+                <h4 align="right">Label</h4>
+
+            </div>
+
             <div class="col-lg-3">
                 <!--Ruler-->
                 <div id="ruler">
@@ -64,7 +62,7 @@
                         <span class="input-group-addon" id="sizing-addon2">Y1</span>
                         <input type="number" class="form-control" name="y1value" id="y1" placeholder="cm">
                     </div>
-					<div class="input-group input-group-sm">
+                    <div class="input-group input-group-sm">
                         <span class="input-group-addon" id="sizing-addon3">Extend</span>
                         <input type="number" class="form-control" name="extend1" id="e1" placeholder="cm">
                     </div>
@@ -76,7 +74,7 @@
                         <span class="input-group-addon" id="sizing-addon5">Y2</span>
                         <input type="number" class="form-control" name="y2value" id="y2" placeholder="cm">
                     </div>
-					<div class="input-group input-group-sm">
+                    <div class="input-group input-group-sm">
                         <span class="input-group-addon" id="sizing-addon6">Extend</span>
                         <input type="number" class="form-control" name="extend2" id="e2" placeholder="cm">
                     </div>
@@ -84,17 +82,17 @@
                         <span class="input-group-addon" id="sizing-addon7">Color</span>
                         <input type="color" class="form-control" name="color" id="clr">
                     </div>
-                    <input type="button" class="btn btn-default" onclick="ruler()" value="Ruler">
-                    <button id="hideSRuler" class="btn btn-default">Hide</button>
-					<input type="button" class="btn btn-default" id="pickA" value="Pick A (X1,Y1)">
-					<input type="button" class="btn btn-default" id="pickB" value="Pick B (X2,Y2)">
-					
+                    <input type="button" class="btn btn-default" onclick="ruler()" value="Draw Line">
+                    
+                    <input type="button" class="btn btn-default" id="pickA" value="Pick A (X1,Y1)">
+                    <input type="button" class="btn btn-default" id="pickB" value="Pick B (X2,Y2)">
+                    
                 </div>
                 <!--END Ruler -->
-				
-				<!--compass-->
+                
+                <!--compass-->
                 <div id="compass">
-				<h2>Compass</h2>
+                <h2>Compass</h2>
                 <div class="input-group input-group-sm">
                     <span class="input-group-addon" id="cx">X</span>
                     <input type="number" class="form-control" name="xvalue" id="x" placeholder="cm">
@@ -116,30 +114,33 @@
                     <input type="number" class="form-control" name="a2" id="ea" placeholder="degree">
                 </div>
               
-				<div class="input-group input-group-sm">
-					<span class="input-group-addon" id="angle">
-						<label class="radio-inline"><input type="radio" name="optradio" id="rotation1" >Counterclockwise</label>     
-						<label class="radio-inline"><input type="radio" name="optradio" id ="rotation2" >Clockwise</label>
-					</span>
-				</div>
-	  
-	  
-  <div class="input-group input-group-sm">
-  <span class="input-group-addon" id="colorpick">Color</span>
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon" id="angle">
+                        <label class="radio-inline"><input type="radio" name="optradio" id="rotation1" >Counterclockwise</label>     
+                        <label class="radio-inline"><input type="radio" name="optradio" id ="rotation2" >Clockwise</label>
+                    </span>
+                </div>
+      
+      
+                <div class="input-group input-group-sm">
+                <span class="input-group-addon" id="colorpick">Color</span>
 
 
                <input type="color" class="form-control" name="color" id="clc">
                </div>
-				<div>
-                <input type="button" class="btn btn-default" onclick="compass()" value="Compass">
-				<button id="hideSCompass" class="btn btn-default">Hide</button>
-				<input type="button" class="btn btn-default" id="pickC" value="Pick Center">
-				</div>				
+                <div>
+                <input type="button" class="btn btn-default" onclick="compass()" value="Draw Arc">
+                
+                <input type="button" class="btn btn-default" id="pickC" value="Pick Center">
+                </div>  
+
+                </div>              
                 <!--END compass -->
-				
-				<!--Label-->
+                
+                
+                <!--Label-->
                 <div id="label">
-				                <h2>Label</h2>
+                                <h2>Label</h2>
 
                 <div class="input-group input-group-sm">
                     <span class="input-group-addon" id="lx">X</span>
@@ -157,16 +158,18 @@
                     <span class="input-group-addon" id="lt">Text</span>
                     <input type="text" name="text" class="form-control" id="txt">
                 </div>
-                <input type="button" class="btn btn-default" onclick="label()" value="Label">
-				<button id="hideSLabel" class="btn btn-default">Hide</button>
-				<input type="button" class="btn btn-default"  value="Locate (X,Y)" id="pickL">
-				</div>				
+                <input type="button" class="btn btn-default" onclick="label()" value="Label Item">
+                
+                <input type="button" class="btn btn-default"  value="Locate (X,Y)" id="pickL">
+                </div>              
                 <!--END Label -->
             </div>
-            <!-- /.col-lg-2 -->
+           
         </div>
+
+        
     </div>
-</div>
+
     <script>
         var canvas = document.getElementById('canvas');
         var context = canvas.getContext('2d');
@@ -262,7 +265,7 @@
 		
         //padding around grid
     
-        function drawBoard() 
+        function init() 
 		{
             
             var p = 0;
@@ -286,6 +289,10 @@
 
             context.strokeStyle = "blue";
             context.stroke();
+			
+			$("#ruler").hide();
+			$("#compass").hide();
+			$("#label").hide();
         }
 
 
@@ -329,19 +336,20 @@
 				
 				var x0 = x1 - (e1 / Math.sqrt(m0 * m0 + 1));
 		
-				if(x0==x1)
-				{
-				y0=y1-e1;
-				
-				}
-				else
-				{
-				var test = (y1-y2)/(x1-x2)*(x0-x1);
-				if(test<0)
-				var y0 = y1 - Math.abs(test);
-				else
-				var y0 = y1 + Math.abs(test);
-				}
+					//line parallel to y axis
+					if(x1==x2)
+					{
+						y0=y1-e1;
+					
+					}
+					else
+					{
+						var test = (y1-y2)/(x1-x2)*(x0-x1);
+						if(test<0)
+							var y0 = y1 - Math.abs(test);
+						else
+							var y0 = y1 + Math.abs(test);
+					}
 				
 				x1=x0;
 				y1=y0;
@@ -351,13 +359,24 @@
 				if(e2>0)
 				{
 				var m1 = (y1-y2)/(x1-x2);
-				var x3 = parseInt(x2)+(e2/Math.sqrt(m1*m1+1));
+				var x3 = x2+(e2/Math.sqrt(m1*m1+1));
 				
-				var ext = m1*(x3-x2);
-				if(ext>0)
-				var y3 = parseInt(y2) + Math.abs(ext);
-				else
-				var y3 = parseInt(y2) - Math.abs(ext);
+					//line parallel to y axis
+					if(x1==x2)
+					{
+						y0=y1-e1;
+				
+					}
+					else
+					{
+					var ext = m1*(x3-x2);
+					
+					if(ext>0)
+					var y3 = y2 + Math.abs(ext);
+					else
+					var y3 = y2 - Math.abs(ext);
+					
+					}
 				
 				x2=x3;
 				y2=y3;
@@ -400,76 +419,37 @@
 		
 		function showRuler(	)
 		{
-				$("#ruler").hide();
-                $("#showRuler").show();
-                $("#hideRuler").hide();
-		
-		
+			$("#ruler").show();
+            $("#ir").css("opacity","1");
+            $("#compass").hide();
+            $("#ic").css("opacity","0.4");
+			$("#label").hide();
+            $("#il").css("opacity","0.4");
+	
 		}
 		
+		function showCompass()
+		{
+			$("#compass").show();
+            $("#ic").css("opacity","1");
+            $("#ruler").hide();
+            $("#ir").css("opacity","0.4");
+            $("#label").hide();
+            $("#il").css("opacity","0.4");
+
+		}
 		
-        //showing divs
-        $(document).ready(function() {
-		
-            $("#hideRuler").click(function() {
-                $("#ruler").hide();
-                $("#showRuler").show();
-                $("#hideRuler").hide();
-            });
-            $("#hideSRuler").click(function() { 
-                $("#ruler").hide();
-                $("#showRuler").show();
-                $("#hideRuler").hide();
-            });
+		function showLabel()
+		{
+			$('#label').show();
+            $('#il').css("opacity","1");
+            $('#ruler').hide();
+            $('#ir').css("opacity","0.4");
+            $('#compass').hide();
+            $('#ic').css("opacity","0.4");
 
-            $("#showRuler").click(function() {
-      
-                $("#ruler").show();
-                $("#hideRuler").show();
-                $("#showRuler").hide();
-            });
-			
-			//Label
-			$("#hideLabel").click(function() {
-                $("#label").hide();
-                $("#showLabel").show();
-                $("#hideLabel").hide();
-            });
-            $("#hideSLabel").click(function() {
-                $("#label").hide();
-                $("#showLabel").show();
-                $("#hideLabel").hide();
-            });
-
-            $("#showLabel").click(function() {
-              
-                $("#label").show();
-                $("#hideLabel").show();
-                $("#showLabel").hide();
-            });
-			
-			
-			//compass
-			$("#hideCompass").click(function() {
-              
-                $("#compass").hide();
-                $("#showCompass").show();
-                $("#hideCompass").hide();
-            });
-            $("#hideSCompass").click(function() {
-            
-                $("#compass").hide();
-                $("#showCompass").show();
-                $("#hideCompass").hide();
-            });
-
-            $("#showCompass").click(function() {
-                $("#compass").show();
-                $("#hideCompass").show();
-                $("#showCompass").hide();
-            });
-			
-        });
+		}
+	
     </script>
 
 </body>
