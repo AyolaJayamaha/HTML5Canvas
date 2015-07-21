@@ -1,7 +1,10 @@
-(function(window) {
+
+
 //coded by Ayola Jayamaha
 // holds all  boxes
 var boxes2 = []; 
+var circle2 = [];
+var line2 = [];
 
 var selectionHandles = [];
 
@@ -22,7 +25,7 @@ var canvasValid = false;
 
 var mySel = null;
 
-var mySelColor = '#CCff00';
+var mySelColor = 'black';
 var mySelWidth = 2;
 var mySelBoxColor = 'darkred';
 var mySelBoxSize = 6;
@@ -35,6 +38,10 @@ var offsetx, offsety;
 // Padding and border style widths for mouse offsets
 var stylePaddingLeft, stylePaddingTop, styleBorderLeft, styleBorderTop;
 
+// Diagram
+var square = false;
+var circle = false;
+var line = false;
 
 // Box object to hold data
 function Box2() {
@@ -62,7 +69,7 @@ Box2.prototype = {
       context.fillRect(this.x,this.y,this.w,this.h);
       
     // draw selection
-    if (mySel === this) {
+    if (mySel == this) {
       context.strokeStyle = mySelColor;
       context.lineWidth = mySelWidth;
       context.strokeRect(this.x,this.y,this.w,this.h);
@@ -120,6 +127,7 @@ function addRect(x, y, w, h, fill) {
   rect.fill = fill;
   boxes2.push(rect);
   invalidate();
+
 }
 
 // initialize our canvas, add a ghost canvas, set draw loop
@@ -182,10 +190,11 @@ function clear(c) {
   c.clearRect(0, 0, WIDTH, HEIGHT);
 }
 
-// Main draw loop.
+// Main  loop.
 // While draw is called as often as the INTERVAL variable demands,
 // It only ever does something if the canvas gets invalidated by our code
-function mainDraw() {
+function mainDraw() 
+{
   if (canvasValid == false) {
     clear(ctx);
     
@@ -352,10 +361,13 @@ function myDown(e){
     }
     
   }
+
   // havent returned means we have selected nothing
   mySel = null;
+
   // clear the ghost canvas for next time
   clear(gctx);
+
   // invalidate because we might need the selection border to disappear
   invalidate();
 }
@@ -371,9 +383,19 @@ function myDblClick(e) {
   getMouse(e);
   // for this method width and height determine the starting X and Y, too.
   // so I left them as vars in case someone wanted to make them args for something and copy this code
-  var width = 20;
-  var height = 20;
-  addRect(mx - (width / 2), my - (height / 2), width, height, 'rgba(220,205,65,0.7)');
+  var width = 50;
+  var height = 50;
+    addRect(mx - (width / 2), my - (height / 2), width, height, 'rgba(255,255,255,0.7)');
+  
+}
+
+function squareDrop(e) 
+{
+  getMouse(e);
+  var width = 50;
+  var height = 50;
+  addRect(mx - (width / 2), my - (height / 2), width, height, 'rgba(255,255,255,0.7)');
+  
 }
 
 
@@ -404,9 +426,45 @@ function getMouse(e) {
       my = e.pageY - offsetY
 }
 
-// If you dont want to use <body onLoad='init()'>
-// You could uncomment this init() reference and place the script reference inside the body tag
-//init();
 
-window.init2 = init2;
-})(window);
+
+
+
+  
+  
+  function allowDrop(ev) 
+  {
+      ev.preventDefault();
+
+  }
+
+  function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+  }
+
+  function drop(ev) 
+  {
+      ev.preventDefault();
+     //var data = ev.dataTransfer.getData("text");
+      //ev.target.appendChild(document.getElementById(data));
+     squareDrop(ev);
+     
+  }
+
+  function selectSquare()
+  {
+    square=true;
+
+  }
+
+  function selectCircle()
+  {
+    circle=true;
+
+  }
+
+  function selectLine()
+  {
+    line=true;
+
+  }

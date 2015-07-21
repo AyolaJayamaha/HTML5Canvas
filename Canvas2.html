@@ -25,12 +25,8 @@
  	
 	function allowDrop(ev) {
 	    ev.preventDefault();
-
 	}
 
-	function drag(ev) {
-	    ev.dataTransfer.setData("text", ev.target.id);
-	}
 
 	function drop(ev) 
 	{
@@ -38,7 +34,7 @@
 	   //var data = ev.dataTransfer.getData("text");
 	    //ev.target.appendChild(document.getElementById(data));
 	
-	    drawcircle();
+	   
 	}
 
 	function drawcircle()
@@ -64,17 +60,17 @@
                 <canvas id="canvas2" width="800" height="500"  ></canvas>
             </div> 
             <div class="col-lg-1">
-            <img class="img-circle" id="ic" src="circle.png" alt="circle"  width="50" height="50" draggable="true" >
+            <img class="img-circle" id="ic" src="./image/circle.png" alt="circle"  width="50" height="50" draggable="true" >
                 <h3>Circle</h3>
             </div>
             
             <div class="col-lg-1">
-                <img class="img-circle" id="is" src="square.jpg" alt="square"  width="50" height="50" draggable="true"  >
+                <img class="img-circle" id="is" src="./image/square.jpg" alt="square"  width="50" height="50" draggable="true"  >
                 <h3>Square</h3>
             </div>
            
             <div class="col-lg-1">
-                <img class="img-circle"   id="il" src="line.png" alt="line" width="50" height="50" draggable="true" >
+                <img class="img-circle"   id="il" src="./image/line.png" alt="line" width="50" height="50" draggable="true" >
                 <h3>Line</h3>
 
             </div>
