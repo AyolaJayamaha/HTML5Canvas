@@ -18,6 +18,7 @@ var isResizeDrag = false;
 var expectResize = -1;
 var mx, my; // mouse coordinates
 
+var square; //if square is selected
 
 var canvasValid = false;
 
@@ -167,13 +168,13 @@ function init2() {
 
   
   // add a large green rectangle
-  addRect(260, 70, 60, 65, 'rgba(0,205,0,0.7)');
+ // addRect(260, 70, 60, 65, 'rgba(0,205,0,0.7)');
   
   // add a green-blue rectangle
-  addRect(240, 120, 40, 40, 'rgba(2,165,165,0.7)');  
+  //addRect(240, 120, 40, 40, 'rgba(2,165,165,0.7)');  
   
   // add a smaller purple rectangle
-  addRect(45, 60, 25, 25, 'rgba(150,150,250,0.7)');
+  //addRect(45, 60, 25, 25, 'rgba(150,150,250,0.7)');
 }
 
 
@@ -205,7 +206,7 @@ function mainDraw() {
 
 // Happens when the mouse is moving inside the canvas
 function myMove(e){
-  if (isDrag) {
+  if (isDrag==true){
     getMouse(e);
     
     mySel.x = mx - offsetx;
@@ -360,20 +361,27 @@ function myDown(e){
   invalidate();
 }
 
-function myUp(){
+function myUp(e){
+
+  if(square=true)
+  {
+    
+    addRect(5,5,60,60,'rgba(220,205,65,0.7)');
+}
   isDrag = false;
   isResizeDrag = false;
   expectResize = -1;
+
 }
 
 // adds a new node
 function myDblClick(e) {
-  getMouse(e);
+  //getMouse(e);
   // for this method width and height determine the starting X and Y, too.
   // so I left them as vars in case someone wanted to make them args for something and copy this code
-  var width = 20;
-  var height = 20;
-  addRect(mx - (width / 2), my - (height / 2), width, height, 'rgba(220,205,65,0.7)');
+  //var width = 20;
+  //var height = 20;
+  //addRect(mx - (width / 2), my - (height / 2), width, height, 'rgba(220,205,65,0.7)');
 }
 
 
@@ -403,6 +411,16 @@ function getMouse(e) {
       mx = e.pageX - offsetX;
       my = e.pageY - offsetY
 }
+
+$('#pickSquare').click(function(){
+square=true;
+
+});
+
+$('#pickCircle').click(function(){
+circle=true;
+
+});
 
 // If you dont want to use <body onLoad='init()'>
 // You could uncomment this init() reference and place the script reference inside the body tag

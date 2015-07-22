@@ -51,12 +51,15 @@
         ev.preventDefault();
     }
 
+    function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+    }
 
     function drop(ev) 
     {
         ev.preventDefault();
-       //var data = ev.dataTransfer.getData("image");
-       //ev.target.appendChild(document.getElementById(data));
+       var data = ev.dataTransfer.getData("text");
+       ev.target.appendChild(document.getElementById(data));
     
        
     }
@@ -240,18 +243,21 @@
             </div> 
 
             <div class="col-lg-1">
-            <img class="img-circle" id="ic2" src="./image/circle.png" alt="circle"  width="50" height="50" draggable="true" >
-                <h3>Circle</h3>
+            <img class="img-circle" id="ic2" src="./image/circle.png" alt="circle"  width="50" height="50" draggable="true" ondragstart="drag(event)">
+                 <input type="button" class="btn btn-default"  value="Circle" id="pickCircle">
+                
             </div>
             
             <div class="col-lg-1">
-                <img class="img-circle" id="is2" src="./image/square.jpg" alt="square"  width="50" height="50" draggable="true"  >
-                <h3>Square</h3>
+                <img class="img-circle" id="is2" src="./image/square.jpg" alt="square"  width="50" height="50" draggable="true" ondragstart="drag(event)" >
+                 <input type="button" class="btn btn-default"  value="Square" id="pickSquare">
+                
             </div>
            
             <div class="col-lg-1">
                 <img class="img-circle"   id="il2" src="./image/line.png" alt="line" width="50" height="50" draggable="true" >
-                <h3>Line</h3>
+                <input type="button" class="btn btn-default"  value="Line" id="pickLine">
+                
 
             </div>
 
@@ -307,6 +313,7 @@ var canvas = document.getElementById('canvas');
             
         }, false);
         
+       
 
 
     </script>
