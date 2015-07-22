@@ -24,6 +24,21 @@
             opacity: 0.4;
 
         }
+        img#ic2{
+
+            opacity: 1;
+        }
+
+        img#is2{
+
+            opacity: 1;
+        }
+        
+        img#il2{
+
+            opacity: 1;
+        }
+        
 
     </style>
     <script type="text/javascript" src="./js/boxes2.js"></script>
@@ -40,8 +55,8 @@
     function drop(ev) 
     {
         ev.preventDefault();
-       var data = ev.dataTransfer.getData("image");
-      // ev.target.appendChild(document.getElementById(data));
+       //var data = ev.dataTransfer.getData("image");
+       //ev.target.appendChild(document.getElementById(data));
     
        
     }
@@ -55,8 +70,9 @@
   <div class="container marketing">
 
     <input type="button" class="btn btn-default" onclick="showPanel1()" value="Geomatrical Constructions">
-<input type="button" class="btn btn-default" onclick="showPanel2()" value="Standard Shapes">
-  <br>
+    <input type="button" class="btn btn-default" onclick="showPanel2()" value="Standard Shapes">
+
+  <br><br>
         <div id="toolbox">
             <div class="panel panel-success">
               <div class="panel-heading">
@@ -224,17 +240,17 @@
             </div> 
 
             <div class="col-lg-1">
-            <img class="img-circle" id="ic" src="./image/circle.png" alt="circle"  width="50" height="50" draggable="true" >
+            <img class="img-circle" id="ic2" src="./image/circle.png" alt="circle"  width="50" height="50" draggable="true" >
                 <h3>Circle</h3>
             </div>
             
             <div class="col-lg-1">
-                <img class="img-circle" id="is" src="./image/square.jpg" alt="square"  width="50" height="50" draggable="true"  >
+                <img class="img-circle" id="is2" src="./image/square.jpg" alt="square"  width="50" height="50" draggable="true"  >
                 <h3>Square</h3>
             </div>
            
             <div class="col-lg-1">
-                <img class="img-circle"   id="il" src="./image/line.png" alt="line" width="50" height="50" draggable="true" >
+                <img class="img-circle"   id="il2" src="./image/line.png" alt="line" width="50" height="50" draggable="true" >
                 <h3>Line</h3>
 
             </div>

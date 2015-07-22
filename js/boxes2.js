@@ -163,6 +163,7 @@ function init2() {
   canvas.onmouseup = myUp;
   canvas.ondblclick = myDblClick;
   canvas.onmousemove = myMove;
+
   
   // set up the selection handle boxes
   for (var i = 0; i < 8; i ++) {
@@ -376,16 +377,18 @@ function myUp(){
   isDrag = false;
   isResizeDrag = false;
   expectResize = -1;
+
 }
 
 // adds a new node
-function myDblClick(e) {
+function myDblClick(e)
+ {
   getMouse(e);
   // for this method width and height determine the starting X and Y, too.
   // so I left them as vars in case someone wanted to make them args for something and copy this code
   var width = 50;
   var height = 50;
-    addRect(mx - (width / 2), my - (height / 2), width, height, 'rgba(255,255,255,0.7)');
+  addRect(mx - (width / 2), my - (height / 2), width, height, 'rgba(255,255,255,0.7)');
   
 }
 
