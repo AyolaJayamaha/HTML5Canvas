@@ -28,7 +28,7 @@
     </style>
     <script type="text/javascript" src="./js/boxes2.js"></script>
  
-	<script type="text/javascript" src="./js/toolbox.js"></script>
+	
 
     <script>
     
@@ -41,7 +41,7 @@
     {
         ev.preventDefault();
        var data = ev.dataTransfer.getData("image");
-        ev.target.appendChild(document.getElementById(data));
+      // ev.target.appendChild(document.getElementById(data));
     
        
     }
@@ -50,15 +50,27 @@
 </head>
 
 <body onload="init()">
-    <div class="container marketing">
-        <div class="row">
-            <div class="col-lg-9">
-                <canvas id="canvas" width="800" height="500" style="border:1px solid #d3d3d3;" ></canvas>
-            </div> 
-            <div class="col-lg-1">
-            <img class="img-circle" id="ir" src="./image/ruler.png" alt="ruler"  width="50" height="50" onclick="showRuler()">
-                <h4>Ruler</h4>
-            </div>
+
+<br> 
+  <div class="container marketing">
+
+    <input type="button" class="btn btn-default" onclick="showPanel1()" value="Geomatrical Constructions">
+<input type="button" class="btn btn-default" onclick="showPanel2()" value="Standard Shapes">
+  <br>
+        <div id="toolbox">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title">Geometrical Drawings</h3>
+              </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <canvas id="canvas" width="800" height="500" style="border:1px solid #d3d3d3;" ></canvas>
+                    </div> 
+                    <div class="col-lg-1">
+                    <img class="img-circle" id="ir" src="./image/ruler.png" alt="ruler"  width="50" height="50" onclick="showRuler()">
+                        <h4>Ruler</h4>
+                    </div>
             
             <div class="col-lg-1">
                 <img class="img-circle" id="ic" src="./image/compass.png" alt="Generic placeholder image"  width="50" height="50" onclick ="showCompass()">
@@ -182,18 +194,64 @@
                 <input type="button" class="btn btn-default" onclick="label()" value="Label Item">
                 
                 <input type="button" class="btn btn-default"  value="Locate (X,Y)" id="pickL">
-                </div>              
-                <!--END Label -->
+                
+                </div>   <!--END Label -->  
+               
             </div>
            
-        </div>
+        </div>  <!-- End Row -->
 
+           
+    
+
+
+      </div>
+
+      </div>  <!-- End toolbox main div -->
+
+    </div>  <!-- End Panel -->
         
+        <div id="shape">
+        <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">Standard Shapes</h3>
+              </div>
+      <div class="panel-body">
+        <div class="row">
+            
+            <div class="col-lg-9"   ondragover="allowDrop(event)" ondrop="drop(event)">
+                <canvas id="canvas2" width="800" height="500"  style="border:1px solid #d3d3d3;"></canvas>
+            </div> 
+
+            <div class="col-lg-1">
+            <img class="img-circle" id="ic" src="./image/circle.png" alt="circle"  width="50" height="50" draggable="true" >
+                <h3>Circle</h3>
+            </div>
+            
+            <div class="col-lg-1">
+                <img class="img-circle" id="is" src="./image/square.jpg" alt="square"  width="50" height="50" draggable="true"  >
+                <h3>Square</h3>
+            </div>
+           
+            <div class="col-lg-1">
+                <img class="img-circle"   id="il" src="./image/line.png" alt="line" width="50" height="50" draggable="true" >
+                <h3>Line</h3>
+
+            </div>
+
+         </div>  <!-- End Row -->
+      </div>
+
+    </div>
+
+</div>   <!-- End shape main div -->
     </div>
 
   
 
 </body>
+
+<script type="text/javascript" src="./js/toolbox.js"></script>
 
 <script> 
 var canvas = document.getElementById('canvas');
