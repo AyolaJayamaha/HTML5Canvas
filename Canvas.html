@@ -84,7 +84,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-9" style="position:relative; width:850px; height:500px ">
-                        <canvas id="layer1" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500px" width="800px "></canvas>
+                        <canvas id="layer1" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
                     </div> 
                     <div class="col-lg-1">
                     <img class="img-circle" id="ir" src="./image/ruler.png" alt="ruler"  width="50" height="50" onclick="showRuler()">
@@ -98,7 +98,7 @@
            
             <div class="col-lg-1">
                 <img class="img-circle"   id="il" src="./image/label.png" alt="Generic placeholder image" width="50" height="50" onclick ="showLabel()">
-                <h4 align="right">Label</h4>
+                <h4>Label</h4>
 
             </div>
 
@@ -282,7 +282,7 @@ var canvas = document.getElementById('layer1');
         
         canvas.addEventListener('mousemove', function(evt) {
             var mousePos = getMousePos(canvas, evt);
-            var message = 'Mouse position: ' + mousePos.x/50 + ',' + mousePos.y/50;
+            var message = '(X,Y): ' + mousePos.x/50 + ',' + mousePos.y/50;
             writeMessage(canvas, message);
         }, false);
         
@@ -311,7 +311,7 @@ var canvas = document.getElementById('layer1');
                 
                 }
 
-                break;
+                
 
             case 'c':
                  switch(selectedItem)
@@ -323,8 +323,15 @@ var canvas = document.getElementById('layer1');
 
                     case 'r' :
                     setR(evt);
-                    selectedItem='c';
+                    selectedItem='a';
                     break;
+
+                    case 'a' :
+                    setAngle(evt)
+                    selectedItem ='c';
+                    compass();
+                    break;
+
                 }
 
             case 'l': 
