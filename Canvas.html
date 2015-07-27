@@ -168,7 +168,7 @@
               
                 <div class="input-group input-group-sm">
                     <span class="input-group-addon" id="angle">
-                        <label class="radio-inline"><input type="radio" name="optradio" id="rotation1" >Counterclockwise</label>     
+                        <label class="radio-inline"><input type="radio" name="optradio" id="rotation1" checked="true">Counterclockwise</label>     
                         <label class="radio-inline"><input type="radio" name="optradio" id ="rotation2" >Clockwise</label>
                     </span>
                 </div>
@@ -311,7 +311,7 @@ var canvas = document.getElementById('layer1');
                 
                 }
 
-                
+                break;
 
             case 'c':
                  switch(selectedItem)
@@ -334,6 +334,8 @@ var canvas = document.getElementById('layer1');
 
                 }
 
+                break;
+
             case 'l': 
                  switch(selectedItem)
                 {  
@@ -342,6 +344,8 @@ var canvas = document.getElementById('layer1');
                     setL(evt);
                     break;
                 }
+
+                break;
         }
         }, false);
         
