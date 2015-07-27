@@ -289,28 +289,53 @@ var canvas = document.getElementById('layer1');
         canvas.addEventListener('mousedown', function(evt) {
             var mousePos = getMousePos(canvas, evt);
             
-            switch(selectedItem)
+            switch(selectedMethod)
             {
-            
-            case 'a' :
-            setA(evt);
-            break;
-            
-            case 'b' :
-            setB(evt);
-            break;
-            
-            case 'c' :
-            setC(evt);
-            break;
-            
-            case 'l' :
-            setL(evt);
-            break;
-            
-            }
-            
-            
+            case 'r':
+                switch(selectedItem)
+                {
+                
+                case 'a' :
+                setA(evt);
+               
+                selectedItem='b';
+                break;
+                
+                case 'b' :
+                setB(evt);
+                ruler();
+                selectedItem='a';
+                break;
+                
+                
+                
+                }
+
+                break;
+
+            case 'c':
+                 switch(selectedItem)
+                {
+                    case 'c' :
+                     setC(evt);
+                     selectedItem ='r';
+                    break;
+
+                    case 'r' :
+                    setR(evt);
+                    selectedItem='c';
+                    break;
+                }
+
+            case 'l': 
+                 switch(selectedItem)
+                {  
+
+                    case 'l' :
+                    setL(evt);
+                    break;
+                }
+        }
         }, false);
         
        
