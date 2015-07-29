@@ -284,6 +284,17 @@ var canvas = document.getElementById('layer1');
             var mousePos = getMousePos(canvas, evt);
             var message = '(X,Y): ' + mousePos.x/50 + ',' + mousePos.y/50;
             writeMessage(canvas, message);
+
+            if (selectedItem=='b')
+            {
+                writeMessage(canvas,"Length :"+ Math.sqrt( (mousePos.x/50-$('#x1').val())*(mousePos.x/50-$('#x1').val())+(mousePos.y/50-$('#y1').val())*(mousePos.y/50-$('#y1').val()) ) );
+            }
+            else if (selectedItem=='r')
+            {
+                writeMessage(canvas,"Radius :"+ Math.sqrt( (mousePos.x/50-$('#x').val())*(mousePos.x/50-$('#x').val())+(mousePos.y/50-$('#y').val())*(mousePos.y/50-$('#y').val()) ) );
+            }
+
+
         }, false);
         
         canvas.addEventListener('mousedown', function(evt) {
@@ -297,7 +308,7 @@ var canvas = document.getElementById('layer1');
                 
                 case 'a' :
                 setA(evt);
-               
+                
                 selectedItem='b';
                 break;
                 
