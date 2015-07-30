@@ -453,33 +453,33 @@ var string ="";
         for (var i = 0; i < rulers.length; i++) 
         {
             string +="ruler";
-            string =string.concat(" (id:", rulers[i].index);
-            string = string.concat(" x1:", rulers[i].xs);
-            string =string.concat(" y1:", rulers[i].ys);
-            string =string.concat(" x2:", rulers[i].xe);
-            string =string.concat(" y2:", rulers[i].ye);
+            string =string.concat(" (id: ", rulers[i].index);
+            string = string.concat(" x1: ", rulers[i].xs);
+            string =string.concat(" y1: ", rulers[i].ys);
+            string =string.concat(" x2: ", rulers[i].xe);
+            string =string.concat(" y2: ", rulers[i].ye);
             string =string.concat("), ");
         }
 
         for (var i = 0; i < compasses.length; i++) 
         {
             string +="compass";
-            string =string.concat(" (id:", compasses[i].index);
-            string = string.concat(" x:", compasses[i].x);
-            string =string.concat(" y:", compasses[i].y);
-            string =string.concat(" radius:", compasses[i].radius);
-            string =string.concat(" stangleart :", compasses[i].starta);
-            string =string.concat(" end angle:", compasses[i].enda);
+            string =string.concat(" (id: ", compasses[i].index);
+            string = string.concat(", x: ", compasses[i].x);
+            string =string.concat(", y: ", compasses[i].y);
+            string =string.concat(", radius: ", compasses[i].radius);
+            string =string.concat(", start angle: ", compasses[i].starta);
+            string =string.concat(", end angle: ", compasses[i].enda);
             string =string.concat("), ");
         }
 
         for (var i = 0; i < labels.length; i++) 
         {
             string +="label";
-            string =string.concat(" (id:", labels[i].index);
-            string = string.concat(" x:", labels[i].xp);
-            string =string.concat(" y:", labels[i].yp);
-            string =string.concat(" text:", labels[i].message);
+            string =string.concat(" (id: ", labels[i].index);
+            string = string.concat(" x: ", labels[i].xp);
+            string =string.concat(" y: ", labels[i].yp);
+            string =string.concat(" text: ", labels[i].message);
             string =string.concat("), ");
         }
 
