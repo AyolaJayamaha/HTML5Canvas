@@ -24,7 +24,7 @@ var canvasValid = false;
 
 var mySel = null;
 
-var mySelColor = '#CCff00';
+var mySelColor = 'black';
 var mySelWidth = 2;
 var mySelBoxColor = 'darkred';
 var mySelBoxSize = 6;
@@ -44,15 +44,15 @@ function Box2() {
   this.y = 0;
   this.w = 1; // default width and height?
   this.h = 1;
-  this.fill = '#444444';
+  this.fill = '#ffffff';
 }
 
 // New methods on the Box class
 Box2.prototype = {
 
   draw: function(context, optionalColor) {
-      if (context === gctx) {
-        context.fillStyle = 'black'; 
+      if (context == gctx) {
+        context.fillStyle = 'white'; 
       } else {
         context.fillStyle = this.fill;
       }
@@ -61,13 +61,9 @@ Box2.prototype = {
       if (this.x > WIDTH || this.y > HEIGHT) return; 
       if (this.x + this.w < 0 || this.y + this.h < 0) return;
       
-      context.fillRect(this.x,this.y,this.w,this.h);
       
-    // draw selection
-    if (mySel === this) {
-      context.strokeStyle = mySelColor;
-      context.lineWidth = mySelWidth;
-      context.strokeRect(this.x,this.y,this.w,this.h);
+   
+   
       
       // draw the boxes      
       var half = mySelBoxSize / 2;
@@ -101,25 +97,32 @@ Box2.prototype = {
       selectionHandles[7].y = this.y+this.h-half;
 
       
-      context.fillStyle = mySelBoxColor;
       for (var i = 0; i < 8; i ++) {
         var cur = selectionHandles[i];
-        context.fillRect(cur.x, cur.y, mySelBoxSize, mySelBoxSize);
+        context.beginPath();
+        context.lineWidth="2";
+        context.rect(cur.x, cur.y, mySelBoxSize, mySelBoxSize);
+        context.strokeStyle = 'black';
+        context.stroke();
       }
-    }
+    
+      context.beginPath();
+        context.lineWidth="2";
+        context.rect(this.x, this.y, this.w, this.h);
+        context.strokeStyle = 'black';
+        context.stroke();
     
   } // end draw
 
 }
 
 //Initialize a new Box, add it, and invalidate the canvas
-function addRect(x, y, w, h, fill) {
+function addRect(x, y, w, h) {
   var rect = new Box2;
   rect.x = x;
   rect.y = y;
   rect.w = w
   rect.h = h;
-  rect.fill = fill;
   boxes2.push(rect);
   invalidate();
 }
@@ -164,17 +167,7 @@ function init2() {
     selectionHandles.push(rect);
   }
   
-  // add custom initialization here:
 
-  
-  // add a large green rectangle
- // addRect(260, 70, 60, 65, 'rgba(0,205,0,0.7)');
-  
-  // add a green-blue rectangle
-  //addRect(240, 120, 40, 40, 'rgba(2,165,165,0.7)');  
-  
-  // add a smaller purple rectangle
-  //addRect(45, 60, 25, 25, 'rgba(150,150,250,0.7)');
 }
 
 
@@ -366,7 +359,7 @@ function myUp(e){
   if(square=true)
   {
     
-    addRect(5,5,60,60,'rgba(220,205,65,0.7)');
+    addRect(5,5,60,60);
 }
   isDrag = false;
   isResizeDrag = false;

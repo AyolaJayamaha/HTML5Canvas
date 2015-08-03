@@ -42,7 +42,7 @@
 
     </style>
     <script type="text/javascript" src="./js/boxes2.js"></script>
- 
+    <script type="text/javascript" src="./js/circles2.js"></script>
 	
 
     <script>
@@ -87,17 +87,17 @@
                         <canvas id="layer1" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
                     </div> 
                     <div class="col-lg-1">
-                    <img class="img-circle" id="ir" src="./image/ruler.png" alt="ruler"  width="50" height="50" onclick="showRuler()">
+                    <img  id="ir" src="./image/ruler.png" alt="ruler"  width="90" height="50" onclick="showRuler()">
                         <h4>Ruler</h4>
                     </div>
             
             <div class="col-lg-1">
-                <img class="img-circle" id="ic" src="./image/compass.png" alt="Generic placeholder image"  width="50" height="50" onclick ="showCompass()">
+                <img  id="ic" src="./image/compass.png" alt="Generic placeholder image"  width="50" height="50" onclick ="showCompass()">
                 <h4>Compass</h4>
             </div>
            
             <div class="col-lg-1">
-                <img class="img-circle"   id="il" src="./image/label.png" alt="Generic placeholder image" width="50" height="50" onclick ="showLabel()">
+                <img    id="il" src="./image/label.png" alt="Generic placeholder image" width="50" height="50" onclick ="showLabel()">
                 <h4>Label</h4>
 
             </div>
@@ -159,11 +159,11 @@
                 </div>
                 <div class="input-group input-group-sm">
                     <span class="input-group-addon" id="cs">Start Angle</span>
-                    <input type="number" class="form-control" name="a1" id="sa" placeholder="degree">
+                    <input type="number" class="form-control"  id="sa" placeholder="degree">
                 </div>
                 <div class="input-group input-group-sm">
                     <span class="input-group-addon" id="ce">End Angle</span>
-                    <input type="number" class="form-control" name="a2" id="ea" placeholder="degree">
+                    <input type="number" class="form-control"  id="ea" placeholder="degree">
                 </div>
               
                 <div class="input-group input-group-sm">
@@ -284,16 +284,16 @@
         <div class="row">
         <div class ="col-lg-6">
             <textarea id="inputTextToSave" style="width:512px;height:256px"></textarea> </div>
-            <div class ="col-lg-2">Filename to Save As:</div>
-        <div class ="col-lg-2"><input id="inputFileNameToSaveAs"></input></div>
-        <div class ="col-lg-2"><button onclick="saveTextAsFile()">Save Text to File</button></div>
+            <div class ="col-lg-2"><h4><span class="label label-default">Filename to Save As:</span></h4></div>
+        <div class ="col-lg-2"><input type="text" class="form-control" id="inputFileNameToSaveAs"></input></div>
+        <div class ="col-lg-2"><input type="button" class="btn btn-default" onclick="saveTextAsFile()" value="Save to File"> </div>
        
     <br><br>
     <div class="row" >
         <div class ="col-lg-6"></div>
-        <div class ="col-lg-2">Select a File to Load:</div>
-        <div class ="col-lg-2"><input type="file" id="fileToLoad"></div>
-        <div class ="col-lg-2"><button onclick="loadFileAsText()">Load Selected File</button><div>
+        <div class ="col-lg-2"><h4><span class="label label-default">Select a File to Load:</span></h4></div>
+        <div class ="col-lg-2"><input type="file" id="fileToLoad" class="form-control"></div>
+        <div class ="col-lg-2"><input type="button" class="btn btn-default" onclick="loadFileAsText()" value ="Load Selected File"><div>
     
 
     </div>
@@ -458,7 +458,8 @@ var string ="";
             string =string.concat(" y1: ", rulers[i].ys);
             string =string.concat(" x2: ", rulers[i].xe);
             string =string.concat(" y2: ", rulers[i].ye);
-            string =string.concat("), ");
+            string =string.concat("), \n");
+
         }
 
         for (var i = 0; i < compasses.length; i++) 
@@ -468,9 +469,17 @@ var string ="";
             string = string.concat(", x: ", compasses[i].x);
             string =string.concat(", y: ", compasses[i].y);
             string =string.concat(", radius: ", compasses[i].radius);
-            string =string.concat(", start angle: ", compasses[i].starta);
-            string =string.concat(", end angle: ", compasses[i].enda);
-            string =string.concat("), ");
+            string =string.concat(", s. angle: ", compasses[i].starta);
+            string =string.concat(", e. angle: ", compasses[i].enda);
+            if(compasses[i].rotation)
+            {
+                string =string.concat(", rotation:a ");
+            }
+            else
+            {
+                string =string.concat(", rotation:c ");
+            }
+            string =string.concat("), \n ");
         }
 
         for (var i = 0; i < labels.length; i++) 
@@ -480,7 +489,7 @@ var string ="";
             string = string.concat(" x: ", labels[i].xp);
             string =string.concat(" y: ", labels[i].yp);
             string =string.concat(" text: ", labels[i].message);
-            string =string.concat("), ");
+            string =string.concat("), \n");
         }
 
         document.getElementById("inputTextToSave").innerHTML=string;
