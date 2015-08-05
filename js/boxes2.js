@@ -152,7 +152,7 @@ function init2() {
   }
   
   // make mainDraw() fire every INTERVAL milliseconds
-  setInterval(mainDraw, INTERVAL);
+  setInterval(mainDraw2, INTERVAL);
   
   // set our events. Up and down are for dragging,
   // double click is for making new boxes
@@ -162,11 +162,13 @@ function init2() {
   canvas.onmousemove = myMove;
   
   // set up the selection handle boxes
-  for (var i = 0; i < 8; i ++) {
+  for (var i = 0; i < 8; i ++) 
+  {
     var rect = new Box2;
     selectionHandles.push(rect);
   }
   
+
 
 }
 
@@ -179,7 +181,7 @@ function clear(c) {
 // Main draw loop.
 // While draw is called as often as the INTERVAL variable demands,
 // It only ever does something if the canvas gets invalidated by our code
-function mainDraw() {
+function mainDraw2() {
   if (canvasValid == false) {
     clear(ctx);
     
@@ -410,10 +412,8 @@ square=true;
 
 });
 
-$('#pickCircle').click(function(){
-circle=true;
 
-});
+
 
 // If you dont want to use <body onLoad='init()'>
 // You could uncomment this init() reference and place the script reference inside the body tag

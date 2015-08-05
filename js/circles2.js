@@ -18,7 +18,7 @@ var isResizeDrag = false;
 var expectResize = -1;
 var mx, my; // mouse coordinates
 
-var circle; //if square is selected
+var circle; //if circle is selected
 
 var canvasValid = false;
 
@@ -50,24 +50,24 @@ function Circle2() {
 // New methods on the Box class
 Circle2.prototype = {
 
-  draw: function(context, optionalColor) {
+  draw: function(context, optionalColor) 
+  {
       if (context == gctx) {
-        context.fillStyle = 'white'; 
+        context.fillStyle = 'black'; 
       } else {
         context.fillStyle = this.fill;
       }
       
 
       if (this.x > WIDTH || this.y > HEIGHT) return; 
-      if (this.x - this.r < 0 || this.y - this.r < 0) return;
-      
-      
-   
-   
+     if (this.x - this.r < 0 || this.y - this.r < 0) return;
       
       // draw the boxes      
-      var half = this.r ;
+      var half = this.r;
       
+//        3 
+//      0   1
+//        2
 
       selectionHandles[0].x = this.x-half;
       selectionHandles[0].y = this.y;
@@ -86,19 +86,20 @@ Circle2.prototype = {
       
 
       
-      for (var i = 0; i < 4; i ++) {
+      for (var i = 0; i < 4; i ++)
+       {
         var cur = selectionHandles[i];
         context.beginPath();
         context.lineWidth="2";
         context.fillRect(cur.x, cur.y, mySelBoxSize, mySelBoxSize);
         context.strokeStyle = 'black';
 
-        context.stroke();
+        
       }
     
       context.beginPath();
         context.lineWidth="2";
-        context.arc(this.x, this.y, this.r, 2*Math.PI,0,true);
+        context.arc(this.x, this.y, this.r,0,2*Math.PI,true);
         context.strokeStyle = 'black';
         context.closePath();
         context.stroke();
@@ -107,7 +108,7 @@ Circle2.prototype = {
 
 }
 
-//Initialize a new Box, add it, and invalidate the canvas
+//Initialize a new Circle, add it, and invalidate the canvas
 function addCircle(x, y, r) {
   var cir = new Circle2();
   cir.x = x;
@@ -135,7 +136,8 @@ function init3() {
   
   // fixes mouse co-ordinate problems when there's a border or padding
   // see getMouse for more detail
-  if (document.defaultView && document.defaultView.getComputedStyle) {
+  if (document.defaultView && document.defaultView.getComputedStyle) 
+  {
     stylePaddingLeft = parseInt(document.defaultView.getComputedStyle(canvas, null)['paddingLeft'], 10)     || 0;
     stylePaddingTop  = parseInt(document.defaultView.getComputedStyle(canvas, null)['paddingTop'], 10)      || 0;
     styleBorderLeft  = parseInt(document.defaultView.getComputedStyle(canvas, null)['borderLeftWidth'], 10) || 0;
@@ -143,7 +145,7 @@ function init3() {
   }
   
   // make mainDraw() fire every INTERVAL milliseconds
-  setInterval(mainDraw, INTERVAL);
+  setInterval(this.mainDraw3, INTERVAL);
   
   // set our events. Up and down are for dragging,
   // double click is for making new boxes
@@ -153,8 +155,8 @@ function init3() {
   canvas.onmousemove = myMove;
   
   // set up the selection handle boxes
-  for (var i = 0; i < 8; i ++) {
-    var cir = new Circle2();
+  for (var i = 0; i < 4; i ++) {
+    var cir = new Circle2;
     selectionHandles.push(cir);
   }
   
@@ -170,15 +172,15 @@ function clear(c) {
 // Main draw loop.
 // While draw is called as often as the INTERVAL variable demands,
 // It only ever does something if the canvas gets invalidated by our code
-function mainDraw() {
+function mainDraw3() {
   if (canvasValid == false) {
     clear(ctx);
     
     // Add stuff you want drawn in the background all the time here
     
     // draw all circles
-    var l = circles2.length;
-    for (var i = 0; i < l; i++) {
+   
+    for (var i = 0; i < circles2.length; i++) {
       circles2[i].draw(ctx); // we used to call drawshape, but now each box draws itself
     }
     
@@ -190,7 +192,7 @@ function mainDraw() {
 
 // Happens when the mouse is moving inside the canvas
 function myMove(e){
-  if (isDrag==true){
+  if (isDrag){
     getMouse(e);
     
     mySel.x = mx - offsetx;
@@ -249,7 +251,7 @@ function myMove(e){
   getMouse(e);
   // if there's a selection see if we grabbed one of the selection handles
   if (mySel !== null && !isResizeDrag) {
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < 4; i++) {
       // 0  1  2
       // 3     4
       // 5  6  7
@@ -266,29 +268,19 @@ function myMove(e){
         
         switch (i) {
           case 0:
-            this.style.cursor='nw-resize';
-            break;
-          case 1:
             this.style.cursor='n-resize';
             break;
+          case 1:
+            this.style.cursor='s-resize';
+            break;
           case 2:
-            this.style.cursor='ne-resize';
+            this.style.cursor='e-resize';
             break;
           case 3:
             this.style.cursor='w-resize';
             break;
-          case 4:
-            this.style.cursor='e-resize';
-            break;
-          case 5:
-            this.style.cursor='sw-resize';
-            break;
-          case 6:
-            this.style.cursor='s-resize';
-            break;
-          case 7:
-            this.style.cursor='se-resize';
-            break;
+          
+          
         }
         return;
       }
@@ -303,11 +295,13 @@ function myMove(e){
 }
 
 // Happens when the mouse is clicked in the canvas
-function myDown(e){
+function myDown(e)
+{
   getMouse(e);
   
   //we are over a selection box
-  if (expectResize !== -1) {
+  if (expectResize !== -1) 
+  {
     isResizeDrag = true;
     return;
   }
@@ -350,7 +344,7 @@ function myUp(e){
   if(circle=true)
   {
     
-    addCircle(60,120,25);
+    addCircle(60,120,50);
   }
   isDrag = false;
   isResizeDrag = false;
