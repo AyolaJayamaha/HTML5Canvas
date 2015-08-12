@@ -15,7 +15,7 @@
     <script src="./js/jquery-2.1.4.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <style type="text/css">
-      #container2 { position: relative; }
+      #canvas1{ position: relative; }
       #canvas2 { border: 1px solid #000; }
     </style> 
     <style>
@@ -45,6 +45,7 @@
     <script type="text/javascript" src="./js/circles2.js"></script>
 	
 
+
     <script>
     
     function allowDrop(ev) {
@@ -52,13 +53,13 @@
     }
 
     function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
+            ev.dataTransfer.setData("image", ev.target.id);
     }
 
     function drop(ev) 
     {
         ev.preventDefault();
-       var data = ev.dataTransfer.getData("text");
+       var data = ev.dataTransfer.getData("image");
        ev.target.appendChild(document.getElementById(data));
     
        
@@ -84,7 +85,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-9" style="position:relative; width:850px; height:500px ">
-                        <canvas id="layer1" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
+                        <canvas id="canvas1" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
                     </div> 
                     <div class="col-lg-1">
                     <img  id="ir" src="./image/ruler.png" alt="ruler"  width="90" height="50" onclick="showRuler()">
@@ -102,7 +103,7 @@
 
             </div>
 
-            <div class="col-lg-3">
+            <div class="col-lg-3" id="functions">
                 <!--Ruler-->
                 <div id="ruler">
                     <h2>Ruler</h2>
@@ -243,25 +244,26 @@
             </div> 
 
             <div class="col-lg-1">
-            <img class="img-circle" id="ic2" src="./image/circle.png" alt="circle"  width="50" height="50" draggable="true" ondragstart="drag(event)">
-                 <input type="button" class="btn btn-default"  value="Circle" id="pickCircle">
+            <img class="img-circle" id="ic2" src="./image/circle.png" alt="circle"  width="50" height="50"  ondragstart="drag(event)">
+                 <input type="button" class="btn btn-default"  value="Circle" id="pickCircle" >
                 
             </div>
             
             <div class="col-lg-1">
-                <img class="img-circle" id="is2" src="./image/square.jpg" alt="square"  width="50" height="50" draggable="true" ondragstart="drag(event)" >
+                <img class="img-circle" id="is2" src="./image/square.jpg" alt="square"  width="50" height="50"  ondragstart="drag(event)" >
                  <input type="button" class="btn btn-default"  value="Square" id="pickSquare">
                 
             </div>
            
             <div class="col-lg-1">
-                <img class="img-circle"   id="il2" src="./image/line.png" alt="line" width="50" height="50" draggable="true" >
+                <img class="img-circle"   id="il2" src="./image/line.png" alt="line" width="50" height="50" ondragstart="drag(event)">
                 <input type="button" class="btn btn-default"  value="Line" id="pickLine">
-                
 
             </div>
 
          </div>  <!-- End Row -->
+     
+
       </div>
 
     </div>
@@ -307,16 +309,132 @@
 
 <script type="text/javascript" src="./js/toolbox.js"></script>
 
-<script> 
-        var canvas = document.getElementById('layer1');
-        var context = canvas.getContext('2d');
+<script>
+        var canvas2 = document.getElementById('canvas2');
+        var context2 = canvas2.getContext('2d');
+        var selectedItem='';        
+        var selectedMethod='';
+        var r={x:0,y:0};
+        var q={x:0,y:0};
+        var s={x:0,y:0};
+        var t={x:0,y:0};
+        var l={x:0,y:0};
+        var m ={x:0,y:0};
+
+        $('#pickCircle').click(function(){
+            selectedMethod ='c';
+            selectedItem = 'r';
+            
+        });
+
+        $('#pickSquare').click(function(){
+            selectedMethod ='s';
+            selectedItem = 's';
+            
+        });
+
+        $('#pickLine').click(function(){
+            selectedMethod ='l';
+            selectedItem = 'l';
+            
+        });
+
+
+
+
+        canvas2.addEventListener('click', function(evt) {
+             var mousePos = getMousePos(canvas2, evt);
+
+            switch(selectedMethod)
+            {
+            case 'c':
+            
+                switch(selectedItem)
+                {
+                case 'r':
+                    r.x=mousePos.x;
+                    r.y=mousePos.y;
+                   
+                    selectedItem='q';
+                break;
+                case 'q':
+                    q.x=mousePos.x;
+                    q.y=mousePos.y;
+
+                     
+                    context2.beginPath();
+                    var diffx = r.x - q.x;
+                    var diffy = r.y - q.y;
+                    var radius2  = Math.sqrt((diffx*diffx) + (diffy*diffy));
+                    
+                context2.arc(r.x,r.y,radius2,0,360,false);
+                context2.stroke();
+                selectedItem ='r';
+                    break;
+                } 
+
+                break;
+
+                case 's': 
+
+                switch(selectedItem)
+                {
+                case 's':
+                    s.x=mousePos.x;
+                    s.y=mousePos.y;
+                    
+                    selectedItem='t';
+                break;
+                case 't':
+                    t.x=mousePos.x;
+                    t.y=mousePos.y;
+
+                     
+                context2.beginPath();
+                context2.rect(s.x,s.y,Math.abs(t.x-s.x),Math.abs(t.y-s.y));
+                context2.stroke();
+                selectedItem ='s';
+                    break;
+                } 
+
+                break;
+
+                case 'l':
+                switch(selectedItem)
+                {
+                case 'l':
+                    l.x=mousePos.x;
+                    l.y=mousePos.y;
+                    
+                    selectedItem='m';
+                break;
+                case 'm':
+                    m.x=mousePos.x;
+                    m.y=mousePos.y;
+
+                     
+                context2.beginPath();
+                context2.moveTo(l.x,l.y);
+                context2.lineTo(m.x,m.y);
+                context2.stroke();
+                selectedItem ='l';
+                    break;
+                } 
+
+
+                break; 
+            }
+        },true);
+
+        var canvas1 = document.getElementById('canvas1');
+        var context1 = canvas1.getContext('2d');
         var selectedItem='';   
         
         
-        canvas.addEventListener('mousemove', function(evt) {
-            var mousePos = getMousePos(canvas, evt);
+        canvas1.addEventListener('mousemove', function(evt) {
+            var mousePos = getMousePos(canvas1, evt);
             var message = '(X,Y): ' + mousePos.x/50 + ',' + mousePos.y/50;
-            writeMessage(canvas, message);
+            writeMessage(canvas1, message);
 
             if (selectedItem=='b')
             {
@@ -333,8 +451,8 @@
             }
         }, false);
         
-        canvas.addEventListener('mousedown', function(evt) {
-            var mousePos = getMousePos(canvas, evt);
+        canvas1.addEventListener('mousedown', function(evt) {
+            var mousePos = getMousePos(canvas1, evt);
             
             switch(selectedMethod)
             {
