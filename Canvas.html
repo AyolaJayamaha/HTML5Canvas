@@ -3,7 +3,7 @@
 
 <head>
 
-<title>Mathematical ToolBox</title>
+    <title>Mathematical ToolBox</title>
     <meta charset="utf-8" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -15,604 +15,692 @@
     <script src="./js/jquery-2.1.4.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <style type="text/css">
-      #canvas1{ position: relative; }
-      #canvas2 { border: 1px solid #000; }
-    </style> 
+        #canvas1 {
+            position: relative;
+        }
+        
+        #canvas2 {
+            border: 1px solid #000;
+        }
+    </style>
     <style>
-        img{
-
+        img {
             opacity: 0.4;
-
         }
-        img#ic2{
-
-            opacity: 1;
-        }
-
-        img#is2{
-
+        
+        img#ic2 {
             opacity: 1;
         }
         
-        img#il2{
-
+        img#is2 {
             opacity: 1;
         }
         
+        img#il2 {
+            opacity: 1;
+        }
 
     </style>
     <script type="text/javascript" src="./js/boxes2.js"></script>
     <script type="text/javascript" src="./js/circles2.js"></script>
-	
+
 
 
     <script>
-    
-    function allowDrop(ev) {
-        ev.preventDefault();
-    }
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
 
-    function drag(ev) {
+        function drag(ev) {
             ev.dataTransfer.setData("image", ev.target.id);
-    }
+        }
 
-    function drop(ev) 
-    {
-        ev.preventDefault();
-       var data = ev.dataTransfer.getData("image");
-       ev.target.appendChild(document.getElementById(data));
-    
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("image");
+            ev.target.appendChild(document.getElementById(data));
+
+
+        }
+
+//Tooltip
+$('#selector').mousemove(function(e) { 
+  $('.tooltip').css('left', e.pageX + 5).css('top', e.pageY - 25).css('display', 'block');
+})
+
+        $( document ).tooltip({
+         track: true
+        });
+
        
-    }
+
     </script>
 
 </head>
 
 <body onload="init()">
 
-<br> 
-  <div class="container marketing">
+    <br>
+    <div class="container marketing">
 
-    <input type="button" class="btn btn-default" onclick="showPanel1()" value="Geomatrical Constructions">
-    <input type="button" class="btn btn-default" onclick="showPanel2()" value="Standard Shapes">
+        <input type="button" class="btn btn-default" onclick="showPanel1()" value="Geomatrical Constructions">
+        <input type="button" class="btn btn-default" onclick="showPanel2()" value="Standard Shapes">
 
-  <br><br>
+        <br>
+        <br>
         <div id="toolbox">
             <div class="panel panel-success">
-              <div class="panel-heading">
-                <h3 class="panel-title">Geometrical Drawings</h3>
-              </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-9" style="position:relative; width:850px; height:500px ">
-                        <canvas id="canvas1" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
-                    </div> 
-                    <div class="col-lg-1">
-                    <img  id="ir" src="./image/ruler.png" alt="ruler"  width="90" height="50" onclick="showRuler()">
-                        <h4>Ruler</h4>
-                    </div>
-            
-            <div class="col-lg-1">
-                <img  id="ic" src="./image/compass.png" alt="Generic placeholder image"  width="50" height="50" onclick ="showCompass()">
-                <h4>Compass</h4>
-            </div>
-           
-            <div class="col-lg-1">
-                <img    id="il" src="./image/label.png" alt="Generic placeholder image" width="50" height="50" onclick ="showLabel()">
-                <h4>Label</h4>
+                <div class="panel-heading">
+                    <h3 class="panel-title">Geometrical Drawings</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div id="geometrical" title="test" class="col-lg-9" style="position:relative; width:850px; height:500px ">
+                            <canvas id="canvas1" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
+                        </div>
+                        <div class="col-lg-1">
+                            <img id="ir" src="./image/ruler.png" alt="ruler" width="90" height="50" onclick="showRuler()">
+                            <h4>Ruler</h4>
+                        </div>
 
-            </div>
+                        <div class="col-lg-1">
+                            <img id="ic" src="./image/compass.png" alt="Generic placeholder image" width="50" height="50" onclick="showCompass()">
+                            <h4>Compass</h4>
+                        </div>
 
-            <div class="col-lg-3" id="functions">
-                <!--Ruler-->
-                <div id="ruler">
-                    <h2>Ruler</h2>
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-addon" id="sizing-addon1">X1</span>
-                        <input type="number" class="form-control" name="x1value" id="x1" placeholder="cm">
-                    </div>
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-addon" id="sizing-addon2">Y1</span>
-                        <input type="number" class="form-control" name="y1value" id="y1" placeholder="cm">
-                    </div>
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-addon" id="sizing-addon3">Extend</span>
-                        <input type="number" class="form-control" name="extend1" id="e1" placeholder="cm">
-                    </div>
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-addon" id="sizing-addon4">X2</span>
-                        <input type="number" class="form-control" name="x2value" id="x2" placeholder="cm">
-                    </div>
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-addon" id="sizing-addon5">Y2</span>
-                        <input type="number" class="form-control" name="y2value" id="y2" placeholder="cm">
-                    </div>
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-addon" id="sizing-addon6">Extend</span>
-                        <input type="number" class="form-control" name="extend2" id="e2" placeholder="cm">
-                    </div>
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-addon" id="sizing-addon7">Color</span>
-                        <input type="color" class="form-control" name="color" id="clr">
-                    </div>
-                    <input type="button" class="btn btn-default" onclick="ruler()" value="Draw Line">
-                    
-                    <input type="button" class="btn btn-default" id="pickA" value="Pick A (X1,Y1)">
-                    <input type="button" class="btn btn-default" id="pickB" value="Pick B (X2,Y2)">
-                    
-                </div>
-                <!--END Ruler -->
-                
-                <!--compass-->
-                <div id="compass">
-                <h2>Compass</h2>
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon" id="cx">X</span>
-                    <input type="number" class="form-control" name="xvalue" id="x" placeholder="cm">
-                </div>
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon" id="cy">Y</span>
-                    <input type="number" class="form-control" name="yvalue" id="y" placeholder="cm">
-                </div>
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon" id="cr">Radius</span>
-                    <input type="number" class="form-control" name="r" id="radius" placeholder="cm">
-                </div>
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon" id="cs">Start Angle</span>
-                    <input type="number" class="form-control"  id="sa" placeholder="degree">
-                </div>
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon" id="ce">End Angle</span>
-                    <input type="number" class="form-control"  id="ea" placeholder="degree">
-                </div>
-              
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon" id="angle">
+                        <div class="col-lg-1">
+                            <img id="il" src="./image/label.png" alt="Generic placeholder image" width="50" height="50" onclick="showLabel()">
+                            <h4>Label</h4>
+
+                        </div>
+
+                        <div class="col-lg-3" id="functions">
+                            <!--Ruler-->
+                            <div id="ruler">
+                                <h2>Ruler</h2>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon1">X1</span>
+                                    <input type="number" class="form-control" name="x1value" id="x1" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon2">Y1</span>
+                                    <input type="number" class="form-control" name="y1value" id="y1" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon3">Extend</span>
+                                    <input type="number" class="form-control" name="extend1" id="e1" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon4">X2</span>
+                                    <input type="number" class="form-control" name="x2value" id="x2" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon5">Y2</span>
+                                    <input type="number" class="form-control" name="y2value" id="y2" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon6">Extend</span>
+                                    <input type="number" class="form-control" name="extend2" id="e2" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon7">Color</span>
+                                    <input type="color" class="form-control" name="color" id="clr">
+                                </div>
+                                <input type="button" class="btn btn-default" onclick="ruler()" value="Draw Line">
+
+                                <input type="button" class="btn btn-default" id="pickA" value="Pick A (X1,Y1)">
+                                <input type="button" class="btn btn-default" id="pickB" value="Pick B (X2,Y2)">
+
+                            </div>
+                            <!--END Ruler -->
+
+                            <!--compass-->
+                            <div id="compass">
+                                <h2>Compass</h2>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="cx">X</span>
+                                    <input type="number" class="form-control" name="xvalue" id="x" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="cy">Y</span>
+                                    <input type="number" class="form-control" name="yvalue" id="y" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="cr">Radius</span>
+                                    <input type="number" class="form-control" name="r" id="radius" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="cs">Start Angle</span>
+                                    <input type="number" class="form-control" id="sa" placeholder="degree">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="ce">End Angle</span>
+                                    <input type="number" class="form-control" id="ea" placeholder="degree">
+                                </div>
+
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="angle">
                         <label class="radio-inline"><input type="radio" name="optradio" id="rotation1" checked="true">Counterclockwise</label>     
                         <label class="radio-inline"><input type="radio" name="optradio" id ="rotation2" >Clockwise</label>
                     </span>
-                </div>
-      
-      
-                <div class="input-group input-group-sm">
-                <span class="input-group-addon" id="colorpick">Color</span>
+                                </div>
 
 
-               <input type="color" class="form-control" name="color" id="clc">
-               </div>
-                <div>
-                <input type="button" class="btn btn-default" onclick="compass()" value="Draw Arc">
-                
-                <input type="button" class="btn btn-default" id="pickC" value="Pick Center">
-                </div>  
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="colorpick">Color</span>
 
-                </div>              
-                <!--END compass -->
-                
-                
-                <!--Label-->
-                <div id="label">
+
+                                    <input type="color" class="form-control" name="color" id="clc">
+                                </div>
+                                <div>
+                                    <input type="button" class="btn btn-default" onclick="compass()" value="Draw Arc">
+
+                                    <input type="button" class="btn btn-default" id="pickC" value="Pick Center">
+                                </div>
+
+                            </div>
+                            <!--END compass -->
+
+
+                            <!--Label-->
+                            <div id="label">
                                 <h2>Label</h2>
 
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon" id="lx">X</span>
-                    <input type="number" class="form-control" name="xvalue" id="xx" placeholder="cm">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="lx">X</span>
+                                    <input type="number" class="form-control" name="xvalue" id="xx" placeholder="cm">
+                                </div>
+
+
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="ly">Y</span>
+                                    <input type="number" class="form-control" name="yvalue" id="yy" placeholder="cm">
+                                </div>
+
+
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="lt">Text</span>
+                                    <input type="text" name="text" class="form-control" id="txt">
+                                </div>
+                                <input type="button" class="btn btn-default" onclick="label()" value="Label Item">
+
+                                <input type="button" class="btn btn-default" value="Locate (X,Y)" id="pickL">
+
+                            </div>
+                            <!--END Label -->
+
+                        </div>
+
+                    </div>
+                    <!-- End Row -->
+
+
+
+
+
                 </div>
 
-
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon" id="ly">Y</span>
-                    <input type="number" class="form-control" name="yvalue" id="yy" placeholder="cm">
-                </div>
-
-
-                <div class="input-group input-group-sm">
-                    <span class="input-group-addon" id="lt">Text</span>
-                    <input type="text" name="text" class="form-control" id="txt">
-                </div>
-                <input type="button" class="btn btn-default" onclick="label()" value="Label Item">
-                
-                <input type="button" class="btn btn-default"  value="Locate (X,Y)" id="pickL">
-                
-                </div>   <!--END Label -->  
-               
             </div>
-           
-        </div>  <!-- End Row -->
+            <!-- End toolbox main div -->
 
-           
-    
-
-
-      </div>
-
-      </div>  <!-- End toolbox main div -->
-
-    </div>  <!-- End Panel -->
-        
-        <div id="shape">
-        <div class="panel panel-info">
-              <div class="panel-heading">
-                <h3 class="panel-title">Standard Shapes</h3>
-              </div>
-      <div class="panel-body">
-        <div class="row">
-            
-            <div class="col-lg-9"   ondragover="allowDrop(event)" ondrop="drop(event)">
-                <canvas id="canvas2" width="800" height="500"  style="border:1px solid #d3d3d3;"></canvas>
-            </div> 
-
-            <div class="col-lg-1">
-            <img class="img-circle" id="ic2" src="./image/circle.png" alt="circle"  width="50" height="50"  ondragstart="drag(event)">
-                 <input type="button" class="btn btn-default"  value="Circle" id="pickCircle" >
-                
-            </div>
-            
-            <div class="col-lg-1">
-                <img class="img-circle" id="is2" src="./image/square.jpg" alt="square"  width="50" height="50"  ondragstart="drag(event)" >
-                 <input type="button" class="btn btn-default"  value="Square" id="pickSquare">
-                
-            </div>
-           
-            <div class="col-lg-1">
-                <img class="img-circle"   id="il2" src="./image/line.png" alt="line" width="50" height="50" ondragstart="drag(event)">
-                <input type="button" class="btn btn-default"  value="Line" id="pickLine">
-
-            </div>
-
-         </div>  <!-- End Row -->
-     
-
-      </div>
-
-    </div>
-
-</div>   <!-- End shape main div -->
-   
-
-<div id="save">
-        <div class="panel panel-warning">
-         <div class="panel-heading">
-                <h3 class="panel-title">Administration</h3>
-              </div>     
- <div class="panel-body">
-    <div class="row">
-        <div class ="col-lg-12">
-            <input type="button" class="btn btn-default" onclick="loaddrawing()" value="Load Drawing API Calls">
         </div>
-    </div>
-    <br> <br>
-        <div class="row">
-        <div class ="col-lg-6">
-            <textarea id="inputTextToSave" style="width:512px;height:256px"></textarea> </div>
-            <div class ="col-lg-2"><h4><span class="label label-default">Filename to Save As:</span></h4></div>
-        <div class ="col-lg-2"><input type="text" class="form-control" id="inputFileNameToSaveAs"></input></div>
-        <div class ="col-lg-2"><input type="button" class="btn btn-default" onclick="saveTextAsFile()" value="Save to File"> </div>
-       
-    <br><br>
-    <div class="row" >
-        <div class ="col-lg-6"></div>
-        <div class ="col-lg-2"><h4><span class="label label-default">Select a File to Load:</span></h4></div>
-        <div class ="col-lg-2"><input type="file" id="fileToLoad" class="form-control"></div>
-        <div class ="col-lg-2"><input type="button" class="btn btn-default" onclick="loadFileAsText()" value ="Load Selected File"><div>
-    
+        <!-- End Panel -->
 
-    </div>
-    
+        <div id="shape">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Standard Shapes</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
 
-</div>
+                        <div id="shapes" title="test" class="col-lg-9" ondragover="allowDrop(event)" ondrop="drop(event)">
+                            <canvas id="canvas2" width="800" height="500" style="border:1px solid #d3d3d3;"></canvas>
+                        </div>
 
-  
- </div> <!-- End div container marketting -->
+                        <div class="col-lg-1">
+                            <img class="img-circle" id="ic2" src="./image/circle.png" alt="circle" width="50" height="50" ondragstart="drag(event)">
+                            <input type="button" class="btn btn-default" value="Circle" id="pickCircle">
+
+                        </div>
+
+                        <div class="col-lg-1">
+                            <img class="img-circle" id="is2" src="./image/square.jpg" alt="square" width="50" height="50" ondragstart="drag(event)">
+                            <input type="button" class="btn btn-default" value="Square" id="pickSquare">
+
+                        </div>
+
+                        <div class="col-lg-1">
+                            <img class="img-circle" id="il2" src="./image/line.png" alt="line" width="50" height="50" ondragstart="drag(event)">
+                            <input type="button" class="btn btn-default" value="Line" id="pickLine">
+
+                        </div>
+
+                    </div>
+                    <!-- End Row -->
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- End shape main div -->
+
+
+        <div id="save">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Administration</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <input type="button" class="btn btn-default" onclick="loaddrawing()" value="Load Drawing API Calls">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <textarea id="inputTextToSave" style="width:512px;height:256px"></textarea>
+                        </div>
+                        <div class="col-lg-2">
+                            <h4><span class="label label-default">Filename to Save As:</span></h4></div>
+                        <div class="col-lg-2">
+                            <input type="text" class="form-control" id="inputFileNameToSaveAs"></input>
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="button" class="btn btn-default" onclick="saveTextAsFile()" value="Save to File"> </div>
+
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-6"></div>
+                            <div class="col-lg-2">
+                                <h4><span class="label label-default">Select a File to Load:</span></h4></div>
+                            <div class="col-lg-2">
+                                <input type="file" id="fileToLoad" class="form-control">
+                            </div>
+                            <div class="col-lg-2">
+                                <input type="button" class="btn btn-default" onclick="loadFileAsText()" value="Load Selected File">
+                                <div>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                        <!-- End div container marketting -->
 </body>
 
 <script type="text/javascript" src="./js/toolbox.js"></script>
 
 <script>
-        var canvas2 = document.getElementById('canvas2');
-        var context2 = canvas2.getContext('2d');
-        var selectedItem='';        
-        var selectedMethod='';
-        var r={x:0,y:0};
-        var q={x:0,y:0};
-        var s={x:0,y:0};
-        var t={x:0,y:0};
-        var l={x:0,y:0};
-        var m ={x:0,y:0};
+    var canvas2 = document.getElementById('canvas2');
+    var context2 = canvas2.getContext('2d');
+    var selectedItem = '';
+    var selectedMethod = '';
+    var r = {
+        x: 0,
+        y: 0
+    };
+    var q = {
+        x: 0,
+        y: 0
+    };
+    var s = {
+        x: 0,
+        y: 0
+    };
+    var t = {
+        x: 0,
+        y: 0
+    };
+    var l = {
+        x: 0,
+        y: 0
+    };
+    var m = {
+        x: 0,
+        y: 0
+    };
 
-        $('#pickCircle').click(function(){
-            selectedMethod ='c';
-            selectedItem = 'r';
-            
-        });
+    $('#pickCircle').click(function() {
+        selectedMethod = 'c';
+        selectedItem = 'r';
 
-        $('#pickSquare').click(function(){
-            selectedMethod ='s';
-            selectedItem = 's';
-            
-        });
+    });
 
-        $('#pickLine').click(function(){
-            selectedMethod ='l';
-            selectedItem = 'l';
-            
-        });
+    $('#pickSquare').click(function() {
+        selectedMethod = 's';
+        selectedItem = 's';
 
+    });
 
+    $('#pickLine').click(function() {
+        selectedMethod = 'l';
+        selectedItem = 'l';
+
+    });
 
 
-        canvas2.addEventListener('click', function(evt) {
-             var mousePos = getMousePos(canvas2, evt);
 
-            switch(selectedMethod)
-            {
+
+    canvas2.addEventListener('click', function(evt) {
+        var mousePos = getMousePos(canvas2, evt);
+
+        switch (selectedMethod) {
             case 'c':
-            
-                switch(selectedItem)
-                {
-                case 'r':
-                    r.x=mousePos.x;
-                    r.y=mousePos.y;
-                   
-                    selectedItem='q';
-                break;
-                case 'q':
-                    q.x=mousePos.x;
-                    q.y=mousePos.y;
 
-                     
-                    context2.beginPath();
-                    var diffx = r.x - q.x;
-                    var diffy = r.y - q.y;
-                    var radius2  = Math.sqrt((diffx*diffx) + (diffy*diffy));
-                    
-                context2.arc(r.x,r.y,radius2,0,360,false);
-                context2.stroke();
-                selectedItem ='r';
-                    break;
-                } 
+                switch (selectedItem) {
+                    case 'r':
+                        r.x = mousePos.x;
+                        r.y = mousePos.y;
 
-                break;
+                        context2.beginPath();
+                        context2.arc(r.x, r.y,3,0,360,false);
+                        context2.fillStyle = 'black';
+                        context2.fill();
+                        context2.stroke();
 
-                case 's': 
+                        selectedItem = 'q';
+                        break;
+                    case 'q':
+                        q.x = mousePos.x;
+                        q.y = mousePos.y;
 
-                switch(selectedItem)
-                {
-                case 's':
-                    s.x=mousePos.x;
-                    s.y=mousePos.y;
-                    
-                    selectedItem='t';
-                break;
-                case 't':
-                    t.x=mousePos.x;
-                    t.y=mousePos.y;
 
-                     
-                context2.beginPath();
-                context2.rect(s.x,s.y,Math.abs(t.x-s.x),Math.abs(t.y-s.y));
-                context2.stroke();
-                selectedItem ='s';
-                    break;
-                } 
+                        
+                        var diffx = r.x - q.x;
+                        var diffy = r.y - q.y;
+
+                        context2.beginPath();
+                        context2.arc(q.x, q.y,3,0,360,false);
+                        context2.fillStyle = 'black';
+                        context2.fill();
+                        context2.stroke();
+
+
+                        var radius2 = Math.sqrt((diffx * diffx) + (diffy * diffy));
+                        context2.beginPath();
+                        context2.arc(r.x, r.y, radius2, 0, 360, false);
+                        context2.stroke();
+                        selectedItem = 'r';
+                        break;
+                }
 
                 break;
 
-                case 'l':
-                switch(selectedItem)
-                {
-                case 'l':
-                    l.x=mousePos.x;
-                    l.y=mousePos.y;
-                    
-                    selectedItem='m';
+            case 's':
+
+                switch (selectedItem) {
+                    case 's':
+                        s.x = mousePos.x;
+                        s.y = mousePos.y;
+
+                        context2.beginPath();
+                        context2.arc(s.x, s.y,3,0,360,false);
+                        context2.fillStyle = 'black';
+                        context2.fill();
+                        context2.stroke();
+
+
+                        selectedItem = 't';
+                        break;
+                    case 't':
+                        t.x = mousePos.x;
+                        t.y = mousePos.y;
+
+                        context2.beginPath();
+                        context2.arc(t.x, t.y,3,0,360,false);
+                        context2.fillStyle = 'black';
+                        context2.fill();
+                        context2.stroke();
+
+
+                        context2.beginPath();
+                        context2.rect(s.x, s.y, Math.abs(t.x - s.x), Math.abs(t.y - s.y));
+                        context2.stroke();
+                        selectedItem = 's';
+                        break;
+                }
+
                 break;
-                case 'm':
-                    m.x=mousePos.x;
-                    m.y=mousePos.y;
 
-                     
-                context2.beginPath();
-                context2.moveTo(l.x,l.y);
-                context2.lineTo(m.x,m.y);
-                context2.stroke();
-                selectedItem ='l';
-                    break;
-                } 
+            case 'l':
+                switch (selectedItem) {
+                    case 'l':
+                        l.x = mousePos.x;
+                        l.y = mousePos.y;
+
+                        context2.beginPath();
+                        context2.arc(l.x, l.y,3,0,360,false);
+                        context2.fillStyle = 'black';
+                        context2.fill();
+                        context2.stroke();
+
+                        selectedItem = 'm';
+                        break;
+
+                    case 'm':
+                        m.x = mousePos.x;
+                        m.y = mousePos.y;
+
+                        context2.beginPath();
+                        context2.arc(m.x, m.y,3,0,360,false);
+                        context2.fillStyle = 'black';
+                        context2.fill();
+                        context2.stroke();
+
+                        context2.beginPath();
+                        context2.moveTo(l.x, l.y);
+                        context2.lineTo(m.x, m.y);
+                        context2.stroke();
+                        selectedItem = 'l';
+                        break;
+                }
 
 
-                break; 
-            }
-        },true);
+                break;
+        }
+    }, true);
 
-        var canvas1 = document.getElementById('canvas1');
-        var context1 = canvas1.getContext('2d');
-        var selectedItem='';   
-        
-        
-        canvas1.addEventListener('mousemove', function(evt) {
-            var mousePos = getMousePos(canvas1, evt);
-            var message = '(X,Y): ' + mousePos.x/50 + ',' + mousePos.y/50;
-            writeMessage(canvas1, message);
+    var canvas1 = document.getElementById('canvas1');
+    var context1 = canvas1.getContext('2d');
+    var selectedItem = '';
 
-            if (selectedItem=='b')
-            {
-                writeMessage(canvas,"Length :"+ Math.sqrt( (mousePos.x/50-$('#x1').val())*(mousePos.x/50-$('#x1').val())+(mousePos.y/50-$('#y1').val())*(mousePos.y/50-$('#y1').val()) ) );
-            }
-            else if (selectedItem=='r')
-            {
-                writeMessage(canvas,"Radius :"+ Math.sqrt( (mousePos.x/50-$('#x').val())*(mousePos.x/50-$('#x').val())+(mousePos.y/50-$('#y').val())*(mousePos.y/50-$('#y').val()) ) );
-            }
-            else if (selectedItem=='k')
-            {
-                setAngle(evt);
-                writeMessage(canvas,"Angle :" + ( $('#sa').val()- $('#ea').val() ) );
-            }
-        }, false);
-        
-        canvas1.addEventListener('mousedown', function(evt) {
-            var mousePos = getMousePos(canvas1, evt);
-            
-            switch(selectedMethod)
-            {
+
+    canvas1.addEventListener('mousemove', function(evt) {
+        var mousePos = getMousePos(canvas1, evt);
+        var message = '(X,Y): ' + mousePos.x / 50 + ',' + mousePos.y / 50;
+        writeMessage(canvas1, message);
+
+        if (selectedItem == 'b') {
+            writeMessage(canvas, "Length :" + Math.sqrt((mousePos.x / 50 - $('#x1').val()) * (mousePos.x / 50 - $('#x1').val()) + (mousePos.y / 50 - $('#y1').val()) * (mousePos.y / 50 - $('#y1').val())));
+        } else if (selectedItem == 'r') {
+            writeMessage(canvas, "Radius :" + Math.sqrt((mousePos.x / 50 - $('#x').val()) * (mousePos.x / 50 - $('#x').val()) + (mousePos.y / 50 - $('#y').val()) * (mousePos.y / 50 - $('#y').val())));
+        } else if (selectedItem == 'k') {
+            setAngle(evt);
+            writeMessage(canvas, "Angle :" + ($('#sa').val() - $('#ea').val()));
+        }
+    }, false);
+
+    canvas1.addEventListener('mousedown', function(evt) {
+        var mousePos = getMousePos(canvas1, evt);
+
+        switch (selectedMethod) {
             case 'r':
-                switch(selectedItem)
-                {
-                
-                case 'a' :
-                setA(evt);
-                
-                selectedItem='b';
-                break;
-                
-                case 'b' :
-                setB(evt);
-                ruler();
-                selectedItem='a';
-                break;
-              
+                switch (selectedItem) {
+
+                    case 'a':
+                        setA(evt);
+
+                        context1.beginPath();
+                        context1.arc(mousePos.x, mousePos.y,3,0,360,false);
+                        context1.fillStyle = 'black';
+                        context1.fill();
+                        context1.stroke();
+
+                        selectedItem = 'b';
+                        break;
+
+                    case 'b':
+                        setB(evt);
+
+                        context1.beginPath();
+                        context1.arc(mousePos.x, mousePos.y,3,0,360,false);
+                        context1.fillStyle = 'black';
+                        context1.fill();
+                        context1.stroke();
+
+                        ruler();
+                        selectedItem = 'a';
+                        break;
+
                 }
 
                 break;
 
             case 'c':
-                 switch(selectedItem)
-                {
-                    case 'c' :
-                     setC(evt);
-                     selectedItem ='r';
-                    break;
+                switch (selectedItem) {
+                    case 'c':
+                        setC(evt);
 
-                    case 'r' :
-                    setR(evt);
-                    selectedItem='k';
-                    break;
+                        context1.beginPath();
+                        context1.arc(mousePos.x, mousePos.y,3,0,360,false);
+                        context1.fillStyle = 'black';
+                        context1.fill();
+                        context1.stroke();
 
-                    case 'k' :
-                    
-                    selectedItem ='c';
-                    compass();
-                    break;
+                        selectedItem = 'r';
+                        break;
+
+                    case 'r':
+                        setR(evt);
+
+                        context1.beginPath();
+                        context1.arc(mousePos.x, mousePos.y,3,0,360,false);
+                        context1.fillStyle = 'black';
+                        context1.fill();
+                        context1.stroke();
+
+                        selectedItem = 'k';
+                        break;
+
+                    case 'k':
+
+                        selectedItem = 'c';
+                        $('#geometrical').title = $('ea').value -  $('sa').value ;
+                        compass();
+                        break;
 
                 }
 
                 break;
 
-            case 'l': 
-                 switch(selectedItem)
-                {  
+            case 'l':
+                switch (selectedItem) {
 
-                    case 'l' :
-                    setL(evt);
-                    break;
+                    case 'l':
+                        setL(evt);
+                        break;
                 }
 
                 break;
         }
-        }, false);
-        
-       
+    }, false);
 
 
 
 
-function saveTextAsFile()
-{
-    var textToWrite = document.getElementById("inputTextToSave").value;
-    var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
-    var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+    function saveTextAsFile() {
+        var textToWrite = document.getElementById("inputTextToSave").value;
+        var textFileAsBlob = new Blob([textToWrite], {
+            type: 'text/plain'
+        });
+        var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
 
-    var downloadLink = document.createElement("a");
-    downloadLink.download = fileNameToSaveAs;
-    downloadLink.innerHTML = "Download File";
-    if (window.webkitURL != null)
-    {
-        // Chrome allows the link to be clicked
-        // without actually adding it to the DOM.
-        downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+        var downloadLink = document.createElement("a");
+        downloadLink.download = fileNameToSaveAs;
+        downloadLink.innerHTML = "Download File";
+        if (window.webkitURL != null) {
+            // Chrome allows the link to be clicked
+            // without actually adding it to the DOM.
+            downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+        } else {
+            // Firefox requires the link to be added to the DOM
+            // before it can be clicked.
+            downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+            downloadLink.onclick = destroyClickedElement;
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+        }
+
+        downloadLink.click();
     }
-    else
-    {
-        // Firefox requires the link to be added to the DOM
-        // before it can be clicked.
-        downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-        downloadLink.onclick = destroyClickedElement;
-        downloadLink.style.display = "none";
-        document.body.appendChild(downloadLink);
+
+    function destroyClickedElement(event) {
+        document.body.removeChild(event.target);
     }
 
-    downloadLink.click();
-}
+    function loadFileAsText() {
+        var fileToLoad = document.getElementById("fileToLoad").files[0];
 
-function destroyClickedElement(event)
-{
-    document.body.removeChild(event.target);
-}
-
-function loadFileAsText()
-{
-    var fileToLoad = document.getElementById("fileToLoad").files[0];
-
-    var fileReader = new FileReader();
-    fileReader.onload = function(fileLoadedEvent) 
-    {
-        var textFromFileLoaded = fileLoadedEvent.target.result;
-        document.getElementById("inputTextToSave").value = textFromFileLoaded;
+        var fileReader = new FileReader();
+        fileReader.onload = function(fileLoadedEvent) {
+            var textFromFileLoaded = fileLoadedEvent.target.result;
+            document.getElementById("inputTextToSave").value = textFromFileLoaded;
+        }
+        fileReader.readAsText(fileToLoad, "UTF-8");
     }
-    fileReader.readAsText(fileToLoad, "UTF-8");
-}
 
-function loaddrawing()
-{
-    
-var string ="";
-    
-        for (var i = 0; i < rulers.length; i++) 
-        {
-            string +="ruler";
-            string =string.concat(" (id: ", rulers[i].index);
+    function loaddrawing() {
+
+        var string = "";
+
+        for (var i = 0; i < rulers.length; i++) {
+            string += "ruler";
+            string = string.concat(" (id: ", rulers[i].index);
             string = string.concat(" x1: ", rulers[i].xs);
-            string =string.concat(" y1: ", rulers[i].ys);
-            string =string.concat(" x2: ", rulers[i].xe);
-            string =string.concat(" y2: ", rulers[i].ye);
-            string =string.concat("), \n");
+            string = string.concat(" y1: ", rulers[i].ys);
+            string = string.concat(" x2: ", rulers[i].xe);
+            string = string.concat(" y2: ", rulers[i].ye);
+            string = string.concat("), \n");
 
         }
 
-        for (var i = 0; i < compasses.length; i++) 
-        {
-            string +="compass";
-            string =string.concat(" (id: ", compasses[i].index);
+        for (var i = 0; i < compasses.length; i++) {
+            string += "compass";
+            string = string.concat(" (id: ", compasses[i].index);
             string = string.concat(", x: ", compasses[i].x);
-            string =string.concat(", y: ", compasses[i].y);
-            string =string.concat(", radius: ", compasses[i].radius);
-            string =string.concat(", s. angle: ", compasses[i].starta);
-            string =string.concat(", e. angle: ", compasses[i].enda);
-            if(compasses[i].rotation)
-            {
-                string =string.concat(", rotation:a ");
+            string = string.concat(", y: ", compasses[i].y);
+            string = string.concat(", radius: ", compasses[i].radius);
+            string = string.concat(", s. angle: ", compasses[i].starta);
+            string = string.concat(", e. angle: ", compasses[i].enda);
+            if (compasses[i].rotation) {
+                string = string.concat(", rotation:a ");
+            } else {
+                string = string.concat(", rotation:c ");
             }
-            else
-            {
-                string =string.concat(", rotation:c ");
-            }
-            string =string.concat("), \n ");
+            string = string.concat("), \n ");
         }
 
-        for (var i = 0; i < labels.length; i++) 
-        {
-            string +="label";
-            string =string.concat(" (id: ", labels[i].index);
+        for (var i = 0; i < labels.length; i++) {
+            string += "label";
+            string = string.concat(" (id: ", labels[i].index);
             string = string.concat(" x: ", labels[i].xp);
-            string =string.concat(" y: ", labels[i].yp);
-            string =string.concat(" text: ", labels[i].message);
-            string =string.concat("), \n");
+            string = string.concat(" y: ", labels[i].yp);
+            string = string.concat(" text: ", labels[i].message);
+            string = string.concat("), \n");
         }
 
-        document.getElementById("inputTextToSave").innerHTML=string;
-}
-
+        document.getElementById("inputTextToSave").innerHTML = string;
+    }
 </script>
 </body>
+
 </html>
