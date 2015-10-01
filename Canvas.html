@@ -349,6 +349,7 @@ $('#selector').mousemove(function(e) {
                              <div class="panel-body">
                                 <div class="row">
                                         <div class="col-lg-4">
+<<<<<<< HEAD
                                             <input type="button" class="btn btn-default" onclick="paintBucketApp.init('C')" value="Load Venn Diagram of 3 Sets ">
                                         </div>
                                          <div class="col-lg-4">
@@ -356,6 +357,15 @@ $('#selector').mousemove(function(e) {
                                         </div>
                                          <div class="col-lg-4">
                                             <input type="button" class="btn btn-default" onclick="paintBucketApp.init('A')" value="Load Venn Diagram of 1 Set ">
+=======
+                                            <input type="button" class="btn btn-default" onclick="loadvenndiagram3()" value="Load Venn Diagram of 3 Sets ">
+                                        </div>
+                                         <div class="col-lg-4">
+                                            <input type="button" class="btn btn-default" onclick="loadvenndiagram2()" value="Load Venn Diagram of 2 Sets ">
+                                        </div>
+                                         <div class="col-lg-4">
+                                            <input type="button" class="btn btn-default" onclick="loadvenndiagram1()" value="Load Venn Diagram of 1 Set ">
+>>>>>>> 525aa04a41b982ce572955cd83570e98e15e8f9f
                                         </div>
                              </div>
                     <div class="row">
@@ -365,10 +375,17 @@ $('#selector').mousemove(function(e) {
                             <div class="row">
                                          <div class="col-lg-2"> </div>
                                         <div class="col-lg-2">
+<<<<<<< HEAD
                                             <input type="button" class="btn btn-default" onclick="" value="Arrow">
                                         </div>
                                          <div class="col-lg-2">
                                             <input type="button" class="btn btn-default" onclick="" value="Label ">
+=======
+                                            <input type="button" class="btn btn-default" onclick="loadvenndiagram2()" value="Arrow">
+                                        </div>
+                                         <div class="col-lg-2">
+                                            <input type="button" class="btn btn-default" onclick="loadvenndiagram1()" value="Label ">
+>>>>>>> 525aa04a41b982ce572955cd83570e98e15e8f9f
                                         </div>
                                                                                 </div>
                         </div>
@@ -662,7 +679,11 @@ $('#selector').mousemove(function(e) {
     }, false);
 
 
+function loadvenndiagram3(){
 
+ paintBucketApp.init();
+
+}
 
 function loadvenndiagram2(){
 
