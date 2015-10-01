@@ -14,6 +14,11 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="./js/jquery-2.1.4.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
+
+    <!-- JavaScript Library for venn diagram canvas -->
+    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script> -->
+    <script type="text/javascript" src="js/html5-canvas-paint-bucket.js"></script>
+
     <style type="text/css">
         #canvas1 {
             position: relative;
@@ -85,7 +90,7 @@ $('#selector').mousemove(function(e) {
 
         <input type="button" class="btn btn-default" onclick="showPanel1()" value="Geomatrical Constructions">
         <input type="button" class="btn btn-default" onclick="showPanel2()" value="Standard Shapes">
-
+        <input type="button" class="btn btn-default" onclick="showPanel3()" value="Venn Diagrams">
         <br>
         <br>
         <div id="toolbox">
@@ -287,7 +292,6 @@ $('#selector').mousemove(function(e) {
         </div>
         <!-- End shape main div -->
 
-
         <div id="save">
             <div class="panel panel-warning">
                 <div class="panel-heading">
@@ -324,17 +328,60 @@ $('#selector').mousemove(function(e) {
                             </div>
                             <div class="col-lg-2">
                                 <input type="button" class="btn btn-default" onclick="loadFileAsText()" value="Load Selected File">
-                                <div>
-
-
-                                </div>
-
+                              
 
                             </div>
 
 
                         </div>
+                    </div>
+                </div>
+                 </div>
+                  </div> 
+                    <!-- End save  div -->
+
+        <div id="venn_diagrams">
+             <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Venn Diagrams</h3>
+                            
+                        </div>
+                             <div class="panel-body">
+                                <div class="row">
+                                        <div class="col-lg-4">
+                                            <input type="button" class="btn btn-default" onclick="loadvenndiagram3()" value="Load Venn Diagram of 3 Sets ">
+                                        </div>
+                                         <div class="col-lg-4">
+                                            <input type="button" class="btn btn-default" onclick="loadvenndiagram2()" value="Load Venn Diagram of 2 Sets ">
+                                        </div>
+                                         <div class="col-lg-4">
+                                            <input type="button" class="btn btn-default" onclick="loadvenndiagram1()" value="Load Venn Diagram of 1 Set ">
+                                        </div>
+                             </div>
+                    <div class="row">
+                        <!-- canvas for Venn Diagrams -->
+                        <div id="canvasDiv">
+                            <br> <br>
+                            <div class="row">
+                                         <div class="col-lg-2"> </div>
+                                        <div class="col-lg-2">
+                                            <input type="button" class="btn btn-default" onclick="loadvenndiagram2()" value="Arrow">
+                                        </div>
+                                         <div class="col-lg-2">
+                                            <input type="button" class="btn btn-default" onclick="loadvenndiagram1()" value="Label ">
+                                        </div>
+                                                                                </div>
+                        </div>
+                     </div>
+                                                    
+                        </div>
+                    </div>
+
+                   
+        
                         <!-- End div container marketting -->
+
+                       
 </body>
 
 <script type="text/javascript" src="./js/toolbox.js"></script>
@@ -615,7 +662,11 @@ $('#selector').mousemove(function(e) {
     }, false);
 
 
+function loadvenndiagram3(){
 
+ paintBucketApp.init();
+
+}
 
     function saveTextAsFile() {
         var textToWrite = document.getElementById("inputTextToSave").value;

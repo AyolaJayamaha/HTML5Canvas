@@ -18,15 +18,15 @@ var paintBucketApp = (function() {
       g: 207,
       b: 51
     },
-    colorBrown = {
-      r: 12,
-      g: 12,
-      b: 192
+    colorPink = {
+      r: 200,
+      g: 20,
+      b: 30
     },
     colorWhite = {
-      r: 0,
-      g: 105,
-      b: 152
+      r: 255,
+      g: 255,
+      b: 255
     },
     curColor = colorPurple,
     outlineImage = new Image(),
@@ -86,7 +86,7 @@ var paintBucketApp = (function() {
       locY += 46;
       drawColorSwatch(colorYellow, locX, locY);
       locY += 46;
-      drawColorSwatch(colorBrown, locX, locY);
+      drawColorSwatch(colorPink, locX, locY);
       locY += 46;
       drawColorSwatch(colorWhite, locX, locY);
       // Draw the outline image on top of everything. We could move this to a separate 
@@ -226,7 +226,7 @@ var paintBucketApp = (function() {
               redraw();
             } else if (mouseY > swatchStartY + swatchImageHeight * 3 &&
               mouseY < swatchStartY + swatchImageHeight * 4) {
-              curColor = colorBrown;
+              curColor = colorPink;
               redraw();
             } else if (mouseY > swatchStartY + swatchImageHeight * 4 &&
               mouseY < swatchStartY + swatchImageHeight * 5) {
