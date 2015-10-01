@@ -56,7 +56,7 @@ var paintBucketApp = (function() {
       context.fillStyle = "rgb(" + color.r + "," + color.g + "," + color.b +
         ")";
       context.fill();
-      if (curColor === color) {
+      if (curColor == color) {
         context.drawImage(swatchImage, 0, 0, 59, swatchImageHeight, x, y,
           59, swatchImageHeight);
       } else {
@@ -110,11 +110,11 @@ var paintBucketApp = (function() {
       g = colorLayerData.data[pixelPos + 1];
       b = colorLayerData.data[pixelPos + 2];
       // If the current pixel matches the clicked color
-      if (r === startR && g === startG && b === startB) {
+      if (r == startR && g == startG && b == startB) {
         return true;
       }
       // If current pixel matches the new color
-      if (r === curColor.r && g === curColor.g && b === curColor.b) {
+      if (r == curColor.r && g == curColor.g && b == curColor.b) {
         return false;
       }
       return true;
@@ -193,7 +193,7 @@ var paintBucketApp = (function() {
         g = colorLayerData.data[pixelPos + 1],
         b = colorLayerData.data[pixelPos + 2],
         a = colorLayerData.data[pixelPos + 3];
-      if (r === curColor.r && g === curColor.g && b === curColor.b) {
+      if (r == curColor.r && g == curColor.g && b == curColor.b) {
         // Return because trying to fill with the same color
         return;
       }
@@ -244,9 +244,9 @@ var paintBucketApp = (function() {
     },
     // Calls the redraw function after all neccessary resources are loaded.
     resourceLoaded = function() {
-      console.log('xx');
+      
       curLoadResNum += 1;
-      if (curLoadResNum === totalLoadResources) {
+      if (curLoadResNum == totalLoadResources) {
         createMouseEvents();
         redraw();
       }
@@ -279,17 +279,7 @@ outlineImage.src ="image/diagram.png";
 	
     // Creates a canvas element, loads images, adds events, and draws the canvas for the first time.
     init = function(image) {
-      // Create the canvas (Neccessary for IE because it doesn't know what a canvas element is)
-      var canvas = document.createElement('canvas');
-      canvas.setAttribute('width', canvasWidth);
-      canvas.setAttribute('height', canvasHeight);
-      canvas.setAttribute('id', 'canvas');
-      document.getElementById('canvasDiv').appendChild(canvas);
-      if (typeof G_vmlCanvasManager !== "undefined") {
-        canvas = G_vmlCanvasManager.initElement(canvas);
-      }
-      context = canvas.getContext("2d"); // Grab the 2d canvas context
-	  
+	 
 	  switch(image)
 	  {
 	  case 'A':
@@ -301,7 +291,21 @@ outlineImage.src ="image/diagram.png";
 		case 'C':
 		loadimage3();
 		break;
+		case 'D':
+		loadimage21();
+		break;
 	 }
+      // Create the canvas (Neccessary for IE because it doesn't know what a canvas element is)
+      var canvas = document.createElement('canvas');
+      canvas.setAttribute('width', canvasWidth);
+      canvas.setAttribute('height', canvasHeight);
+      canvas.setAttribute('id', 'canvas');
+      document.getElementById('canvasDiv').appendChild(canvas);
+      if (typeof G_vmlCanvasManager != "undefined") {
+        canvas = G_vmlCanvasManager.initElement(canvas);
+      }
+      context = canvas.getContext("2d"); // Grab the 2d canvas context
+	 
 	 
       // Note: The above code is a workaround for IE 8 and lower. Otherwise we could have used:
       //     context = document.getElementById('canvas').getContext("2d");
@@ -317,7 +321,7 @@ outlineImage.src ="image/diagram.png";
         try {
           outlineLayerData = context.getImageData(0, 0, canvasWidth,
             canvasHeight);
-          console.log(outlineLayerData);
+         
         } catch (ex) {
           window.alert(
             "Application cannot be run locally. Please run on a server."
@@ -326,8 +330,6 @@ outlineImage.src ="image/diagram.png";
         }
         clearCanvas();
 		
-		 
-	 
         colorLayerData = context.getImageData(0, 0, canvasWidth,
           canvasHeight);
         resourceLoaded();

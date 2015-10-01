@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test</title>
+        <script>
+            window.addEventListener('load', function() {
+                var canvas = document.getElementById("canvas");  
+                var ctx = canvas.getContext("2d");  
+
+                var order = 0;
+
+                function drawLayer1() {
+                    ctx.fillStyle = "rgb(200,0,0)";
+                    ctx.fillRect (10, 10, 55, 50);
+                }
+
+                function drawLayer2() {
+                    ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+                    ctx.fillRect (30, 30, 55, 50);
+                }
+
+                function draw() {
+                    ctx.clearRect(0, 0, 256, 256);
+
+                    if (order === 0) {
+                        drawLayer1();
+                        drawLayer2();
+                    }
+                    else {
+                        drawLayer2();
+                        drawLayer1();
+                    }
+                }
+
+                setInterval(draw, 250);
+                setInterval(function() {
+                    order = 1 - order;
+                }, 200);
+            }, false);
+        </script>
+    </head>
+    <body>
+        <canvas id="canvas" width="256px" height="256px"></canvas>
+    </body>
+</html>
