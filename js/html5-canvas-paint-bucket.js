@@ -18,15 +18,15 @@ var paintBucketApp = (function() {
       g: 207,
       b: 51
     },
-    colorBrown = {
-      r: 12,
-      g: 12,
-      b: 192
+    colorPink = {
+      r: 200,
+      g: 20,
+      b: 30
     },
     colorWhite = {
-      r: 0,
-      g: 105,
-      b: 152
+      r: 255,
+      g: 255,
+      b: 255
     },
     curColor = colorPurple,
     outlineImage = new Image(),
@@ -86,7 +86,7 @@ var paintBucketApp = (function() {
       locY += 46;
       drawColorSwatch(colorYellow, locX, locY);
       locY += 46;
-      drawColorSwatch(colorBrown, locX, locY);
+      drawColorSwatch(colorPink, locX, locY);
       locY += 46;
       drawColorSwatch(colorWhite, locX, locY);
       // Draw the outline image on top of everything. We could move this to a separate 
@@ -226,7 +226,7 @@ var paintBucketApp = (function() {
               redraw();
             } else if (mouseY > swatchStartY + swatchImageHeight * 3 &&
               mouseY < swatchStartY + swatchImageHeight * 4) {
-              curColor = colorBrown;
+              curColor = colorPink;
               redraw();
             } else if (mouseY > swatchStartY + swatchImageHeight * 4 &&
               mouseY < swatchStartY + swatchImageHeight * 5) {
@@ -251,8 +251,34 @@ var paintBucketApp = (function() {
         redraw();
       }
     },
+	
+	loadimage1= function()
+{
+outlineImage.src ="image/v1.png";
+
+},
+loadimage2=function()
+{
+outlineImage.src ="image/v2.png";
+
+},
+
+loadimage21=function()
+{
+outlineImage.src ="image/v4.png";
+
+},
+
+ loadimage3=function()
+{
+outlineImage.src ="image/diagram.png";
+
+},
+
+	
+	
     // Creates a canvas element, loads images, adds events, and draws the canvas for the first time.
-    init = function() {
+    init = function(image) {
       // Create the canvas (Neccessary for IE because it doesn't know what a canvas element is)
       var canvas = document.createElement('canvas');
       canvas.setAttribute('width', canvasWidth);
@@ -263,6 +289,20 @@ var paintBucketApp = (function() {
         canvas = G_vmlCanvasManager.initElement(canvas);
       }
       context = canvas.getContext("2d"); // Grab the 2d canvas context
+	  
+	  switch(image)
+	  {
+	  case 'A':
+		loadimage1();
+		break;
+		case 'B':
+		loadimage2();
+		break;
+		case 'C':
+		loadimage3();
+		break;
+	 }
+	 
       // Note: The above code is a workaround for IE 8 and lower. Otherwise we could have used:
       //     context = document.getElementById('canvas').getContext("2d");
       // Load images
@@ -285,13 +325,20 @@ var paintBucketApp = (function() {
           return;
         }
         clearCanvas();
+		
+		 
+	 
         colorLayerData = context.getImageData(0, 0, canvasWidth,
           canvasHeight);
         resourceLoaded();
       };
-      outlineImage.src = "image/diagram.png";
+	 
+	 
     };
+	
+	
   return {
     init: init
   };
 }());
+
