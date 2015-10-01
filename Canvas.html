@@ -349,6 +349,7 @@ $('#selector').mousemove(function(e) {
                              <div class="panel-body">
                                 <div class="row">
                                         <div class="col-lg-4">
+
                                             <input type="button" class="btn btn-default" onclick="paintBucketApp.init('C')" value="Load Venn Diagram of 3 Sets ">
                                         </div>
                                          <div class="col-lg-4">
@@ -357,24 +358,27 @@ $('#selector').mousemove(function(e) {
                                          <div class="col-lg-4">
                                             <input type="button" class="btn btn-default" onclick="paintBucketApp.init('A')" value="Load Venn Diagram of 1 Set ">
                                         </div>
+                                         
                              </div>
-                    <div class="row">
+                  
                         <!-- canvas for Venn Diagrams -->
                         <div id="canvasDiv">
                             <br> <br>
                             <div class="row">
                                          <div class="col-lg-2"> </div>
                                         <div class="col-lg-2">
+
                                             <input type="button" class="btn btn-default" onclick="" value="Arrow">
                                         </div>
                                          <div class="col-lg-2">
                                             <input type="button" class="btn btn-default" onclick="" value="Label ">
-                                        </div>
+
+                                          
                                                                                 </div>
                         </div>
                      </div>
                                                     
-                        </div>
+                        
                     </div>
 
                    
@@ -662,7 +666,11 @@ $('#selector').mousemove(function(e) {
     }, false);
 
 
+function loadvenndiagram3(){
 
+ paintBucketApp.init();
+
+}
 
 function loadvenndiagram2(){
 
