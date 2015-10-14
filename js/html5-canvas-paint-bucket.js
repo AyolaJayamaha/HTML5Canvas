@@ -300,7 +300,8 @@ outlineImage.src ="image/diagram.png";
       canvas.setAttribute('width', canvasWidth);
       canvas.setAttribute('height', canvasHeight);
       canvas.setAttribute('id', 'canvas');
-      document.getElementById('canvasDiv').appendChild(canvas);
+	  canvas.setAttribute('style','z-index: 0; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;');
+      document.getElementById('canvasdiv').appendChild(canvas);
       if (typeof G_vmlCanvasManager != "undefined") {
         canvas = G_vmlCanvasManager.initElement(canvas);
       }
