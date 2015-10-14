@@ -13,11 +13,15 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="./js/jquery-2.1.4.min.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap.js"></script>
 
     <!-- JavaScript Library for venn diagram canvas -->
     <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script> -->
-    <script type="text/javascript" src="js/html5-canvas-paint-bucket.js"></script>
+    <script type="text/javascript" src="./js/html5-canvas-paint-bucket.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.1.0/fabric.all.min.js" ></script>
+
+	
+    <script type="text/javascript" src="js/CanvasInput.js"></script>
 
     <style type="text/css">
         #canvas1 {
@@ -27,25 +31,59 @@
         #canvas2 {
             border: 1px solid #000;
         }
-    </style>
-    <style>
-        img {
-            opacity: 0.4;
-        }
-        
-        img#ic2 {
-            opacity: 1;
-        }
-        
-        img#is2 {
-            opacity: 1;
-        }
-        
-        img#il2 {
-            opacity: 1;
-        }
+		#canvasdiv{
+			 position: relative;
+		}
 
+   .circular {
+    position: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    background: url(./image/ruler.png) no-repeat;
+    }
+
+    .circularc {
+        position: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    background: url(./image/compass.png) no-repeat;
+    }
+
+    .circularl {
+        position: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    background: url(./image/label.png) no-repeat;
+    }
+
+
+.circular img {
+    opacity: 0.4;
+    filter: alpha(opacity=1);
+    }
+
+.circularc img {
+    opacity: 0.4;
+    filter: alpha(opacity=1);
+    }
+
+    .circularl img {
+    opacity: 0.4;
+    filter: alpha(opacity=1);
+    }
     </style>
+   
+
+   
     <script type="text/javascript" src="./js/boxes2.js"></script>
     <script type="text/javascript" src="./js/circles2.js"></script>
 
@@ -104,17 +142,20 @@ $('#selector').mousemove(function(e) {
                             <canvas id="canvas1" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
                         </div>
                         <div class="col-lg-1">
-                            <img id="ir" src="./image/ruler.png" alt="ruler" width="90" height="50" onclick="showRuler()">
+                           
+                            <div class="circular"><img id="ir" src="./image/ruler.png" alt="" onclick="showRuler()" /></div>
                             <h4>Ruler</h4>
                         </div>
 
                         <div class="col-lg-1">
-                            <img id="ic" src="./image/compass.png" alt="Generic placeholder image" width="50" height="50" onclick="showCompass()">
+                           
+                            <div class="circularc"><img id="ic" src="./image/compass.png" alt="" onclick="showCompass()" /></div>
                             <h4>Compass</h4>
                         </div>
 
                         <div class="col-lg-1">
-                            <img id="il" src="./image/label.png" alt="Generic placeholder image" width="50" height="50" onclick="showLabel()">
+                           
+                             <div class="circularl"><img id="il" src="./image/label.png" alt="" onclick="showLabel()" /></div>
                             <h4>Label</h4>
 
                         </div>
@@ -239,7 +280,9 @@ $('#selector').mousemove(function(e) {
                     </div>
                     <!-- End Row -->
 
-
+					<div class="row">
+						<input type="button" class="btn btn-default" onclick="save()" value="Save Diagram">
+					</div>
 
 
 
@@ -261,6 +304,7 @@ $('#selector').mousemove(function(e) {
 
                         <div id="shapes" title="test" class="col-lg-9" ondragover="allowDrop(event)" ondrop="drop(event)">
                             <canvas id="canvas2" width="800" height="500" style="border:1px solid #d3d3d3;"></canvas>
+                            
                         </div>
 
                         <div class="col-lg-1">
@@ -350,42 +394,61 @@ $('#selector').mousemove(function(e) {
                                 <div class="row">
                                         <div class="col-lg-3">
 
-                                            <input type="button" class="btn btn-default" onclick="paintBucketApp.init('C')" value="Load Venn Diagram of 3 Sets ">
+                                            <input type="button" class="btn btn-default" onclick="paintBucketApp.init('C')" value="3 Sets ">
                                         </div>
                                         <div class="col-lg-3">
 
-                                            <input type="button" class="btn btn-default" onclick="paintBucketApp.init('D')" value="Load Venn Diagram of 3 Sets with 1 mutually excusive">
+                                            <input type="button" class="btn btn-default" onclick="paintBucketApp.init('D')" value="3 Sets with 1 mutually excusive">
                                         </div>
                                          <div class="col-lg-3">
-                                            <input type="button" class="btn btn-default" onclick="paintBucketApp.init('B')" value="Load Venn Diagram of 2 Sets ">
+                                            <input type="button" class="btn btn-default" onclick="paintBucketApp.init('B')" value="2 Sets ">
                                         </div>
                                          <div class="col-lg-3">
-                                            <input type="button" class="btn btn-default" onclick="paintBucketApp.init('A')" value="Load Venn Diagram of 1 Set ">
+                                            <input type="button" class="btn btn-default" onclick="paintBucketApp.init('A')" value="1 Set ">
                                         </div>
                                          
                              </div>
+							 
                   
                         <!-- canvas for Venn Diagrams -->
-                        <div id="canvasDiv">
-                            <br> <br>
+                        <div id="canvasdiv">
+                            
                             <div class="row">
+							
                                          <div class="col-lg-2"> </div>
                                         <div class="col-lg-2">
 
                                             <input type="button" class="btn btn-default" onclick="" value="Arrow">
                                         </div>
                                          <div class="col-lg-2">
-                                            <input type="button" class="btn btn-default" onclick="" value="Label ">
-
-                                          
-                                                                                </div>
+                                            <input type="button" class="btn btn-default" onclick="setlabel()" value="Label ">
+											<input type="button" class="btn btn-default" onclick="settext()" value="Set Text ">
+											<div class="input-group input-group-sm">
+												<span class="input-group-addon" >Text</span>
+												<input type="text" class="form-control" id="setl" placeholder="label text">
+											</div>
+											
+											<div class="input-group input-group-sm">
+												<span class="input-group-addon" >X :</span>
+												<input type="number" class="form-control" id="xcr" placeholder="x cordinates">
+											</div>
+											
+											<div class="input-group input-group-sm">
+												<span class="input-group-addon" >Y :</span>
+												<input type="number" class="form-control" id="ycr" placeholder="y cordinates">
+											</div>
+											
+										</div>
                         </div>
+						<br> <br> <br> <br>
+							<canvas id="canvas4" width="792" height="592" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;"></canvas>
                      </div>
                                                     
                         
                     </div>
 
-                   
+                   </div>
+				   </div>
         
                         <!-- End div container marketting -->
 
@@ -394,8 +457,11 @@ $('#selector').mousemove(function(e) {
 
 <script type="text/javascript" src="./js/toolbox.js"></script>
 
+
 <script>
-    var canvas2 = document.getElementById('canvas2');
+	
+    
+	var canvas2 = new fabric.Canvas('canvas2');
     var context2 = canvas2.getContext('2d');
     var selectedItem = '';
     var selectedMethod = '';
@@ -442,11 +508,12 @@ $('#selector').mousemove(function(e) {
 
     });
 
+ canvas2.on({
+ 'mouse:down': function(e) {
 
 
-
-    canvas2.addEventListener('click', function(evt) {
-        var mousePos = getMousePos(canvas2, evt);
+   
+        var mousePos = getMousePos(canvas2, e);
 
         switch (selectedMethod) {
             case 'c':
@@ -515,11 +582,30 @@ $('#selector').mousemove(function(e) {
                         context2.fillStyle = 'black';
                         context2.fill();
                         context2.stroke();
+						
+						var rect = new fabric.Rect({
+  left: s.x,
+  top: s.y,
+  fill: 'red',
+  width: Math.abs(t.x - s.x),
+  height: Math.abs(t.y - s.y)
+});
+
+                        var input = new CanvasInput({
+  canvas: document.getElementById('canvas')
+});
 
 
-                        context2.beginPath();
-                        context2.rect(s.x, s.y, Math.abs(t.x - s.x), Math.abs(t.y - s.y));
-                        context2.stroke();
+                        canvas2.add(rect);
+						
+						var text = new fabric.Text('hello world', { left: 100, top: 100 });
+						canvas2.on('mouse:down', function(e) {
+ if (e.target) {
+    console.log('an object was clicked! ', e.target.type);
+  }
+});
+canvas2.add(text);
+
                         selectedItem = 's';
                         break;
                 }
@@ -562,7 +648,9 @@ $('#selector').mousemove(function(e) {
 
                 break;
         }
-    }, true);
+		}
+    });
+	
 
     var canvas1 = document.getElementById('canvas1');
     var context1 = canvas1.getContext('2d');
@@ -669,6 +757,25 @@ $('#selector').mousemove(function(e) {
         }
     }, false);
 
+	 var canvas3 = document.getElementById('canvasdiv');
+    var context3 = canvas3.getContext('2d');
+	
+
+var input = new CanvasInput({
+  canvas: document.getElementById('canvas4')
+});
+
+
+
+
+	
+	canvas3.addEventListener('mousemove', function(evt) {
+        var mousePos = getMousePos(canvasdiv, evt);
+        var message = '(X,Y): ' + mousePos.x / 50 + ',' + mousePos.y / 50;
+        writeMessage(canvasdiv, message);
+
+        
+    }, false);
 
 function loadvenndiagram3(){
 
@@ -692,6 +799,10 @@ function loadvenndiagram21(){
 
  paintBucketApp.loadimage21();
 
+}
+
+function save(){
+project.exportSVG();
 }
 
     function saveTextAsFile() {
@@ -778,6 +889,9 @@ function loadvenndiagram21(){
         document.getElementById("inputTextToSave").innerHTML = string;
     }
 </script>
+
+<script type="text/javascript" src="./js/venndiagram.js"></script>
+
 </body>
 
 </html>
