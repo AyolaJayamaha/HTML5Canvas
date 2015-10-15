@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Mathematical ToolBox</title>
+    <meta charset="utf-8" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="./js/jquery-2.1.4.min.js"></script>
+    <script src="./js/bootstrap.js"></script>
+
+    <!-- JavaScript Library for venn diagram canvas -->
+    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script> -->
+    <script type="text/javascript" src="./js/html5-canvas-paint-bucket.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.1.0/fabric.all.min.js" ></script>
+
+	
+    <script type="text/javascript" src="js/CanvasInput.js"></script>
+
+    <style type="text/css">
+        #canvas1 {
+            position: relative;
+        }
+        
+        #canvas2 {
+            border: 1px solid #000;
+        }
+		#canvas3{
+			 position: relative;
+		}
+
+   .circular {
+    position: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    background: url(./image/ruler.png) no-repeat;
+    }
+
+    .circularc {
+        position: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    background: url(./image/compass.png) no-repeat;
+    }
+
+    .circularl {
+        position: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    background: url(./image/label.png) no-repeat;
+    }
+
+
+.circular img {
+    opacity: 0.4;
+    filter: alpha(opacity=1);
+    }
+
+.circularc img {
+    opacity: 0.4;
+    filter: alpha(opacity=1);
+    }
+
+    .circularl img {
+    opacity: 0.4;
+    filter: alpha(opacity=1);
+    }
+    </style>
+   
+
+   
+    <script type="text/javascript" src="./js/boxes2.js"></script>
+    <script type="text/javascript" src="./js/circles2.js"></script>
+
+
+
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("image", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("image");
+            ev.target.appendChild(document.getElementById(data));
+
+
+        }
+
+
+
+       
+
+    </script>
+
+</head>
+
+<body onload="init()">
+
+    <br>
+    <div class="container marketing">
+
+        <input type="button" class="btn btn-default" onclick="showPanel1()" value="Geomatrical Constructions">
+        <input type="button" class="btn btn-default" onclick="showPanel2()" value="Standard Shapes">
+        <input type="button" class="btn btn-default" onclick="showPanel3()" value="Venn Diagrams">
+        <br>
+        <br>
+        <div id="toolbox">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Geometrical Drawings</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div id="geometrical" title="test" class="col-lg-9" style="position:relative; width:850px; height:500px ">
+                            <canvas id="canvas1" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
+                        </div>
+                        <div class="col-lg-1">
+                           
+                            <div class="circular"><img id="ir" src="./image/ruler.png" alt="" onclick="showRuler()" /></div>
+                            <h4>Ruler</h4>
+                        </div>
+
+                        <div class="col-lg-1">
+                           
+                            <div class="circularc"><img id="ic" src="./image/compass.png" alt="" onclick="showCompass()" /></div>
+                            <h4>Compass</h4>
+                        </div>
+
+                        <div class="col-lg-1">
+                           
+                             <div class="circularl"><img id="il" src="./image/label.png" alt="" onclick="showLabel()" /></div>
+                            <h4>Label</h4>
+
+                        </div>
+
+                        <div class="col-lg-3" id="functions">
+                            <!--Ruler-->
+                            <div id="ruler">
+                                <h2>Ruler</h2>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon1">X1</span>
+                                    <input type="number" class="form-control" name="x1value" id="x1" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon2">Y1</span>
+                                    <input type="number" class="form-control" name="y1value" id="y1" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon3">Extend</span>
+                                    <input type="number" class="form-control" name="extend1" id="e1" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon4">X2</span>
+                                    <input type="number" class="form-control" name="x2value" id="x2" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon5">Y2</span>
+                                    <input type="number" class="form-control" name="y2value" id="y2" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon6">Extend</span>
+                                    <input type="number" class="form-control" name="extend2" id="e2" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon7">Color</span>
+                                    <input type="color" class="form-control" name="color" id="clr">
+                                </div>
+                                <input type="button" class="btn btn-default" onclick="ruler()" value="Draw Line">
+
+                                <input type="button" class="btn btn-default" id="pickA" value="Pick A (X1,Y1)">
+                                <input type="button" class="btn btn-default" id="pickB" value="Pick B (X2,Y2)">
+
+                            </div>
+                            <!--END Ruler -->
+
+                            <!--compass-->
+                            <div id="compass">
+                                <h2>Compass</h2>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="cx">X</span>
+                                    <input type="number" class="form-control" name="xvalue" id="x" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="cy">Y</span>
+                                    <input type="number" class="form-control" name="yvalue" id="y" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="cr">Radius</span>
+                                    <input type="number" class="form-control" name="r" id="radius" placeholder="cm">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="cs">Start Angle</span>
+                                    <input type="number" class="form-control" id="sa" placeholder="degree">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="ce">End Angle</span>
+                                    <input type="number" class="form-control" id="ea" placeholder="degree">
+                                </div>
+
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="angle">
+                        <label class="radio-inline"><input type="radio" name="optradio" id="rotation1" checked="true">Counterclockwise</label>     
+                        <label class="radio-inline"><input type="radio" name="optradio" id ="rotation2" >Clockwise</label>
+                    </span>
+                                </div>
+
+
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="colorpick">Color</span>
+
+
+                                    <input type="color" class="form-control" name="color" id="clc">
+                                </div>
+                                <div>
+                                    <input type="button" class="btn btn-default" onclick="compass()" value="Draw Arc">
+
+                                    <input type="button" class="btn btn-default" id="pickC" value="Pick Center">
+                                </div>
+
+                            </div>
+                            <!--END compass -->
+
+
+                            <!--Label-->
+                            <div id="label">
+                                <h2>Label</h2>
+
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="lx">X</span>
+                                    <input type="number" class="form-control" name="xvalue" id="xx" placeholder="cm">
+                                </div>
+
+
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="ly">Y</span>
+                                    <input type="number" class="form-control" name="yvalue" id="yy" placeholder="cm">
+                                </div>
+
+
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="lt">Text</span>
+                                    <input type="text" name="text" class="form-control" id="txt">
+                                </div>
+                                <input type="button" class="btn btn-default" onclick="label()" value="Label Item">
+
+                                <input type="button" class="btn btn-default" value="Locate (X,Y)" id="pickL">
+
+                            </div>
+                            <!--END Label -->
+
+                        </div>
+
+                    </div>
+                    <!-- End Row -->
+
+					<div class="row">
+						<input type="button" class="btn btn-default" onclick="save()" value="Save Diagram">
+					</div>
+
+
+
+                </div>
+
+            </div>
+            <!-- End toolbox main div -->
+
+        </div>
+        <!-- End Panel -->
+
+        <div id="shape">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Standard Shapes</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+
+                        <div id="shapes" title="test" class="col-lg-9" ondragover="allowDrop(event)" ondrop="drop(event)">
+                            <canvas id="canvas2" width="800" height="500" style="border:1px solid #d3d3d3;"></canvas>
+                            
+                        </div>
+
+                        <div class="col-lg-1">
+                            <img class="img-circle" id="ic2" src="./image/circle.png" alt="circle" width="50" height="50" ondragstart="drag(event)">
+                            <input type="button" class="btn btn-default" value="Circle" id="pickCircle">
+
+                        </div>
+
+                        <div class="col-lg-1">
+                            <img class="img-circle" id="is2" src="./image/square.jpg" alt="square" width="50" height="50" ondragstart="drag(event)">
+                            <input type="button" class="btn btn-default" value="Square" id="pickSquare">
+
+                        </div>
+
+                        <div class="col-lg-1">
+                            <img class="img-circle" id="il2" src="./image/line.png" alt="line" width="50" height="50" ondragstart="drag(event)">
+                            <input type="button" class="btn btn-default" value="Line" id="pickLine">
+
+                        </div>
+
+                    </div>
+                    <!-- End Row -->
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- End shape main div -->
+
+        <div id="save">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Administration</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <input type="button" class="btn btn-default" onclick="loaddrawing()" value="Load Drawing API Calls">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <textarea id="inputTextToSave" style="width:512px;height:256px"></textarea>
+                        </div>
+                        <div class="col-lg-2">
+                            <h4><span class="label label-default">Filename to Save As:</span></h4></div>
+                        <div class="col-lg-2">
+                            <input type="text" class="form-control" id="inputFileNameToSaveAs"></input>
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="button" class="btn btn-default" onclick="saveTextAsFile()" value="Save to File"> </div>
+
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-6"></div>
+                            <div class="col-lg-2">
+                                <h4><span class="label label-default">Select a File to Load:</span></h4></div>
+                            <div class="col-lg-2">
+                                <input type="file" id="fileToLoad" class="form-control">
+                            </div>
+                            <div class="col-lg-2">
+                                <input type="button" class="btn btn-default" onclick="loadFileAsText()" value="Load Selected File">
+                              
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                 </div>
+                  </div> 
+                    <!-- End save  div -->
+
+        <div id="venn_diagrams">
+             <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Venn Diagrams</h3>
+                            
+                        </div>
+                             <div class="panel-body">
+                                <div class="row">
+                                        <div class="col-lg-3">
+
+                                            <input type="button" class="btn btn-default" onclick="paintBucketApp.init('C')" value="3 Sets ">
+                                        </div>
+                                        <div class="col-lg-3">
+
+                                            <input type="button" class="btn btn-default" onclick="paintBucketApp.init('D')" value="3 Sets with 1 mutually excusive">
+                                        </div>
+                                         <div class="col-lg-3">
+                                            <input type="button" class="btn btn-default" onclick="paintBucketApp.init('B')" value="2 Sets ">
+                                        </div>
+                                         <div class="col-lg-3">
+                                            <input type="button" class="btn btn-default" onclick="paintBucketApp.init('A')" value="1 Set ">
+                                        </div>
+										
+                                         
+                             </div>
+							 <br><br><br><br>
+							 <div class="row">
+							  <div class="col-lg-2"></div>
+							   <div class="col-lg-2"></div>
+							    <div class="col-lg-2"></div>
+								 <div class="col-lg-2"></div>
+								
+							 <div class="col-lg-1">
+                                            <input type="button" class="btn btn-default" onclick="" value="Label ">
+                                        </div>
+										<div class="col-lg-1">
+                                            <input type="button" class="btn btn-default" onclick="" value="Color">
+                                        </div>
+										<div class="col-lg-1">
+                                            <input type="button" class="btn btn-default" onclick="" value="Add to Question">
+                                        </div>
+							 
+							 </div>
+							 
+                  
+                        <!-- canvas for Venn Diagrams -->
+                        <div id="canvasdiv">
+                            
+                            
+							
+                     </div>
+                                                    
+                        
+                    </div>
+
+                   </div>
+				   </div>
+        
+                        <!-- End div container marketting -->
+
+                       
+</body>
+
+<script type="text/javascript" src="./js/toolbox.js"></script>
+
+
+<script>
+	
+    
+	var canvas2 = new fabric.Canvas('canvas2');
+    var context2 = canvas2.getContext('2d');
+    var selectedItem = '';
+    var selectedMethod = '';
+    var r = {
+        x: 0,
+        y: 0
+    };
+    var q = {
+        x: 0,
+        y: 0
+    };
+    var s = {
+        x: 0,
+        y: 0
+    };
+    var t = {
+        x: 0,
+        y: 0
+    };
+    var l = {
+        x: 0,
+        y: 0
+    };
+    var m = {
+        x: 0,
+        y: 0
+    };
+
+    $('#pickCircle').click(function() {
+        selectedMethod = 'c';
+        selectedItem = 'r';
+
+    });
+
+    $('#pickSquare').click(function() {
+        selectedMethod = 's';
+        selectedItem = 's';
+
+    });
+
+    $('#pickLine').click(function() {
+        selectedMethod = 'l';
+        selectedItem = 'l';
+
+    });
+
+ canvas2.on({
+ 'mouse:down': function(e) {
+
+
+   
+        var mousePos = getMousePos(canvas2, e);
+
+        switch (selectedMethod) {
+            case 'c':
+
+                switch (selectedItem) {
+                    case 'r':
+                        r.x = mousePos.x;
+                        r.y = mousePos.y;
+
+                        context2.beginPath();
+                        context2.arc(r.x, r.y,3,0,360,false);
+                        context2.fillStyle = 'black';
+                        context2.fill();
+                        context2.stroke();
+
+                        selectedItem = 'q';
+                        break;
+                    case 'q':
+                        q.x = mousePos.x;
+                        q.y = mousePos.y;
+
+
+                        
+                        var diffx = r.x - q.x;
+                        var diffy = r.y - q.y;
+
+                        context2.beginPath();
+                        context2.arc(q.x, q.y,3,0,360,false);
+                        context2.fillStyle = 'black';
+                        context2.fill();
+                        context2.stroke();
+
+
+                        var radius2 = Math.sqrt((diffx * diffx) + (diffy * diffy));
+                        context2.beginPath();
+                        context2.arc(r.x, r.y, radius2, 0, 360, false);
+                        context2.stroke();
+                        selectedItem = 'r';
+                        break;
+                }
+
+                break;
+
+            case 's':
+
+                switch (selectedItem) {
+                    case 's':
+                        s.x = mousePos.x;
+                        s.y = mousePos.y;
+
+                        context2.beginPath();
+                        context2.arc(s.x, s.y,3,0,360,false);
+                        context2.fillStyle = 'black';
+                        context2.fill();
+                        context2.stroke();
+
+
+                        selectedItem = 't';
+                        break;
+                    case 't':
+                        t.x = mousePos.x;
+                        t.y = mousePos.y;
+
+                        context2.beginPath();
+                        context2.arc(t.x, t.y,3,0,360,false);
+                        context2.fillStyle = 'black';
+                        context2.fill();
+                        context2.stroke();
+						
+						var rect = new fabric.Rect({
+  left: s.x,
+  top: s.y,
+  fill: 'red',
+  width: Math.abs(t.x - s.x),
+  height: Math.abs(t.y - s.y)
+});
+
+                        var input = new CanvasInput({
+  canvas: document.getElementById('canvas')
+});
+
+
+                        canvas2.add(rect);
+						
+						var text = new fabric.Text('hello world', { left: 100, top: 100 });
+						canvas2.on('mouse:down', function(e) {
+ if (e.target) {
+    console.log('an object was clicked! ', e.target.type);
+  }
+});
+canvas2.add(text);
+
+                        selectedItem = 's';
+                        break;
+                }
+
+                break;
+
+            case 'l':
+                switch (selectedItem) {
+                    case 'l':
+                        l.x = mousePos.x;
+                        l.y = mousePos.y;
+
+                        context2.beginPath();
+                        context2.arc(l.x, l.y,3,0,360,false);
+                        context2.fillStyle = 'black';
+                        context2.fill();
+                        context2.stroke();
+
+                        selectedItem = 'm';
+                        break;
+
+                    case 'm':
+                        m.x = mousePos.x;
+                        m.y = mousePos.y;
+
+                        context2.beginPath();
+                        context2.arc(m.x, m.y,3,0,360,false);
+                        context2.fillStyle = 'black';
+                        context2.fill();
+                        context2.stroke();
+
+                        context2.beginPath();
+                        context2.moveTo(l.x, l.y);
+                        context2.lineTo(m.x, m.y);
+                        context2.stroke();
+                        selectedItem = 'l';
+                        break;
+                }
+
+
+                break;
+        }
+		}
+    });
+	
+
+    var canvas1 = document.getElementById('canvas1');
+    var context1 = canvas1.getContext('2d');
+    var selectedItem = '';
+
+
+    canvas1.addEventListener('mousemove', function(evt) {
+        var mousePos = getMousePos(canvas1, evt);
+        var message = '(X,Y): ' + mousePos.x / 50 + ',' + mousePos.y / 50;
+        writeMessage(canvas1, message);
+
+        if (selectedItem == 'b') {
+            writeMessage(canvas, "Length :" + Math.sqrt((mousePos.x / 50 - $('#x1').val()) * (mousePos.x / 50 - $('#x1').val()) + (mousePos.y / 50 - $('#y1').val()) * (mousePos.y / 50 - $('#y1').val())));
+        } else if (selectedItem == 'r') {
+            writeMessage(canvas, "Radius :" + Math.sqrt((mousePos.x / 50 - $('#x').val()) * (mousePos.x / 50 - $('#x').val()) + (mousePos.y / 50 - $('#y').val()) * (mousePos.y / 50 - $('#y').val())));
+        } else if (selectedItem == 'k') {
+            setAngle(evt);
+            writeMessage(canvas, "Angle :" + ($('#sa').val() - $('#ea').val()));
+        }
+    }, false);
+
+    canvas1.addEventListener('mousedown', function(evt) {
+        var mousePos = getMousePos(canvas1, evt);
+
+        switch (selectedMethod) {
+            case 'r':
+                switch (selectedItem) {
+
+                    case 'a':
+                        setA(evt);
+
+                        context1.beginPath();
+                        context1.arc(mousePos.x, mousePos.y,3,0,360,false);
+                        context1.fillStyle = 'black';
+                        context1.fill();
+                        context1.stroke();
+
+                        selectedItem = 'b';
+                        break;
+
+                    case 'b':
+                        setB(evt);
+
+                        context1.beginPath();
+                        context1.arc(mousePos.x, mousePos.y,3,0,360,false);
+                        context1.fillStyle = 'black';
+                        context1.fill();
+                        context1.stroke();
+
+                        ruler();
+                        selectedItem = 'a';
+                        break;
+
+                }
+
+                break;
+
+            case 'c':
+                switch (selectedItem) {
+                    case 'c':
+                        setC(evt);
+
+                        context1.beginPath();
+                        context1.arc(mousePos.x, mousePos.y,3,0,360,false);
+                        context1.fillStyle = 'black';
+                        context1.fill();
+                        context1.stroke();
+
+                        selectedItem = 'r';
+                        break;
+
+                    case 'r':
+                        setR(evt);
+
+                        context1.beginPath();
+                        context1.arc(mousePos.x, mousePos.y,3,0,360,false);
+                        context1.fillStyle = 'black';
+                        context1.fill();
+                        context1.stroke();
+
+                        selectedItem = 'k';
+                        break;
+
+                    case 'k':
+
+                        selectedItem = 'c';
+                        $('#geometrical').title = $('ea').value -  $('sa').value ;
+                        compass();
+                        break;
+
+                }
+
+                break;
+
+            case 'l':
+                switch (selectedItem) {
+
+                    case 'l':
+                        setL(evt);
+                        break;
+                }
+
+                break;
+        }
+    }, false);
+
+
+	 var canvas3 = document.getElementById('canvas4');
+
+    var context3 = canvas3.getContext('2d');
+	
+var cx=0;
+var cy=0;
+
+var input = new CanvasInput({
+  canvas: document.getElementById('canvas4'),
+	x : cx.value,
+	y : cy.value
+	
+} );
+
+
+canvas3.addEventListener('mousedown', function(evt) {
+        var mousePos = getMousePos(canvas3, evt);
+       
+        cx=mousePos.x ;
+		cy=mousePos.y;
+		
+		var contextx=canvas3.getContext('2d');
+contextx._clearRect=contextx.clearRect;
+contextx.clearRect=function(x,y,w,h){
+    contextx._clearRect(0,0,750,800);
+    //do your stuff here
+	
+};
+        
+    }, false);
+
+
+	
+	
+
+function loadvenndiagram3(){
+
+ paintBucketApp.init();
+
+}
+
+function loadvenndiagram2(){
+
+ paintBucketApp.loadimage2();
+
+}
+
+function loadvenndiagram1(){
+
+ paintBucketApp.loadimage1();
+
+}
+
+function loadvenndiagram21(){
+
+ paintBucketApp.loadimage21();
+
+}
+
+function save(){
+project.exportSVG();
+}
+
+    function saveTextAsFile() {
+        var textToWrite = document.getElementById("inputTextToSave").value;
+        var textFileAsBlob = new Blob([textToWrite], {
+            type: 'text/plain'
+        });
+        var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+
+        var downloadLink = document.createElement("a");
+        downloadLink.download = fileNameToSaveAs;
+        downloadLink.innerHTML = "Download File";
+        if (window.webkitURL != null) {
+            // Chrome allows the link to be clicked
+            // without actually adding it to the DOM.
+            downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+        } else {
+            // Firefox requires the link to be added to the DOM
+            // before it can be clicked.
+            downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+            downloadLink.onclick = destroyClickedElement;
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+        }
+
+        downloadLink.click();
+    }
+
+    function destroyClickedElement(event) {
+        document.body.removeChild(event.target);
+    }
+
+    function loadFileAsText() {
+        var fileToLoad = document.getElementById("fileToLoad").files[0];
+
+        var fileReader = new FileReader();
+        fileReader.onload = function(fileLoadedEvent) {
+            var textFromFileLoaded = fileLoadedEvent.target.result;
+            document.getElementById("inputTextToSave").value = textFromFileLoaded;
+        }
+        fileReader.readAsText(fileToLoad, "UTF-8");
+    }
+
+    function loaddrawing() {
+
+        var string = "";
+
+        for (var i = 0; i < rulers.length; i++) {
+            string += "ruler";
+            string = string.concat(" (id: ", rulers[i].index);
+            string = string.concat(" x1: ", rulers[i].xs);
+            string = string.concat(" y1: ", rulers[i].ys);
+            string = string.concat(" x2: ", rulers[i].xe);
+            string = string.concat(" y2: ", rulers[i].ye);
+            string = string.concat("), \n");
+
+        }
+
+        for (var i = 0; i < compasses.length; i++) {
+            string += "compass";
+            string = string.concat(" (id: ", compasses[i].index);
+            string = string.concat(", x: ", compasses[i].x);
+            string = string.concat(", y: ", compasses[i].y);
+            string = string.concat(", radius: ", compasses[i].radius);
+            string = string.concat(", s. angle: ", compasses[i].starta);
+            string = string.concat(", e. angle: ", compasses[i].enda);
+            if (compasses[i].rotation) {
+                string = string.concat(", rotation:a ");
+            } else {
+                string = string.concat(", rotation:c ");
+            }
+            string = string.concat("), \n ");
+        }
+
+        for (var i = 0; i < labels.length; i++) {
+            string += "label";
+            string = string.concat(" (id: ", labels[i].index);
+            string = string.concat(" x: ", labels[i].xp);
+            string = string.concat(" y: ", labels[i].yp);
+            string = string.concat(" text: ", labels[i].message);
+            string = string.concat("), \n");
+        }
+
+        document.getElementById("inputTextToSave").innerHTML = string;
+    }
+</script>
+
+<script type="text/javascript" src="./js/venndiagram.js"></script>
+
+</body>
+
+</html>
