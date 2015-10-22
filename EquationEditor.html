@@ -1,0 +1,102 @@
+﻿<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <script src="./js/jquery-2.1.4.min.js"></script>
+ <script src="./js/bootstrap.js"></script>
+<script type="text/javascript" src="http://latex.codecogs.com/editor3.js"></script>
+
+</head>
+<body>
+2014 O/L Mathematics
+<br><br>
+Maths I
+<br>
+Time 2 hours
+<br>
+Part A
+<br>
+Answer All Questions
+<br> <br> <br>
+1. පොල්තෙල් ලිටර් 20 කින් 1/4 ක පොල්තෙල් ලිටර් කොපමණ තිබේද?
+<p><a href="javascript:OpenLatexEditor('textbox1','html','en-us',false,'','mini')">
+පිළිතුර
+</a>
+<br><br>
+<iframe id ="i1" src="" height="50"></iframe>
+<br>
+</p>
+<textarea id="textbox1" col="4" rows="2"  ></textarea>
+<br><br>
+2. අගය සොයන්න : 2.5 + 6.2
+<p><a href="javascript:OpenLatexEditor('textbox2','html','en-us',false,'','mini')">
+පිළිතුර
+</a>
+<br><br>
+<iframe id ="i2" src="" height="50"></iframe>
+<br>
+</p>
+<textarea id="textbox2" col="4" rows="2" ></textarea>
+<br><br>
+3. සුළු කරන්න:  8y + 3y
+<p><a href="javascript:OpenLatexEditor('textbox3','html','en-us',false,'','mini')">
+පිළිතුර
+</a>
+<br><br>
+<iframe id ="i3" src="" height="50"></iframe>
+<br>
+</p>
+<textarea id="textbox3" col="4" rows="2" ></textarea>
+<br><br>
+4. විසදන්න:  3x=12
+<p><a href="javascript:OpenLatexEditor('textbox4','html','en-us',false,'','mini')">
+පිළිතුර
+</a>
+<br><br>
+<iframe id ="i4" src="" height="50"></iframe>
+<br>
+</p>
+<textarea id="textbox4" col="4" rows="2" ></textarea>
+<br><br>
+5. කිලෝග්‍රෑම් 1.2 ග්‍රෑම්වලන් දක්වන්න.
+<p><a href="javascript:OpenLatexEditor('textbox5','html','en-us',false,'','mini')">
+පිළිතුර
+</a>
+<br><br>
+<iframe id ="i5" src="" height="50"></iframe>
+<br>
+</p>
+<textarea id="textbox5" col="4" rows="2" ></textarea>
+<br><br>
+6. රු 40ට මිලදී ගත් භාණ්ඩයක් රු48 ට විකිණීමේදී ලැබෙන ලාභය කීයද?
+<p><a href="javascript:OpenLatexEditor('textbox6','html','en-us',false,'','mini')">
+පිළිතුර
+</a>
+<br><br>
+<iframe id ="i6" src="" height="50"></iframe>
+<br>
+</p>
+<textarea id="textbox6" col="4" rows="2" ></textarea>
+<br><br>
+<script type="text/javascript"> 
+
+$('textarea').keyup(function(){
+
+
+document.getElementById('i1').src=$('#textbox1').val().split('"')[1];
+document.getElementById('i2').src=$('#textbox2').val().split('"')[1];
+document.getElementById('i3').src=$('#textbox3').val().split('"')[1];
+document.getElementById('i4').src=$('#textbox4').val().split('"')[1];
+document.getElementById('i5').src=$('#textbox5').val().split('"')[1];
+document.getElementById('i6').src=$('#textbox6').val().split('"')[1];
+
+}
+);
+
+$(document).ready(function(){
+    $("textarea").val('');
+}); 
+
+</script>
+</body>
+</html>
