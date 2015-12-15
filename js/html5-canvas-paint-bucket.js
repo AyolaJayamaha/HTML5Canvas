@@ -1,6 +1,7 @@
 var paintBucketApp = (function() {
   "use strict";
   var context,
+  ctx = new C2S(792,592),
     canvasWidth = 792,
     canvasHeight = 592,
     colorPurple = {
@@ -47,6 +48,7 @@ var paintBucketApp = (function() {
     // Clears the canvas.
     clearCanvas = function() {
       context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+	  ctx.clearRect(0, 0, context.canvas.width, context.canvas.height);
     },
     // Draw a color swatch
     drawColorSwatch = function(color, x, y) {
@@ -56,12 +58,28 @@ var paintBucketApp = (function() {
       context.fillStyle = "rgb(" + color.r + "," + color.g + "," + color.b +
         ")";
       context.fill();
+	  
+	  ctx.beginPath();
+	  ctx.arc(x + 46, y + 23, 18, 0, Math.PI * 2, true);
+      ctx.closePath();
+      ctx.fillStyle = "rgb(" + color.r + "," + color.g + "," + color.b +
+        ")";
+      ctx.fill();
+	  
       if (curColor == color) {
         context.drawImage(swatchImage, 0, 0, 59, swatchImageHeight, x, y,
           59, swatchImageHeight);
+		
+		ctx.drawImage(swatchImage, 0, 0, 59, swatchImageHeight, x, y,
+          59, swatchImageHeight);
+		  
       } else {
         context.drawImage(swatchImage, x, y, swatchImageWidth,
           swatchImageHeight);
+		  
+		ctx.drawImage(swatchImage, x, y, swatchImageWidth,
+          swatchImageHeight);
+		  
       }
     },
     // Draw the elements on the canvas
@@ -75,8 +93,12 @@ var paintBucketApp = (function() {
       clearCanvas();
       // Draw the current state of the color layer to the canvas
       context.putImageData(colorLayerData, 0, 0);
+	  ctx.putImageData(colorLayerData, 0, 0);
+	  
       // Draw the background
       context.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
+	  ctx.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
+	  
       // Draw the color swatches
       locX = 52;
       locY = 19;
@@ -92,6 +114,9 @@ var paintBucketApp = (function() {
       // Draw the outline image on top of everything. We could move this to a separate 
       //   canvas so we did not have to redraw this everyime.
       context.drawImage(outlineImage, drawingAreaX, drawingAreaY,
+        drawingAreaWidth, drawingAreaHeight);
+		
+		ctx.drawImage(outlineImage, drawingAreaX, drawingAreaY,
         drawingAreaWidth, drawingAreaHeight);
     },
     matchOutlineColor = function(r, g, b, a) {
@@ -300,7 +325,7 @@ outlineImage.src ="image/diagram.png";
       canvas.setAttribute('width', canvasWidth);
       canvas.setAttribute('height', canvasHeight);
       canvas.setAttribute('id', 'canvas');
-	  canvas.setAttribute('style','z-index: 0; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;');
+	  canvas.setAttribute('style','z-index: 1; position:; left:200px;top:100px; border:1px solid #d3d3d3;');
       document.getElementById('canvasdiv').appendChild(canvas);
       if (typeof G_vmlCanvasManager != "undefined") {
         canvas = G_vmlCanvasManager.initElement(canvas);
@@ -318,6 +343,9 @@ outlineImage.src ="image/diagram.png";
       outlineImage.onload = function() {
         context.drawImage(outlineImage, drawingAreaX, drawingAreaY,
           drawingAreaWidth, drawingAreaHeight);
+		  ctx.drawImage(outlineImage, drawingAreaX, drawingAreaY,
+          drawingAreaWidth, drawingAreaHeight);
+		  
         // Test for cross origin security error (SECURITY_ERR: DOM Exception 18)
         try {
           outlineLayerData = context.getImageData(0, 0, canvasWidth,

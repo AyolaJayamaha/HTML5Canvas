@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Mathematical ToolBox</title>
+    <meta charset="utf-8" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="./js/jquery-2.1.4.min.js"></script>
+    <script src="./js/bootstrap.js"></script>
+
+    <!-- JavaScript Library for venn diagram canvas -->
+    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script> -->
+    <script type="text/javascript" src="./js/canvas2svg.js"></script> 
+
+</head>
+
+<body>
+
+<canvas id="canvas" width="800" height="500" ></canvas>
+<textarea id ="textbox" rows="5" cols="200"></textarea>
+</body>
+<script type="text/javascript">
+
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+context.beginPath();
+context.arc(50, 250,30,0,360,false);
+context.fillStyle = 'lightgreen';
+context.fill();
+context.stroke();
+
+//make a mock canvas context using canvas2svg. We use a C2S namespace for less typing:
+var ctx = new C2S(500,500); //width, height of your desired svg file
+//do your normal canvas stuff:
+ctx.beginPath();
+ctx.arc(50, 250,30,0,360,false);
+ctx.fillStyle = 'lightgreen';
+ctx.fill();
+ctx.stroke();
+
+context.beginPath();
+context.arc(100, 250,30,0,360,false);
+context.fillStyle = 'rgba(0,20,154,0.4)';
+context.fill();
+context.stroke();
+
+context.beginPath();
+context.arc(50, 250,30,0,360,false);
+context.fillStyle = 'rgba(0,180,54,0.7)';
+context.fill();
+context.stroke();
+
+//ok lets serialize to SVG:
+var myRectangle = ctx.getSerializedSvg(true); //true here will replace any named entities with numbered ones.
+                                      //Standalone SVG doesn't support most named entities.
+			$("#textbox").val(myRectangle);
+
+</script>
+</html>

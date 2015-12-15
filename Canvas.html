@@ -15,17 +15,15 @@
     <script src="./js/jquery-2.1.4.min.js"></script>
     <script src="./js/bootstrap.js"></script>
 
-    <!-- JavaScript Library for venn diagram canvas -->
-    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script> -->
+    <!-- JavaScript Library for venn diagram canvas and svg export -->
+	<script type="text/javascript" src="./js/canvas2svg.js"></script> 
     <script type="text/javascript" src="./js/html5-canvas-paint-bucket.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.1.0/fabric.all.min.js" ></script>
 
-	
-    <script type="text/javascript" src="js/CanvasInput.js"></script>
-
+	    <script type="text/javascript" src="./fabricjs/fabric.js-1.6.0-rc.1/dist/fabric.js"></script>
     <style type="text/css">
         #canvas1 {
-            position: relative;
+			display: block;
+			vertical-align: bottom;
         }
         
         #canvas2 {
@@ -131,8 +129,8 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div id="geometrical" title="test" class="col-lg-9" style="position:relative; width:850px; height:500px ">
-                            <canvas id="canvas1" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
+                        <div id="geometrical" title="Drawing" class="col-lg-9" style="position:relative; width:800px; height:500px ">
+                            <canvas id="canvas1" style="border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
                         </div>
                         <div class="col-lg-1">
                            
@@ -273,11 +271,7 @@
                     </div>
                     <!-- End Row -->
 
-					<div class="row">
-						<input type="button" class="btn btn-default" onclick="save()" value="Save Diagram">
-					</div>
-
-
+				
 
                 </div>
 
@@ -386,11 +380,9 @@
                              <div class="panel-body">
                                 <div class="row">
                                         <div class="col-lg-3">
-
                                             <input type="button" class="btn btn-default" onclick="paintBucketApp.init('C')" value="3 Sets ">
                                         </div>
                                         <div class="col-lg-3">
-
                                             <input type="button" class="btn btn-default" onclick="paintBucketApp.init('D')" value="3 Sets with 1 mutually excusive">
                                         </div>
                                          <div class="col-lg-3">
@@ -398,32 +390,34 @@
                                         </div>
                                          <div class="col-lg-3">
                                             <input type="button" class="btn btn-default" onclick="paintBucketApp.init('A')" value="1 Set ">
-                                        </div>
-										
-                                         
+                                        </div>    									
                              </div>
 							 
 							 <div class="row">
-							 <div class="col-lg-2">
+										<div class="col-lg-2">
+										<br><br>
                                             <input type="button" class="btn btn-default" onclick="" value="Label ">
                                         </div>
 										<div class="col-lg-2">
+										<br><br>
                                             <input type="button" class="btn btn-default" onclick="" value="Color">
                                         </div>
-							 
+										<div class="col-lg-8">
+										</div>
 							 </div>
 							 
-                  
-                        <!-- canvas for Venn Diagrams -->
-                        <div id="canvasdiv">
-                            
-                            <div class="row">
-							<canvas id="canvas4" width="792" height="592" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;"></canvas>
-                                         
-                        </div>
-						<br> <br> <br> <br>
+							 <div class="row">
+								<!-- canvas for Venn Diagrams -->
+								<!-->
+								<div id="canvasdiv">
+								
+									<canvas id="canvas4" width="792" height="592" style="z-index: 1; position:relative; left:200px;top:100px; border:1px solid #d3d3d3;"></canvas>
+								
+								</div>
+								<-->
+							</div>
 							
-                     </div>
+                     
                                                     
                         
                     </div>
@@ -738,7 +732,7 @@ canvas2.add(text);
         }
     }, false);
 
-
+/*
 	 var canvas3 = document.getElementById('canvas4');
 
     var context3 = canvas3.getContext('2d');
@@ -746,12 +740,7 @@ canvas2.add(text);
 var cx=0;
 var cy=0;
 
-var input = new CanvasInput({
-  canvas: document.getElementById('canvas4'),
-	x : cx.value,
-	y : cy.value
-	
-} );
+
 
 
 canvas3.addEventListener('mousedown', function(evt) {
@@ -763,15 +752,14 @@ canvas3.addEventListener('mousedown', function(evt) {
 		var contextx=canvas3.getContext('2d');
 contextx._clearRect=contextx.clearRect;
 contextx.clearRect=function(x,y,w,h){
-    contextx._clearRect(0,0,750,800);
-    //do your stuff here
-	
-};
+    contextx._clearRect(0,0,792,592);
+    //do your stuff here	
+	};
         
-    }, false);
+}, false);
 
 
-	
+	*/
 	
 
 function loadvenndiagram3(){

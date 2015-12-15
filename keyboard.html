@@ -1,0 +1,250 @@
+
+<!-- THREE STEPS TO INSTALL ON SCREEN KEYBOARD:
+
+
+
+  1.  Copy the coding into the HEAD of your HTML document
+
+  2.  Add the onLoad event handler into the BODY tag
+
+  3.  Put the last coding into the BODY of your HTML document  -->
+
+
+
+<!-- STEP ONE: Paste this code into the HEAD of your HTML document  -->
+
+
+
+<HEAD>
+
+
+
+<!-- This script and many more are available free online at -->
+
+<!-- The JavaScript Source!! http://www.javascriptsource.com -->
+
+<!-- Original:  Wolfgang Ahlers (ahlers@ahlers-net.de) -->
+
+<!-- Web Site:  http://www.kennzeichnungsrecht.de -->
+
+<script type="text/Javascript">
+
+
+
+function tast()
+
+{
+
+window.open("tast.html","tastatur","width=455, height=230,menubar=no,statusbar=no,scrolling=no");
+
+}
+
+
+
+function Auswert(){
+
+
+
+for (i=0;i<document.vollsuche.ListFarbe.length;++i) 
+
+
+
+if(document.vollsuche.ListFarbe.options[i].selected == true) 
+
+
+
+var apfelfarbe = document.vollsuche.ListFarbe.options[i].value
+
+
+
+
+
+for (i=0;i<document.vollsuche.ListRost.length;++i) 
+
+
+
+if(document.vollsuche.ListRost.options[i].selected == true) 
+
+
+
+var apfelrost = document.vollsuche.ListRost.options[i].value;
+
+
+
+for (i=0;i<document.vollsuche.ListGroesse.length;++i) 
+
+
+
+if(document.vollsuche.ListGroesse.options[i].selected == true) 
+
+
+
+var apfelgroesse = document.vollsuche.ListGroesse.options[i].value
+
+
+
+
+
+
+
+var uebergabe = apfelfarbe.concat(apfelrost);
+
+var uebergabe = uebergabe.concat(apfelgroesse);
+
+
+
+artikelsuchterm = document.vollsuche.test.value;
+
+
+
+artikelsuchterm = artikelsuchterm.replace(/ /g, "&");
+
+
+
+var uebergabestring = artikelsuchterm + "_" + uebergabe;
+
+
+
+uebergabewert = "dbapfelneu.html" + "?" + uebergabestring;
+
+
+
+// alert(uebergabewert);
+
+
+
+return true;
+
+}
+
+</script>
+
+</HEAD>
+
+
+
+<!-- STEP TWO: Insert the onLoad event handler into your BODY tag  -->
+
+
+
+<BODY onLoad="document.vollsuche.test.focus()">
+
+
+
+<!-- STEP THREE: Copy this code into the BODY of your HTML document  -->
+
+
+
+<!-- This script and many more are available free online at -->
+
+<!-- The JavaScript Source!! http://www.javascriptsource.com -->
+
+<!-- Original:  Wolfgang Ahlers (ahlers@ahlers-net.de) -->
+
+<!-- Web Site:  http://www.kennzeichnungsrecht.de -->
+
+	<form name="vollsuche" action="javascript:window.location.href = uebergabewert;" onSubmit="return Auswert(vollsuche.test);">
+
+			
+
+
+
+				<p>
+
+				
+
+				<table width="90%" border="0" cellspacing="2" cellpadding="5">
+
+					<tr>
+
+
+
+						<td  bgcolor="">
+
+							<b>
+
+								<font color="black" face="arial, helvetica">
+
+									Add your name:
+
+								</font>
+
+							</b>
+
+						</td>
+
+						<td  bgcolor="">
+
+							<input name="test" type="text">
+
+							   
+
+							<button name="Tastatur" type="button" value="Tastenfeld" onClick="tast()";>
+
+							Keyboard
+
+							</button>
+
+						</td>
+
+					</tr>
+
+					<tr>
+
+						<td>
+
+							
+
+						</td>
+
+						<td>
+
+							
+
+						</td>
+
+					</tr>
+
+					<tr>
+
+						<td>
+
+							 
+
+						</td>
+
+						<td>
+
+							<input type="submit" value="Submit" >
+
+							<br>Will not submit!
+
+							
+
+						</td>
+
+					</tr>
+
+					
+
+				</table>
+
+			</font>
+
+			
+
+		</form>
+
+
+
+<p><center>
+
+<font face="arial, helvetica" size"-2">Free JavaScripts provided<br>
+
+by <a href="http://javascriptsource.com">The JavaScript Source</a></font>
+
+</center><p>
+
+
+
+<!-- Script Size:  3.35 KB -->
