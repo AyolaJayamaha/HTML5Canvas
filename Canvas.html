@@ -15,6 +15,7 @@
     <script src="./js/jquery-2.1.4.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <style type="text/css">
+	
         #canvas1 {
             position: relative;
         }
@@ -43,6 +44,7 @@
     </style>
     <script type="text/javascript" src="./js/boxes2.js"></script>
     <script type="text/javascript" src="./js/circles2.js"></script>
+	<script type="text/javascript" src="./js/toolbox.js"></script>
 
 
 
@@ -59,8 +61,6 @@
             ev.preventDefault();
             var data = ev.dataTransfer.getData("image");
             ev.target.appendChild(document.getElementById(data));
-
-
         }
 
 //Tooltip
@@ -83,7 +83,7 @@ $('#selector').mousemove(function(e) {
     <br>
     <div class="container marketing">
 
-        <input type="button" class="btn btn-default" onclick="showPanel1()" value="Geomatrical Constructions">
+        <input type="button" class="btn btn-default" onclick="showPanel1()" value="Geometrical Constructions">
         <input type="button" class="btn btn-default" onclick="showPanel2()" value="Standard Shapes">
 
         <br>
@@ -109,8 +109,8 @@ $('#selector').mousemove(function(e) {
                         </div>
 
                         <div class="col-lg-1">
-                            <img id="il" src="./image/label.png" alt="Generic placeholder image" width="50" height="50" onclick="showLabel()">
-                            <h4>Label</h4>
+                            <img id="il" src="./image/label.png" alt="Generic placeholder image" width="50" height="50" onclick="showLable()">
+                            <h4>Lable</h4>
 
                         </div>
 
@@ -182,7 +182,7 @@ $('#selector').mousemove(function(e) {
                                     <span class="input-group-addon" id="angle">
                         <label class="radio-inline"><input type="radio" name="optradio" id="rotation1" checked="true">Counterclockwise</label>     
                         <label class="radio-inline"><input type="radio" name="optradio" id ="rotation2" >Clockwise</label>
-                    </span>
+									</span>
                                 </div>
 
 
@@ -202,9 +202,9 @@ $('#selector').mousemove(function(e) {
                             <!--END compass -->
 
 
-                            <!--Label-->
+                            <!--Lable-->
                             <div id="label">
-                                <h2>Label</h2>
+                                <h2>Lable</h2>
 
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon" id="lx">X</span>
@@ -222,7 +222,7 @@ $('#selector').mousemove(function(e) {
                                     <span class="input-group-addon" id="lt">Text</span>
                                     <input type="text" name="text" class="form-control" id="txt">
                                 </div>
-                                <input type="button" class="btn btn-default" onclick="label()" value="Label Item">
+                                <input type="button" class="btn btn-default" onclick="lable()" value="Lable Item">
 
                                 <input type="button" class="btn btn-default" value="Locate (X,Y)" id="pickL">
 
@@ -233,10 +233,6 @@ $('#selector').mousemove(function(e) {
 
                     </div>
                     <!-- End Row -->
-
-
-
-
 
                 </div>
 
@@ -295,8 +291,14 @@ $('#selector').mousemove(function(e) {
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <input type="button" class="btn btn-default" onclick="loaddrawing()" value="Load Drawing API Calls">
+                        <div class="col-lg-4">
+                            <input type="button" class="btn btn-default" onclick="loaddrawingcalls()" value="Load Drawing API Calls">
+                        </div>
+						<div class="col-lg-4">
+                            <input type="button" class="btn btn-default" onclick="loaddrawing()" value="Load Drawing">
+                        </div>
+						<div class="col-lg-4">
+                            <input type="button" class="btn btn-default" onclick="cleardrawing()" value="Clear Drawing">
                         </div>
                     </div>
                     <br>
@@ -306,7 +308,7 @@ $('#selector').mousemove(function(e) {
                             <textarea id="inputTextToSave" style="width:512px;height:256px"></textarea>
                         </div>
                         <div class="col-lg-2">
-                            <h4><span class="label label-default">Filename to Save As:</span></h4></div>
+                            <h4><span class="lable lable-default">Filename to Save As:</span></h4></div>
                         <div class="col-lg-2">
                             <input type="text" class="form-control" id="inputFileNameToSaveAs"></input>
                         </div>
@@ -318,15 +320,15 @@ $('#selector').mousemove(function(e) {
                         <div class="row">
                             <div class="col-lg-6"></div>
                             <div class="col-lg-2">
-                                <h4><span class="label label-default">Select a File to Load:</span></h4></div>
+                                <h4><span class="lable lable-default">Select a File to Load:</span></h4></div>
                             <div class="col-lg-2">
                                 <input type="file" id="fileToLoad" class="form-control">
                             </div>
                             <div class="col-lg-2">
                                 <input type="button" class="btn btn-default" onclick="loadFileAsText()" value="Load Selected File">
                                 <div>
-
-
+									
+								
                                 </div>
 
 
@@ -387,9 +389,6 @@ $('#selector').mousemove(function(e) {
 
     });
 
-
-
-
     canvas2.addEventListener('click', function(evt) {
         var mousePos = getMousePos(canvas2, evt);
 
@@ -411,10 +410,7 @@ $('#selector').mousemove(function(e) {
                         break;
                     case 'q':
                         q.x = mousePos.x;
-                        q.y = mousePos.y;
-
-
-                        
+                        q.y = mousePos.y;  
                         var diffx = r.x - q.x;
                         var diffy = r.y - q.y;
 
@@ -538,7 +534,6 @@ $('#selector').mousemove(function(e) {
 
                     case 'a':
                         setA(evt);
-
                         context1.beginPath();
                         context1.arc(mousePos.x, mousePos.y,3,0,360,false);
                         context1.fillStyle = 'black';
@@ -658,7 +653,7 @@ $('#selector').mousemove(function(e) {
         fileReader.readAsText(fileToLoad, "UTF-8");
     }
 
-    function loaddrawing() {
+    function loaddrawingcalls() {
 
         var string = "";
 
@@ -670,7 +665,6 @@ $('#selector').mousemove(function(e) {
             string = string.concat(" x2: ", rulers[i].xe);
             string = string.concat(" y2: ", rulers[i].ye);
             string = string.concat("), \n");
-
         }
 
         for (var i = 0; i < compasses.length; i++) {
@@ -689,17 +683,32 @@ $('#selector').mousemove(function(e) {
             string = string.concat("), \n ");
         }
 
-        for (var i = 0; i < labels.length; i++) {
-            string += "label";
-            string = string.concat(" (id: ", labels[i].index);
-            string = string.concat(" x: ", labels[i].xp);
-            string = string.concat(" y: ", labels[i].yp);
-            string = string.concat(" text: ", labels[i].message);
+        for (var i = 0; i < lables.length; i++) {
+            string += "lable";
+            string = string.concat(" (id: ", lables[i].index);
+            string = string.concat(" x: ", lables[i].xp);
+            string = string.concat(" y: ", lables[i].yp);
+            string = string.concat(" text: ", lables[i].message);
             string = string.concat("), \n");
         }
 
         document.getElementById("inputTextToSave").innerHTML = string;
     }
+	
+	function loaddrawing() 
+	{
+		clearCanvas();
+	
+		for (var i = 0; i < rulers.length; i++) {
+			
+		}
+	}
+	
+	function cleardrawing() 
+	{
+		clearCanvas();
+	
+	}
 </script>
 </body>
 
