@@ -89,8 +89,8 @@
                 <div class="panel-body">
                     <div class="row">
                         <div id="geometrical" class="col-lg-9" style="position:relative; width:850px; height:500px ">
-                            <canvas id="canvas1" style="z-index: 2; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
-							<canvas id="layer" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
+                            <canvas id="canvas1" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
+							<canvas id="measurementlayer" style="z-index: 2; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
                         </div>
                         <div class="col-lg-1">
                             <img id="ir" src="./image/ruler.png" alt="ruler" width="90" height="50" onclick="showRuler()">
@@ -419,8 +419,7 @@
                         context2.fillStyle = 'black';
                         context2.fill();
                         context2.stroke();
-
-
+						
                         var radius2 = Math.sqrt((diffx * diffx) + (diffy * diffy));
                         context2.beginPath();
                         context2.arc(r.x, r.y, radius2, 0, 360, false);
@@ -507,7 +506,7 @@
 
     var canvas1 = document.getElementById('canvas1');
     var context1 = canvas1.getContext('2d');
-	var layer = document.getElementById('layer');
+	var layer = document.getElementById('measurementlayer');
     var context = layer.getContext('2d');
     var selectedItem = '';
 
@@ -533,7 +532,7 @@
         switch (selectedMethod) {
             case 'r':
                 switch (selectedItem) {
-
+				
                     case 'a':
                         setA(evt);
                         context1.beginPath();
