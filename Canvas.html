@@ -25,26 +25,27 @@
         }
     </style>
     <style>
-        img {
+        
+        
+        img#ic {
             opacity: 0.4;
         }
         
-        img#ic2 {
-            opacity: 1;
+        img#il {
+            opacity: 0.4;
         }
         
-        img#is2 {
-            opacity: 1;
+        img#ir {
+            opacity: 0.4;
         }
-        
-        img#il2 {
-            opacity: 1;
+		img#im {
+            opacity: 0.4;
         }
 
     </style>
     <script type="text/javascript" src="./js/boxes2.js"></script>
     <script type="text/javascript" src="./js/circles2.js"></script>
-	<script type="text/javascript" src="./js/toolbox.js"></script>
+	
 
 
 
@@ -63,14 +64,6 @@
             ev.target.appendChild(document.getElementById(data));
         }
 
-//Tooltip
-$('#selector').mousemove(function(e) { 
-  $('.tooltip').css('left', e.pageX + 5).css('top', e.pageY - 25).css('display', 'block');
-})
-
-        $( document ).tooltip({
-         track: true
-        });
 
        
 
@@ -95,8 +88,9 @@ $('#selector').mousemove(function(e) {
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div id="geometrical" title="test" class="col-lg-9" style="position:relative; width:850px; height:500px ">
-                            <canvas id="canvas1" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
+                        <div id="geometrical" class="col-lg-9" style="position:relative; width:850px; height:500px ">
+                            <canvas id="canvas1" style="z-index: 2; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
+							<canvas id="layer" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
                         </div>
                         <div class="col-lg-1">
                             <img id="ir" src="./image/ruler.png" alt="ruler" width="90" height="50" onclick="showRuler()">
@@ -109,10 +103,16 @@ $('#selector').mousemove(function(e) {
                         </div>
 
                         <div class="col-lg-1">
-                            <img id="il" src="./image/label.png" alt="Generic placeholder image" width="50" height="50" onclick="showLable()">
-                            <h4>Lable</h4>
+                            <img id="il" src="./image/label.png" alt="Generic placeholder image" width="50" height="50" onclick="showLabel()">
+                            <h4>Label</h4>
 
                         </div>
+						
+						<div class="col-lg-1">
+                            <img id="im" src="./image/ruler.png" alt="Generic placeholder image" width="50" height="50" onclick="measurelength()">
+                            <h4>Measure Length</h4>
+                        </div>
+
 
                         <div class="col-lg-3" id="functions">
                             <!--Ruler-->
@@ -204,7 +204,7 @@ $('#selector').mousemove(function(e) {
 
                             <!--Lable-->
                             <div id="label">
-                                <h2>Lable</h2>
+                                <h2>Label</h2>
 
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon" id="lx">X</span>
@@ -222,7 +222,7 @@ $('#selector').mousemove(function(e) {
                                     <span class="input-group-addon" id="lt">Text</span>
                                     <input type="text" name="text" class="form-control" id="txt">
                                 </div>
-                                <input type="button" class="btn btn-default" onclick="lable()" value="Lable Item">
+                                <input type="button" class="btn btn-default" onclick="label()" value="Label Item">
 
                                 <input type="button" class="btn btn-default" value="Locate (X,Y)" id="pickL">
 
@@ -250,7 +250,7 @@ $('#selector').mousemove(function(e) {
                 <div class="panel-body">
                     <div class="row">
 
-                        <div id="shapes" title="test" class="col-lg-9" ondragover="allowDrop(event)" ondrop="drop(event)">
+                        <div id="shapes" class="col-lg-9" ondragover="allowDrop(event)" ondrop="drop(event)">
                             <canvas id="canvas2" width="800" height="500" style="border:1px solid #d3d3d3;"></canvas>
                         </div>
 
@@ -308,7 +308,7 @@ $('#selector').mousemove(function(e) {
                             <textarea id="inputTextToSave" style="width:512px;height:256px"></textarea>
                         </div>
                         <div class="col-lg-2">
-                            <h4><span class="lable lable-default">Filename to Save As:</span></h4></div>
+                            <h4><span class="label label-default">Filename to Save As:</span></h4></div>
                         <div class="col-lg-2">
                             <input type="text" class="form-control" id="inputFileNameToSaveAs"></input>
                         </div>
@@ -320,7 +320,7 @@ $('#selector').mousemove(function(e) {
                         <div class="row">
                             <div class="col-lg-6"></div>
                             <div class="col-lg-2">
-                                <h4><span class="lable lable-default">Select a File to Load:</span></h4></div>
+                                <h4><span class="label label-default">Select a File to Load:</span></h4></div>
                             <div class="col-lg-2">
                                 <input type="file" id="fileToLoad" class="form-control">
                             </div>
@@ -507,6 +507,8 @@ $('#selector').mousemove(function(e) {
 
     var canvas1 = document.getElementById('canvas1');
     var context1 = canvas1.getContext('2d');
+	var layer = document.getElementById('layer');
+    var context = layer.getContext('2d');
     var selectedItem = '';
 
 
@@ -564,7 +566,6 @@ $('#selector').mousemove(function(e) {
                 switch (selectedItem) {
                     case 'c':
                         setC(evt);
-
                         context1.beginPath();
                         context1.arc(mousePos.x, mousePos.y,3,0,360,false);
                         context1.fillStyle = 'black';
@@ -605,12 +606,48 @@ $('#selector').mousemove(function(e) {
                         break;
                 }
 
-                break;
+                break;		
         }
     }, false);
 
+layer.addEventListener('mousedown', function(evt) {
+        var mousePos = getMousePos(layer, evt);
 
+		        switch (selectedMethod) {
+				
+				case 'm':
+                switch (selectedItem) {
 
+                    case 'a':
+                        setX(evt);
+                        context.beginPath();
+                        context.arc(mousePos.x, mousePos.y,3,0,360,false);
+                        context.fillStyle = 'black';
+                        context.fill();
+                        context.stroke();
+
+                        selectedItem = 'b';
+                        break;
+
+                    case 'b':
+                        setY(evt);
+
+                        context.beginPath();
+                        context.arc(mousePos.x, mousePos.y,3,0,360,false);
+                        context.fillStyle = 'black';
+                        context.fill();
+                        context.stroke();
+
+                        measurelength();
+                        selectedItem = 'a';
+                        break;
+
+                }
+				break;
+				
+				}
+		
+		}, false);
 
     function saveTextAsFile() {
         var textToWrite = document.getElementById("inputTextToSave").value;
@@ -683,12 +720,12 @@ $('#selector').mousemove(function(e) {
             string = string.concat("), \n ");
         }
 
-        for (var i = 0; i < lables.length; i++) {
-            string += "lable";
-            string = string.concat(" (id: ", lables[i].index);
-            string = string.concat(" x: ", lables[i].xp);
-            string = string.concat(" y: ", lables[i].yp);
-            string = string.concat(" text: ", lables[i].message);
+        for (var i = 0; i < labels.length; i++) {
+            string += "label";
+            string = string.concat(" (id: ", labels[i].index);
+            string = string.concat(" x: ", labels[i].xp);
+            string = string.concat(" y: ", labels[i].yp);
+            string = string.concat(" text: ", labels[i].message);
             string = string.concat("), \n");
         }
 
@@ -710,6 +747,7 @@ $('#selector').mousemove(function(e) {
 	
 	}
 </script>
+
 </body>
 
 </html>
