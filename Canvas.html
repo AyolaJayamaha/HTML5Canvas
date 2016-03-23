@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="./js/jquery-2.1.4.min.js"></script>
+    <script src="./js/jquery-2.2.2.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <style type="text/css">
 	
@@ -97,6 +97,7 @@ $('#selector').mousemove(function(e) {
                     <div class="row">
                         <div id="geometrical" title="test" class="col-lg-9" style="position:relative; width:850px; height:500px ">
                             <canvas id="canvas1" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
+                            <canvas id="layer" style="z-index: 2; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
                         </div>
                         <div class="col-lg-1">
                             <img id="ir" src="./image/ruler.png" alt="ruler" width="90" height="50" onclick="showRuler()">
@@ -154,7 +155,7 @@ $('#selector').mousemove(function(e) {
                             </div>
                             <!--END Ruler -->
 
-                            <!--compass-->
+                            <!--Compass-->
                             <div id="compass">
                                 <h2>Compass</h2>
                                 <div class="input-group input-group-sm">
@@ -168,6 +169,7 @@ $('#selector').mousemove(function(e) {
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon" id="cr">Radius</span>
                                     <input type="number" class="form-control" name="r" id="radius" placeholder="cm">
+									<input type="button" class="btn btn-default" onclick="lockradius()" id="lock" value="Lock">
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon" id="cs">Start Angle</span>
@@ -202,9 +204,9 @@ $('#selector').mousemove(function(e) {
                             <!--END compass -->
 
 
-                            <!--Lable-->
+                            <!--Label-->
                             <div id="label">
-                                <h2>Lable</h2>
+                                <h2>Label</h2>
 
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon" id="lx">X</span>
@@ -222,7 +224,7 @@ $('#selector').mousemove(function(e) {
                                     <span class="input-group-addon" id="lt">Text</span>
                                     <input type="text" name="text" class="form-control" id="txt">
                                 </div>
-                                <input type="button" class="btn btn-default" onclick="lable()" value="Lable Item">
+                                <input type="button" class="btn btn-default" onclick="label()" value="Label Item">
 
                                 <input type="button" class="btn btn-default" value="Locate (X,Y)" id="pickL">
 
