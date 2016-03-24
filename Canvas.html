@@ -169,7 +169,6 @@
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon" id="cr">Radius</span>
                                     <input type="number" class="form-control" name="r" id="radius" placeholder="cm">
-									<input type="button" class="btn btn-default" onclick="lockradius()" id="lock" value="Lock">
 									<input type="button" class="btn btn-default" id="fixradius" onclick="radiusfix()" value="Fix Radius">
                                 </div>
                                 <div class="input-group input-group-sm">
@@ -349,30 +348,7 @@
     var context2 = canvas2.getContext('2d');
     var selectedItem = '';
     var selectedMethod = '';
-    var r = {
-        x: 0,
-        y: 0
-    };
-    var q = {
-        x: 0,
-        y: 0
-    };
-    var s = {
-        x: 0,
-        y: 0
-    };
-    var t = {
-        x: 0,
-        y: 0
-    };
-    var l = {
-        x: 0,
-        y: 0
-    };
-    var m = {
-        x: 0,
-        y: 0
-    };
+    
 
     $('#pickCircle').click(function() {
         selectedMethod = 'c';
