@@ -557,7 +557,6 @@
 
                     case 'r':
                         setR(evt);
-						
                         context1.beginPath();
                         context1.arc(mousePos.x, mousePos.y,3,0,360,false);
                         context1.fillStyle = 'black';
@@ -568,7 +567,7 @@
                         break;
 
                     case 'k':
-
+						setAngle(evt);
                         selectedItem = 'c';
                         $('#geometrical').title = $('ea').value -  $('sa').value ;
                         compass();
