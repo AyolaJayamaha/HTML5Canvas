@@ -63,10 +63,7 @@
             var data = ev.dataTransfer.getData("image");
             ev.target.appendChild(document.getElementById(data));
         }
-
-
-       
-
+		
     </script>
 
 </head>
@@ -88,8 +85,6 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-
-
                         <div id="geometrical" class="col-lg-8" style="position:relative; width:850px; height:500px ">
                             <canvas id="canvas1" style="z-index: 2; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
 							<canvas id="measurementlayer" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
@@ -111,8 +106,8 @@
                         </div>
 						
 						<div class="col-lg-1">
-                            <img id="im" src="./image/ruler.png" alt="Generic placeholder image" width="50" height="50" onclick="measurelength()">
-                            <h4>Measure Length</h4>
+                            <img id="im" src="./image/divider.jpg" alt="Generic placeholder image" width="50" height="50" onclick="measurelength()">
+                            <h4>Divider</h4>
                         </div>
 
 
@@ -169,8 +164,13 @@
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon" id="cr">Radius</span>
                                     <input type="number" class="form-control" name="r" id="radius" placeholder="cm">
-									<input type="button" class="btn btn-default" id="lockradius" onclick="radiuslock()" value="Lock Radius">
-									<input type="button" class="btn btn-default" id="unlockradius" onclick="radiusunlock()" value="Unlock Radius">
+								</div>
+								<div class="input-group input-group-sm">
+								<span class="input-group-addon" id="rad">
+									<label class="radio-inline"><input type="radio" name="opt" id="rad1" value="lock">Lock</label>     
+									<label class="radio-inline"><input type="radio" name="opt" id ="rad2" checked="true" value="unlock">Unlock</label>
+									<!-- <label class="radio-inline"><input type="radio" name="opt" id ="rad3" value="same">Same Centre</label> -->
+									</span>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon" id="cs">Start Angle</span>
@@ -183,21 +183,18 @@
 
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon" id="angle">
-                        <label class="radio-inline"><input type="radio" name="optradio" id="rotation1" checked="true">Counterclockwise</label>     
-                        <label class="radio-inline"><input type="radio" name="optradio" id ="rotation2" >Clockwise</label>
+										<label class="radio-inline"><input type="radio" name="optradio" id="rotation1" checked="true">Counterclockwise</label>     
+										<label class="radio-inline"><input type="radio" name="optradio" id ="rotation2" >Clockwise</label>
 									</span>
                                 </div>
 
 
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon" id="colorpick">Color</span>
-
-
                                     <input type="color" class="form-control" name="color" id="clc">
                                 </div>
                                 <div>
                                     <input type="button" class="btn btn-default" onclick="compass()" value="Draw Arc">
-
                                     <input type="button" class="btn btn-default" id="pickC" value="Pick Center">
                                 </div>
 
@@ -223,11 +220,9 @@
                                     <span class="input-group-addon" id="lt">Text</span>
                                     <input type="text" name="text" class="form-control" id="txt">
                                 </div>
-                                <input type="button" class="btn btn-default" onclick="label()" value="Label Item">
-
-                                <input type="button" class="btn btn-default" value="Locate (X,Y)" id="pickL">
-
-                            </div>
+									<input type="button" class="btn btn-default" onclick="label()" value="Label Item">
+									<input type="button" class="btn btn-default" value="Locate (X,Y)" id="pickL">
+								</div>
                             <!--END Label -->
 
                         </div>
@@ -258,19 +253,16 @@
                         <div class="col-lg-1">
                             <img class="img-circle" id="ic2" src="./image/circle.png" alt="circle" width="50" height="50" ondragstart="drag(event)">
                             <input type="button" class="btn btn-default" value="Circle" id="pickCircle">
-
                         </div>
 
                         <div class="col-lg-1">
                             <img class="img-circle" id="is2" src="./image/square.jpg" alt="square" width="50" height="50" ondragstart="drag(event)">
                             <input type="button" class="btn btn-default" value="Square" id="pickSquare">
-
                         </div>
 
                         <div class="col-lg-1">
                             <img class="img-circle" id="il2" src="./image/line.png" alt="line" width="50" height="50" ondragstart="drag(event)">
                             <input type="button" class="btn btn-default" value="Line" id="pickLine">
-
                         </div>
 
                     </div>
@@ -292,13 +284,16 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <input type="button" class="btn btn-default" onclick="loaddrawingcalls()" value="Load Drawing API Calls">
                         </div>
-						<div class="col-lg-4">
+						<div class="col-lg-3">
                             <input type="button" class="btn btn-default" onclick="loaddrawing()" value="Load Drawing">
                         </div>
-						<div class="col-lg-4">
+						<div class="col-lg-3">
+                            <input type="button" class="btn btn-default" onclick="undodrawing()" value="Undo Drawing">
+                        </div>
+						<div class="col-lg-3">
                             <input type="button" class="btn btn-default" onclick="cleardrawing()" value="Clear Drawing">
                         </div>
                     </div>
@@ -315,7 +310,6 @@
                         </div>
                         <div class="col-lg-2">
                             <input type="button" class="btn btn-default" onclick="saveTextAsFile()" value="Save to File"> </div>
-
                         <br>
                         <br>
                         <div class="row">
@@ -364,17 +358,13 @@
     $('#pickLine').click(function() {
         selectedMethod = 'l';
         selectedItem = 'l';
-
     });
 
-	
-	
     canvas2.addEventListener('click', function(evt) {
         var mousePos = getMousePos(canvas2, evt);
 
         switch (selectedMethod) {
             case 'c':
-
                 switch (selectedItem) {
                     case 'r':
                         r.x = mousePos.x;
@@ -422,8 +412,6 @@
                         context2.fillStyle = 'black';
                         context2.fill();
                         context2.stroke();
-
-
                         selectedItem = 't';
                         break;
                     case 't':
@@ -478,8 +466,6 @@
                         selectedItem = 'l';
                         break;
                 }
-
-
                 break;
         }
     }, true);
@@ -515,52 +501,55 @@
 				
                     case 'a':
                         setA(evt);
-                        context1.beginPath();
-                        context1.arc(mousePos.x, mousePos.y,3,0,360,false);
-                        context1.fillStyle = 'black';
-                        context1.fill();
-                        context1.stroke();
-
+						measurementlayerUp();
+                        context.beginPath();
+                        context.arc(mousePos.x, mousePos.y,3,0,360,false);
+                        context.fillStyle = 'black';
+                        context.fill();
+                        context.stroke();
+						measurementlayerDown();
                         selectedItem = 'b';
                         break;
 
                     case 'b':
                         setB(evt);
-                        context1.beginPath();
-                        context1.arc(mousePos.x, mousePos.y,3,0,360,false);
-                        context1.fillStyle = 'black';
-                        context1.fill();
-                        context1.stroke();
-
+						measurementlayerUp();
+                        context.beginPath();
+                        context.arc(mousePos.x, mousePos.y,3,0,360,false);
+                        context.fillStyle = 'black';
+                        context.fill();
+                        context.stroke();
+						measurementlayerDown();
                         ruler();
                         selectedItem = 'a';
+						clear();
                         break;
-
                 }
-
                 break;
 
             case 'c':
                 switch (selectedItem) {
                     case 'c':
                         setC(evt);
-                        context1.beginPath();
-                        context1.arc(mousePos.x, mousePos.y,3,0,360,false);
-                        context1.fillStyle = 'black';
-                        context1.fill();
-                        context1.stroke();
-
+						measurementlayerUp();
+                        context.beginPath();
+                        context.arc(mousePos.x, mousePos.y,3,0,360,false);
+                        context.fillStyle = 'black';
+                        context.fill();
+                        context.stroke();
+						measurementlayerDown();
                         selectedItem = 'r';
                         break;
 
                     case 'r':
                         setR(evt);
-                        context1.beginPath();
-                        context1.arc(mousePos.x, mousePos.y,3,0,360,false);
-                        context1.fillStyle = 'black';
-                        context1.fill();
-                        context1.stroke();
-
+						measurementlayerUp();
+                        context.beginPath();
+                        context.arc(mousePos.x, mousePos.y,3,0,360,false);
+                        context.fillStyle = 'black';
+                        context.fill();
+                        context.stroke();
+						measurementlayerDown();
                         selectedItem = 'k';
                         break;
 
@@ -568,6 +557,7 @@
 						setAngle(evt);
                         selectedItem = 'c';
                         compass();
+						clear();
                         break;
                 }
                 break;
@@ -588,10 +578,9 @@ layer.addEventListener('mousedown', function(evt) {
         var mousePos = getMousePos(layer, evt);
 
 		        switch (selectedMethod) {
-				
 				case 'm':
-                switch (selectedItem) {
-
+                switch (selectedItem) 
+				{
                     case 'a':
                         setX(evt);
                         context.beginPath();
@@ -614,7 +603,6 @@ layer.addEventListener('mousedown', function(evt) {
                         measurelength();
                         selectedItem = 'a';
                         break;
-
                 }
 				break;
 				
@@ -656,7 +644,8 @@ layer.addEventListener('mousedown', function(evt) {
         var fileToLoad = document.getElementById("fileToLoad").files[0];
 
         var fileReader = new FileReader();
-        fileReader.onload = function(fileLoadedEvent) {
+        fileReader.onload = function(fileLoadedEvent)
+		{
             var textFromFileLoaded = fileLoadedEvent.target.result;
             document.getElementById("inputTextToSave").value = textFromFileLoaded;
         }
@@ -670,10 +659,10 @@ layer.addEventListener('mousedown', function(evt) {
         for (var i = 0; i < rulers.length; i++) {
             string += "ruler";
             string = string.concat(" (id: ", rulers[i].index);
-            string = string.concat(" x1: ", rulers[i].xs);
-            string = string.concat(" y1: ", rulers[i].ys);
-            string = string.concat(" x2: ", rulers[i].xe);
-            string = string.concat(" y2: ", rulers[i].ye);
+            string = string.concat(", x1: ", rulers[i].xs);
+            string = string.concat(", y1: ", rulers[i].ys);
+            string = string.concat(", x2: ", rulers[i].xe);
+            string = string.concat(", y2: ", rulers[i].ye);
             string = string.concat("), \n");
         }
 
@@ -705,14 +694,7 @@ layer.addEventListener('mousedown', function(evt) {
         document.getElementById("inputTextToSave").innerHTML = string;
     }
 	
-	function loaddrawing() 
-	{
-		clearCanvas();
 	
-		for (var i = 0; i < rulers.length; i++) {
-			
-		}
-	}
 	
 	function cleardrawing() 
 	{
