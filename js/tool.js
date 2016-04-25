@@ -1,13 +1,15 @@
 /*!
- * Tool contains canvas2 and context2
+ * Tool contains events
  * functions
  *
  * by Ayola Jayamaha
  * Date: 2016-04-10
  */
 
- var canvas2 = document.getElementById('canvas2');
-var context2 = canvas2.getContext('2d');
+var canvas1 = document.getElementById('canvas1');
+var context1 = canvas1.getContext('2d');
+var layer = document.getElementById('measurementlayer');
+var context = layer.getContext('2d');
 var selectedItem = '';
 var selectedMethod = '';
 
@@ -30,140 +32,18 @@ $('#pickLine').click(function() {
 
 });
 
-
-
-canvas2.addEventListener('click', function(evt) {
-    var mousePos = getMousePos(canvas2, evt);
-
-    switch (selectedMethod) {
-        case 'c':
-
-            switch (selectedItem) {
-                case 'r':
-                    r.x = mousePos.x;
-                    r.y = mousePos.y;
-
-                    context2.beginPath();
-                    context2.arc(r.x, r.y, 3, 0, 360, false);
-                    context2.fillStyle = 'black';
-                    context2.fill();
-                    context2.stroke();
-
-                    selectedItem = 'q';
-                    break;
-                case 'q':
-                    q.x = mousePos.x;
-                    q.y = mousePos.y;
-                    var diffx = r.x - q.x;
-                    var diffy = r.y - q.y;
-
-                    context2.beginPath();
-                    context2.arc(q.x, q.y, 3, 0, 360, false);
-                    context2.fillStyle = 'black';
-                    context2.fill();
-                    context2.stroke();
-
-                    var radius2 = Math.sqrt((diffx * diffx) + (diffy * diffy));
-                    context2.beginPath();
-                    context2.arc(r.x, r.y, radius2, 0, 360, false);
-                    context2.stroke();
-                    selectedItem = 'r';
-                    break;
-            }
-
-            break;
-
-        case 's':
-
-            switch (selectedItem) {
-                case 's':
-                    s.x = mousePos.x;
-                    s.y = mousePos.y;
-
-                    context2.beginPath();
-                    context2.arc(s.x, s.y, 3, 0, 360, false);
-                    context2.fillStyle = 'black';
-                    context2.fill();
-                    context2.stroke();
-                    selectedItem = 't';
-                    break;
-                case 't':
-                    t.x = mousePos.x;
-                    t.y = mousePos.y;
-
-                    context2.beginPath();
-                    context2.arc(t.x, t.y, 3, 0, 360, false);
-                    context2.fillStyle = 'black';
-                    context2.fill();
-                    context2.stroke();
-
-
-                    context2.beginPath();
-                    context2.rect(s.x, s.y, Math.abs(t.x - s.x), Math.abs(t.y - s.y));
-                    context2.stroke();
-                    selectedItem = 's';
-                    break;
-            }
-
-            break;
-
-        case 'l':
-            switch (selectedItem) {
-                case 'l':
-                    l.x = mousePos.x;
-                    l.y = mousePos.y;
-
-                    context2.beginPath();
-                    context2.arc(l.x, l.y, 3, 0, 360, false);
-                    context2.fillStyle = 'black';
-                    context2.fill();
-                    context2.stroke();
-
-                    selectedItem = 'm';
-                    break;
-
-                case 'm':
-                    m.x = mousePos.x;
-                    m.y = mousePos.y;
-
-                    context2.beginPath();
-                    context2.arc(m.x, m.y, 3, 0, 360, false);
-                    context2.fillStyle = 'black';
-                    context2.fill();
-                    context2.stroke();
-
-                    context2.beginPath();
-                    context2.moveTo(l.x, l.y);
-                    context2.lineTo(m.x, m.y);
-                    context2.stroke();
-                    selectedItem = 'l';
-                    break;
-            }
-
-
-            break;
-    }
-}, true);
-
-var canvas1 = document.getElementById('canvas1');
-var context1 = canvas1.getContext('2d');
-var layer = document.getElementById('measurementlayer');
-var context = layer.getContext('2d');
-var selectedItem = '';
-
-
 canvas1.addEventListener('mousemove', function(evt) {
     var mousePos = getMousePos(canvas1, evt);
-    var message = '(X,Y): ' + mousePos.x / 50 + ',' + mousePos.y / 50;
+    var message = '(X,Y): ' + (mousePos.x / 50).toFixed(1) + ',' + (mousePos.y / 50).toFixed(1);
     writeMessage(canvas1, message);
 
     if (selectedItem == 'b') {
-        writeMessage(canvas, "Length :" + Math.sqrt((mousePos.x / 50 - $('#x1').val()) * (mousePos.x / 50 - $('#x1').val()) + (mousePos.y / 50 - $('#y1').val()) * (mousePos.y / 50 - $('#y1').val())));
+        writeMessage(canvas, "Length :" + Math.sqrt((mousePos.x / 50 - $('#x1').val()) * (mousePos.x / 50 - $('#x1').val()) + (mousePos.y / 50 - $('#y1').val()) * (mousePos.y / 50 - $('#y1').val())).toFixed(1));
     } else if (selectedItem == 'r') {
-        writeMessage(canvas, "Radius :" + Math.sqrt((mousePos.x / 50 - $('#x').val()) * (mousePos.x / 50 - $('#x').val()) + (mousePos.y / 50 - $('#y').val()) * (mousePos.y / 50 - $('#y').val())));
+        writeMessage(canvas, "Radius :" + Math.sqrt((mousePos.x / 50 - $('#x').val()) * (mousePos.x / 50 - $('#x').val()) + (mousePos.y / 50 - $('#y').val()) * (mousePos.y / 50 - $('#y').val())).toFixed(1));
     } else if (selectedItem == 'k') {
         setAngle(evt);
-        writeMessage(canvas, "Angle :" + ($('#sa').val() - $('#ea').val()));
+        writeMessage(canvas, "Angle :" + ($('#sa').val() - $('#ea').val()).toFixed(1));
     }
 }, false);
 
@@ -182,13 +62,13 @@ canvas1.addEventListener('mousedown', function(evt) {
                     context.fillStyle = 'black';
                     context.fill();
                     context.stroke();
-                    measurementlayerDown();
+					measurementlayerDown();
                     selectedItem = 'b';
                     break;
 
                 case 'b':
                     setB(evt);
-                    measurementlayerUp();
+					measurementlayerUp();
                     context.beginPath();
                     context.arc(mousePos.x, mousePos.y, 3, 0, 360, false);
                     context.fillStyle = 'black';
@@ -197,7 +77,6 @@ canvas1.addEventListener('mousedown', function(evt) {
                     measurementlayerDown();
                     ruler();
                     selectedItem = 'a';
-                    clear();
                     break;
             }
             break;
@@ -232,7 +111,6 @@ canvas1.addEventListener('mousedown', function(evt) {
                     setAngle(evt);
                     selectedItem = 'c';
                     compass();
-                    clear();
                     break;
             }
             break;
@@ -374,18 +252,3 @@ function cleardrawing() {
     clearCanvas();
 
 }
-
-//dragging for shapes
-function allowDrop(ev) {
-            ev.preventDefault();
-        }
-
-        function drag(ev) {
-            ev.dataTransfer.setData("image", ev.target.id);
-        }
-
-        function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("image");
-            ev.target.appendChild(document.getElementById(data));
-        }

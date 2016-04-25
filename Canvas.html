@@ -7,66 +7,62 @@
         <meta charset="utf-8" />
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" href="./css/tool.css">
 
         <!-- Optional theme -->
         <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="./css/tool.css">
-
+        
         <!-- Latest compiled and minified JavaScript -->
-        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-        <script src="./js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="./js/boxes2.js"></script>
-        <script type="text/javascript" src="./js/circles2.js"></script>
-
-
-
+        <script src="./js/jquery-2.2.2.js"></script>
+        <script src="./js/bootstrap.js"></script>
+		<script src="./js/canvas2svg.js"></script>
 
     </head>
 
     <body onload="init()">
 
-        <br>
-        <div class="container marketing">
+        
+		<div class="container marketing">
 
-            <input type="button" class="btn btn-default" onclick="showPanel1()" value="Geometrical Constructions">
-            <!--input type="button" class="btn btn-default" onclick="showPanel2()" value="Standard Shapes"-->
-
-            <br>
-            <br>
-            <div id="toolbox">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Geometrical Drawings</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div id="geometrical" class="col-lg-8" style="position:relative; width:850px; height:500px ">
-                                <canvas id="canvas1" style="z-index: 2; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
-                                <canvas id="measurementlayer" style="z-index: 1; position:absolute; left:0px;top:0px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
+			<div class="panel panel-success" style ="height:600px; overflow:hidden;">
+					
+                
+                <div class="panel-heading">
+                    <h3 class="panel-title">Geometrical Constructions</h3>
+                 </div>
+					
+                <div class="panel-body" >
+                        <div class="row" >
+                            <div class="col-md-9" >
+                                <canvas id="canvas1" style="z-index: 1; position:absolute; left:10px;top:10px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
+                                <canvas id="measurementlayer" style="z-index: 0; position:absolute; left:10px;top:10px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
                             </div>
-                            <div class="col-lg-1">
-                                <img id="ir" src="./image/ruler.png" alt="ruler" width="90" height="50" onclick="showRuler()">
+                            <div class="col-md-1">
+                                <img id="ir" src="./image/ruler.png" alt="Generic placeholder image" width="90" height="50" >
                                 <h4>Ruler</h4>
                             </div>
 
-                            <div class="col-lg-1">
-                                <img id="ic" src="./image/compass.png" alt="Generic placeholder image" width="50" height="50" onclick="showCompass()">
+                            <div class="col-md-1">
+                                <img id="ic" src="./image/compass.png" alt="Generic placeholder image" width="50" height="50" >
                                 <h4>Compass</h4>
                             </div>
 
-                            <div class="col-lg-1">
-                                <img id="il" src="./image/label.png" alt="Generic placeholder image" width="50" height="50" onclick="showLabel()">
+                            <div class="col-md-1">
+                                <img id="il" src="./image/label.png" alt="Generic placeholder image" width="50" height="50" >
                                 <h4>Label</h4>
-
                             </div>
-
-                            <div class="col-lg-1">
-                                <img id="im" src="./image/divider.jpg" alt="Generic placeholder image" width="50" height="50" onclick="measurelength()">
+						
+						</div>
+						
+							<div class="col-md-9"></div>
+                            <div class="col-md-1">
+                                <img id="im" src="./image/divider.jpg" alt="Generic placeholder image" width="50" height="50">
                                 <h4>Divider</h4>
                             </div>
 
-
-                            <div class="col-lg-3" id="functions">
+						
+							<div class="col-md-9"></div>
+                            <div class="col-md-3" id="functions">
                                 <!--Ruler-->
                                 <div id="ruler">
                                     <h2>Ruler</h2>
@@ -98,7 +94,8 @@
                                         <span class="input-group-addon" id="sizing-addon7">Color</span>
                                         <input type="color" class="form-control" name="color" id="clr">
                                     </div>
-                                    <input type="button" class="btn btn-default" onclick="ruler()" value="Draw Line">
+                                    
+									<input type="button" class="btn btn-default"  value="Extended Line">
                                     <input type="button" class="btn btn-default" id="pickA" value="Pick A (X1,Y1)">
                                     <input type="button" class="btn btn-default" id="pickB" value="Pick B (X2,Y2)">
 
@@ -121,10 +118,11 @@
                                         <input type="number" class="form-control" name="r" id="radius" placeholder="cm">
                                     </div>
                                     <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="rad">
-									<label class="radio-inline"><input type="radio" name="opt" id="rad1" value="lock">Lock</label>     
-									<label class="radio-inline"><input type="radio" name="opt" id ="rad2" checked="true" value="unlock">Unlock</label>
-									<!-- <label class="radio-inline"><input type="radio" name="opt" id ="rad3" value="same">Same Centre</label> -->
+                                    <span class="input-group-addon" id="rad">
+										<label class="radio-inline"><input type="radio" name="opt" id="rad1" value="lock">Lock</label>     
+										<label class="radio-inline"><input type="radio" name="opt" id ="rad2" checked="true" value="unlock">Unlock</label>
+										<label class="radio-inline"><input type="radio" name="opt" id="rad3" value="lock">Same Center</label>     
+										<label class="radio-inline"><input type="radio" name="opt" id ="rad4" value="unlock">Circle</label>
 									</span>
                                     </div>
                                     <div class="input-group input-group-sm">
@@ -141,9 +139,8 @@
 										<label class="radio-inline"><input type="radio" name="optradio" id="rotation1" checked="true">Counterclockwise</label>     
 										<label class="radio-inline"><input type="radio" name="optradio" id ="rotation2" >Clockwise</label>
 									</span>
+								
                                     </div>
-
-
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-addon" id="colorpick">Color</span>
                                         <input type="color" class="form-control" name="color" id="clc">
@@ -160,80 +157,42 @@
                                 <!--Lable-->
                                 <div id="label">
                                     <h2>Label</h2>
-
+									
                                     <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="lx">X</span>
-                                        <input type="number" class="form-control" name="xvalue" id="xx" placeholder="cm">
+                                        <span class="input-group-addon" id="lx" style="display: none;">X</span>
+                                        <input type="number" class="form-control" name="xvalue" id="xx" placeholder="cm" style="display: none;">
                                     </div>
 
-                                    <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="ly">Y</span>
-                                        <input type="number" class="form-control" name="yvalue" id="yy" placeholder="cm">
+                                    <div class="input-group input-group-sm" >
+                                        <span class="input-group-addon" id="ly" style="display: none;">Y</span>
+                                        <input type="number" class="form-control" name="yvalue" id="yy" placeholder="cm" style="display: none;">
                                     </div>
 
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-addon" id="lt">Text</span>
                                         <input type="text" name="text" class="form-control" id="txt">
                                     </div>
+									
                                     <input type="button" class="btn btn-default" onclick="label()" value="Label Item">
                                     <input type="button" class="btn btn-default" value="Locate (X,Y)" id="pickL">
+									
                                 </div>
                                 <!--END Label -->
 
-                            </div>
-
+                            </div> <!--End Functions-->
+						
                         </div>
-                        <!-- End Row -->
-
-                    </div>
-
-                </div>
-                <!-- End toolbox main div -->
+                        <!-- End Panel Body -->
+    
 
             </div>
             <!-- End Panel -->
 
-            <div id="shape">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Standard Shapes</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-
-                            <div id="shapes" class="col-lg-9" ondragover="allowDrop(event)" ondrop="drop(event)">
-                                <canvas id="canvas2" width="800" height="500" style="border:1px solid #d3d3d3;"></canvas>
-                            </div>
-
-                            <div class="col-lg-1">
-                                <img class="img-circle" id="ic2" src="./image/circle.png" alt="circle" width="50" height="50" ondragstart="drag(event)">
-                                <input type="button" class="btn btn-default" value="Circle" id="pickCircle">
-                            </div>
-
-                            <div class="col-lg-1">
-                                <img class="img-circle" id="is2" src="./image/square.jpg" alt="square" width="50" height="50" ondragstart="drag(event)">
-                                <input type="button" class="btn btn-default" value="Square" id="pickSquare">
-                            </div>
-
-                            <div class="col-lg-1">
-                                <img class="img-circle" id="il2" src="./image/line.png" alt="line" width="50" height="50" ondragstart="drag(event)">
-                                <input type="button" class="btn btn-default" value="Line" id="pickLine">
-                            </div>
-
-                        </div>
-                        <!-- End Row -->
+				
 
 
-                    </div>
-
-                </div>
-
-            </div>
-            <!-- End shape main div -->
-
-
-            <div id="save">
-                <div class="panel panel-warning">
+            
+            <div class="panel panel-warning">
                     <div class="panel-heading">
                         <h3 class="panel-title">Administration</h3>
                     </div>
@@ -249,7 +208,10 @@
                                 <input type="button" class="btn btn-default" onclick="undodrawing()" value="Undo Drawing">
                             </div>
                             <div class="col-lg-3">
-                                <input type="button" class="btn btn-default" onclick="cleardrawing()" value="Clear Drawing">
+                                <input type="button" class="btn btn-default" onclick="clearAll()" value="Clear Drawing">
+                            </div>
+							<div class="col-lg-3">
+                                <input type="button" class="btn btn-default" onclick="drawsvg()" value="SVG">
                             </div>
                         </div>
                         <br>
@@ -259,7 +221,7 @@
                                 <textarea id="inputTextToSave" style="width:512px;height:256px"></textarea>
                             </div>
                             <div class="col-lg-2">
-                                <h4><span class="label label-default">Filename to Save As:</span></h4></div>
+                                <h4><span class="label label-default">Filename to Save As: </span></h4></div>
                             <div class="col-lg-2">
                                 <input type="text" class="form-control" id="inputFileNameToSaveAs"></input>
                             </div>
@@ -271,23 +233,22 @@
                             <div class="row">
                                 <div class="col-lg-6"></div>
                                 <div class="col-lg-2">
-                                    <h4><span class="label label-default">Select a File to Load:</span></h4></div>
+                                    <h4><span class="label label-default">Select a File to Load: </span></h4></div>
                                 <div class="col-lg-2">
                                     <input type="file" id="fileToLoad" class="form-control">
                                 </div>
                                 <div class="col-lg-2">
                                     <input type="button" class="btn btn-default" onclick="loadFileAsText()" value="Load Selected File">
                                 </div>
-
-
                             </div>
-                            <!-- End div container marketting -->
-    </body>
+                        </div>
+					</div>
+			</div>
+						
+		</div>
 
     <script type="text/javascript" src="./js/toolbox.js"></script>
-    <script type="text/javascript" src="./js/tool.js"></script>
-
-
-    </body>
+	<script type="text/javascript" src="./js/tool.js"></script>
+</body>
 
 </html>
