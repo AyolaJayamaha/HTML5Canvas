@@ -33,7 +33,7 @@
 					
                 <div class="panel-body" >
                         <div class="row" >
-                            <div class="col-md-9" >
+                            <div class="col-md-9" id ="c">
                                 <canvas id="canvas1" style="z-index: 1; position:absolute; left:10px;top:10px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
                                 <canvas id="measurementlayer" style="z-index: 0; position:absolute; left:10px;top:10px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
                             </div>
@@ -67,35 +67,35 @@
                                 <div id="ruler">
                                     <h2>Ruler</h2>
                                     <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="sizing-addon1">X1</span>
-                                        <input type="number" class="form-control" name="x1value" id="x1" placeholder="cm">
+                                        <span class="input-group-addon" id="sizing-addon1"style="display:none">X1</span>
+                                        <input type="number" class="form-control" name="x1value" id="x1" placeholder="cm" style="display:none">
                                     </div>
                                     <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="sizing-addon2">Y1</span>
-                                        <input type="number" class="form-control" name="y1value" id="y1" placeholder="cm">
+                                        <span class="input-group-addon" id="sizing-addon2"style="display:none">Y1</span>
+                                        <input type="number" class="form-control" name="y1value" id="y1" placeholder="cm"style="display:none">
                                     </div>
                                     <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="sizing-addon3">Extend</span>
-                                        <input type="number" class="form-control" name="extend1" id="e1" placeholder="cm">
+                                        <span class="input-group-addon" id="sizing-addon3"style="display:none">Extend</span>
+                                        <input type="number" class="form-control" name="extend1" id="e1" placeholder="cm"style="display:none">
                                     </div>
                                     <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="sizing-addon4">X2</span>
-                                        <input type="number" class="form-control" name="x2value" id="x2" placeholder="cm">
+                                        <span class="input-group-addon" id="sizing-addon4"style="display:none">X2</span>
+                                        <input type="number" class="form-control" name="x2value" id="x2" placeholder="cm"style="display:none">
                                     </div>
                                     <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="sizing-addon5">Y2</span>
-                                        <input type="number" class="form-control" name="y2value" id="y2" placeholder="cm">
+                                        <span class="input-group-addon" id="sizing-addon5"style="display:none">Y2</span>
+                                        <input type="number" class="form-control" name="y2value" id="y2" placeholder="cm"style="display:none">
                                     </div>
                                     <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="sizing-addon6">Extend</span>
-                                        <input type="number" class="form-control" name="extend2" id="e2" placeholder="cm">
+                                        <span class="input-group-addon" id="sizing-addon6"style="display:none">Extend</span>
+                                        <input type="number" class="form-control" name="extend2" id="e2" placeholder="cm"style="display:none">
                                     </div>
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-addon" id="sizing-addon7">Color</span>
                                         <input type="color" class="form-control" name="color" id="clr">
                                     </div>
                                     
-									<input type="button" class="btn btn-default"  value="Extended Line">
+									<input type="button" class="btn btn-default"  value="Extend Line" id="extension">
                                     <input type="button" class="btn btn-default" id="pickA" value="Pick A (X1,Y1)">
                                     <input type="button" class="btn btn-default" id="pickB" value="Pick B (X2,Y2)">
 
@@ -105,15 +105,15 @@
                                 <!--Compass-->
                                 <div id="compass">
                                     <h2>Compass</h2>
-                                    <div class="input-group input-group-sm">
+                                    <div class="input-group input-group-sm"style="display:none">
                                         <span class="input-group-addon" id="cx">X</span>
                                         <input type="number" class="form-control" name="xvalue" id="x" placeholder="cm">
                                     </div>
-                                    <div class="input-group input-group-sm">
+                                    <div class="input-group input-group-sm"style="display:none">
                                         <span class="input-group-addon" id="cy">Y</span>
                                         <input type="number" class="form-control" name="yvalue" id="y" placeholder="cm">
                                     </div>
-                                    <div class="input-group input-group-sm">
+                                    <div class="input-group input-group-sm"style="display:none">
                                         <span class="input-group-addon" id="cr">Radius</span>
                                         <input type="number" class="form-control" name="r" id="radius" placeholder="cm">
                                     </div>
@@ -125,11 +125,11 @@
 										<label class="radio-inline"><input type="radio" name="opt" id ="rad4" value="unlock">Circle</label>
 									</span>
                                     </div>
-                                    <div class="input-group input-group-sm">
+                                    <div class="input-group input-group-sm"style="display:none">
                                         <span class="input-group-addon" id="cs">Start Angle</span>
                                         <input type="number" class="form-control" id="sa" placeholder="degree">
                                     </div>
-                                    <div class="input-group input-group-sm">
+                                    <div class="input-group input-group-sm"style="display:none">
                                         <span class="input-group-addon" id="ce">End Angle</span>
                                         <input type="number" class="form-control" id="ea" placeholder="degree">
                                     </div>
@@ -146,8 +146,8 @@
                                         <input type="color" class="form-control" name="color" id="clc">
                                     </div>
                                     <div>
-                                        <input type="button" class="btn btn-default" onclick="compass()" value="Draw Arc">
-                                        <input type="button" class="btn btn-default" id="pickC" value="Pick Center">
+                                        <input type="button" class="btn btn-default" onclick="compass()" value="Draw Arc"style="display:none">
+                                        <input type="button" class="btn btn-default" id="pickC" value="Pick Center"style="display:none">
                                     </div>
 
                                 </div>

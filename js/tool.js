@@ -12,7 +12,7 @@ var layer = document.getElementById('measurementlayer');
 var context = layer.getContext('2d');
 var selectedItem = '';
 var selectedMethod = '';
-
+var w =1;
 
 $('#pickCircle').click(function() {
     selectedMethod = 'c';
@@ -31,6 +31,25 @@ $('#pickLine').click(function() {
     selectedItem = 'l';
 
 });
+
+/*
+$('#extension').click(canvas1.addEventListener('mousedown', function(evt) {
+    var mousePos = getMousePos(canvas1, evt);
+	if(w==1)
+	{
+		mousePos1= mousePos;
+		w=2;
+	}
+	else
+	{
+		mousePos2= mousePos;
+		w=1;
+	}
+}
+));
+*/
+
+$('#extension').click(extendedline);
 
 canvas1.addEventListener('mousemove', function(evt) {
     var mousePos = getMousePos(canvas1, evt);
@@ -252,3 +271,39 @@ function cleardrawing() {
     clearCanvas();
 
 }
+
+ textarea = null;
+/*
+function mouseDownOnTextarea(e) {
+    var x = textarea.offsetLeft - e.clientX,
+        y = textarea.offsetTop - e.clientY;
+    function drag(e) {
+        textarea.style.left = e.clientX + x + 'px';
+        textarea.style.top = e.clientY + y + 'px';
+    }
+    function stopDrag() {
+        document.removeEventListener('mousemove', drag);
+        document.removeEventListener('mouseup', stopDrag);
+    }
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('mouseup', stopDrag);
+}
+
+canvas1.addEventListener('click', function(e) {
+    if (!textarea) {
+        textarea = document.createElement('textarea');
+       // textarea.className = 'info';
+		textarea.type ='input';
+       // textarea.addEventListener('mousedown', mouseDownOnTextarea);
+        $('#c').append(textarea);
+		
+    }
+    var x = e.clientX -canvas1.offsetLeft,
+        y = e.clientY - canvas1.offsetTop;
+		
+    textarea.value = "x: " + x + " y: " + y;
+    textarea.style.top = e.clientY + 'px';
+    textarea.style.left = e.clientX + 'px';
+	textarea.zIndex=30;
+	}, false);
+*/
