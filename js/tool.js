@@ -14,23 +14,7 @@ var selectedItem = '';
 var selectedMethod = '';
 var w =1;
 
-$('#pickCircle').click(function() {
-    selectedMethod = 'c';
-    selectedItem = 'r';
 
-});
-
-$('#pickSquare').click(function() {
-    selectedMethod = 's';
-    selectedItem = 's';
-
-});
-
-$('#pickLine').click(function() {
-    selectedMethod = 'l';
-    selectedItem = 'l';
-
-});
 
 /*
 $('#extension').click(canvas1.addEventListener('mousedown', function(evt) {
@@ -49,7 +33,10 @@ $('#extension').click(canvas1.addEventListener('mousedown', function(evt) {
 ));
 */
 
-$('#extension').click(extendedline);
+$('#ext3').click(extendedlineleft);
+$('#ext4').click(extendedlineright);
+$('#ext1').click(extendedlinetop);
+$('#ext2').click(extendedlinebottom);
 
 canvas1.addEventListener('mousemove', function(evt) {
     var mousePos = getMousePos(canvas1, evt);
@@ -130,6 +117,7 @@ canvas1.addEventListener('mousedown', function(evt) {
                     setAngle(evt);
                     selectedItem = 'c';
                     compass();
+					$('#textlabel').text('Click on centre');
                     break;
             }
             break;
@@ -192,10 +180,10 @@ function saveTextAsFile() {
     var downloadLink = document.createElement("a");
     downloadLink.download = fileNameToSaveAs;
     downloadLink.innerHTML = "Download File";
-    if (window.webkitURL != null) {
+    if (window.URL != null) {
         // Chrome allows the link to be clicked
         // without actually adding it to the DOM.
-        downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+        downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
     } else {
         // Firefox requires the link to be added to the DOM
         // before it can be clicked.
@@ -226,6 +214,7 @@ function loadFileAsText() {
 function loaddrawingcalls() {
 
     var string = "";
+	$("#inputTextToSave").val("");
 
     for (var i = 0; i < rulers.length; i++) {
         string += "ruler";
@@ -262,7 +251,8 @@ function loaddrawingcalls() {
         string = string.concat("), \n");
     }
 
-    document.getElementById("inputTextToSave").innerHTML = string;
+	$("#inputTextToSave").val(string);
+   
 }
 
 
@@ -272,7 +262,7 @@ function cleardrawing() {
 
 }
 
- textarea = null;
+ 
 /*
 function mouseDownOnTextarea(e) {
     var x = textarea.offsetLeft - e.clientX,
@@ -307,3 +297,100 @@ canvas1.addEventListener('click', function(e) {
 	textarea.zIndex=30;
 	}, false);
 */
+
+function extendedlineleft(){
+	extlineleft(rulers.length-1);
+}
+
+function extendedlineright(){
+	extlineright(rulers.length-1);
+}
+
+function extendedlinetop(){
+	extlinetop(rulers.length-1);
+}
+
+function extendedlinebottom(){
+	extlinebottom(rulers.length-1);
+}
+
+
+function extlineleft(i)
+{
+	
+	try{
+	$('#e1').val(4);
+	$('#e2').val(0);
+	$('#x1').val(rulers[i].xs);
+	$('#y1').val(rulers[i].ys);
+	$('#x2').val(rulers[i].xe);
+	$('#y2').val(rulers[i].ye);
+	ruler();
+	$('#e1').val(0);
+	$('#e2').val(0);
+	
+	}
+	catch(ex)
+	{
+		console.log("error")
+	}
+}
+
+function extlinetop(i)
+{
+	
+	try{
+	if(rulers[i].xs==rulers[i].xe){
+	$('#x1').val(rulers[i].xs);
+	$('#y1').val(rulers[i].ys-3);
+	$('#x2').val(rulers[i].xe);
+	$('#y2').val(rulers[i].ye);
+	ruler();
+	}
+	
+	}
+	catch(ex)
+	{
+		console.log("error")
+	}
+}
+
+function extlinebottom(i)
+{
+	
+	try{
+	if(rulers[i].xs==rulers[i].xe){
+	$('#x1').val(rulers[i].xs);
+	$('#y1').val(rulers[i].ys);
+	$('#x2').val(rulers[i].xe);
+	$('#y2').val(rulers[i].ye+3);
+	ruler();
+	
+	}
+	}
+	catch(ex)
+	{
+		console.log("error")
+	}
+}
+
+function extlineright(i)
+{
+	
+	try{
+	$('#e1').val(0);
+	$('#e2').val(4);
+	$('#x1').val(rulers[i].xs);
+	$('#y1').val(rulers[i].ys);
+	$('#x2').val(rulers[i].xe);
+	$('#y2').val(rulers[i].ye);
+	ruler();
+	$('#e1').val(0);
+	$('#e2').val(0);
+	
+	}
+	catch(ex)
+	{
+		console.log("error")
+	}
+}

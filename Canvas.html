@@ -1,255 +1,255 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
+<head>
 
-        <title>Mathematical ToolBox</title>
-        <meta charset="utf-8" />
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
-		<link rel="stylesheet" href="./css/tool.css">
+    <title>Mathematical ToolBox</title>
+    <meta charset="utf-8" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/tool.css">
 
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
-        
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="./js/jquery-2.2.2.js"></script>
-        <script src="./js/bootstrap.js"></script>
-		<script src="./js/canvas2svg.js"></script>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
 
-    </head>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="./js/jquery-2.2.2.js"></script>
+    <script src="./js/bootstrap.js"></script>
+    <script src="./js/canvas2svg.js"></script>
 
-    <body onload="init()">
+</head>
 
-        
-		<div class="container marketing">
-
-			<div class="panel panel-success" style ="height:600px; overflow:hidden;">
-					
-                
-                <div class="panel-heading">
-                    <h3 class="panel-title">Geometrical Constructions</h3>
-                 </div>
-					
-                <div class="panel-body" >
-                        <div class="row" >
-                            <div class="col-md-9" id ="c">
-                                <canvas id="canvas1" style="z-index: 1; position:absolute; left:10px;top:10px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
-                                <canvas id="measurementlayer" style="z-index: 0; position:absolute; left:10px;top:10px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
-                            </div>
-                            <div class="col-md-1">
-                                <img id="ir" src="./image/ruler.png" alt="Generic placeholder image" width="90" height="50" >
-                                <h4>Ruler</h4>
-                            </div>
-
-                            <div class="col-md-1">
-                                <img id="ic" src="./image/compass.png" alt="Generic placeholder image" width="50" height="50" >
-                                <h4>Compass</h4>
-                            </div>
-
-                            <div class="col-md-1">
-                                <img id="il" src="./image/label.png" alt="Generic placeholder image" width="50" height="50" >
-                                <h4>Label</h4>
-                            </div>
-						
-						</div>
-						
-							<div class="col-md-9"></div>
-                            <div class="col-md-1">
-                                <img id="im" src="./image/divider.jpg" alt="Generic placeholder image" width="50" height="50">
-                                <h4>Divider</h4>
-                            </div>
-
-						
-							<div class="col-md-9"></div>
-                            <div class="col-md-3" id="functions">
-                                <!--Ruler-->
-                                <div id="ruler">
-                                    <h2>Ruler</h2>
-                                    <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="sizing-addon1"style="display:none">X1</span>
-                                        <input type="number" class="form-control" name="x1value" id="x1" placeholder="cm" style="display:none">
-                                    </div>
-                                    <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="sizing-addon2"style="display:none">Y1</span>
-                                        <input type="number" class="form-control" name="y1value" id="y1" placeholder="cm"style="display:none">
-                                    </div>
-                                    <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="sizing-addon3"style="display:none">Extend</span>
-                                        <input type="number" class="form-control" name="extend1" id="e1" placeholder="cm"style="display:none">
-                                    </div>
-                                    <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="sizing-addon4"style="display:none">X2</span>
-                                        <input type="number" class="form-control" name="x2value" id="x2" placeholder="cm"style="display:none">
-                                    </div>
-                                    <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="sizing-addon5"style="display:none">Y2</span>
-                                        <input type="number" class="form-control" name="y2value" id="y2" placeholder="cm"style="display:none">
-                                    </div>
-                                    <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="sizing-addon6"style="display:none">Extend</span>
-                                        <input type="number" class="form-control" name="extend2" id="e2" placeholder="cm"style="display:none">
-                                    </div>
-                                    <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="sizing-addon7">Color</span>
-                                        <input type="color" class="form-control" name="color" id="clr">
-                                    </div>
-                                    
-									<input type="button" class="btn btn-default"  value="Extend Line" id="extension">
-                                    <input type="button" class="btn btn-default" id="pickA" value="Pick A (X1,Y1)">
-                                    <input type="button" class="btn btn-default" id="pickB" value="Pick B (X2,Y2)">
-
-                                </div>
-                                <!--END Ruler -->
-
-                                <!--Compass-->
-                                <div id="compass">
-                                    <h2>Compass</h2>
-                                    <div class="input-group input-group-sm"style="display:none">
-                                        <span class="input-group-addon" id="cx">X</span>
-                                        <input type="number" class="form-control" name="xvalue" id="x" placeholder="cm">
-                                    </div>
-                                    <div class="input-group input-group-sm"style="display:none">
-                                        <span class="input-group-addon" id="cy">Y</span>
-                                        <input type="number" class="form-control" name="yvalue" id="y" placeholder="cm">
-                                    </div>
-                                    <div class="input-group input-group-sm"style="display:none">
-                                        <span class="input-group-addon" id="cr">Radius</span>
-                                        <input type="number" class="form-control" name="r" id="radius" placeholder="cm">
-                                    </div>
-                                    <div class="input-group input-group-sm">
-                                    <span class="input-group-addon" id="rad">
-										<label class="radio-inline"><input type="radio" name="opt" id="rad1" value="lock">Lock</label>     
-										<label class="radio-inline"><input type="radio" name="opt" id ="rad2" checked="true" value="unlock">Unlock</label>
-										<label class="radio-inline"><input type="radio" name="opt" id="rad3" value="lock">Same Center</label>     
-										<label class="radio-inline"><input type="radio" name="opt" id ="rad4" value="unlock">Circle</label>
-									</span>
-                                    </div>
-                                    <div class="input-group input-group-sm"style="display:none">
-                                        <span class="input-group-addon" id="cs">Start Angle</span>
-                                        <input type="number" class="form-control" id="sa" placeholder="degree">
-                                    </div>
-                                    <div class="input-group input-group-sm"style="display:none">
-                                        <span class="input-group-addon" id="ce">End Angle</span>
-                                        <input type="number" class="form-control" id="ea" placeholder="degree">
-                                    </div>
-
-                                    <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="angle">
-										<label class="radio-inline"><input type="radio" name="optradio" id="rotation1" checked="true">Counterclockwise</label>     
-										<label class="radio-inline"><input type="radio" name="optradio" id ="rotation2" >Clockwise</label>
-									</span>
-								
-                                    </div>
-                                    <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="colorpick">Color</span>
-                                        <input type="color" class="form-control" name="color" id="clc">
-                                    </div>
-                                    <div>
-                                        <input type="button" class="btn btn-default" onclick="compass()" value="Draw Arc"style="display:none">
-                                        <input type="button" class="btn btn-default" id="pickC" value="Pick Center"style="display:none">
-                                    </div>
-
-                                </div>
-                                <!--END compass -->
+<body onload="init()">
 
 
-                                <!--Lable-->
-                                <div id="label">
-                                    <h2>Label</h2>
-									
-                                    <div class="input-group input-group-sm">
-                                        <span class="input-group-addon" id="lx" style="display: none;">X</span>
-                                        <input type="number" class="form-control" name="xvalue" id="xx" placeholder="cm" style="display: none;">
-                                    </div>
+<div class="container marketing">
 
-                                    <div class="input-group input-group-sm" >
-                                        <span class="input-group-addon" id="ly" style="display: none;">Y</span>
-                                        <input type="number" class="form-control" name="yvalue" id="yy" placeholder="cm" style="display: none;">
-                                    </div>
+    <div class="panel panel-success" style ="height:600px; overflow:hidden;">
 
-                                    <div class="input-group input-group-sm" style="display: none;">
-                                        <span class="input-group-addon" id="lt">Text</span>
-                                        <input type="text" name="text" class="form-control" id="txt">
-                                    </div>
-									
-									
-                                    <input type="button" class="btn btn-default" onclick="label()" value="Label Item" style="display: none;">
-                                    <input type="button" class="btn btn-default" value="Locate (X,Y)" id="pickL">
-									
-                                </div>
-                                <!--END Label -->
 
-                            </div> <!--End Functions-->
-						
-                        </div>
-                        <!-- End Panel Body -->
-    
+        <div class="panel-heading">
+            <h3 class="panel-title">Geometrical Constructions</h3>
+        </div>
+
+        <div class="panel-body" >
+            <div class="row" >
+                <div class="col-md-9" id ="c">
+                    <canvas id="canvas1" style="z-index: 1; position:absolute; left:10px;top:10px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
+                    <canvas id="measurementlayer" style="z-index: 0; position:absolute; left:10px;top:10px; border:1px solid #d3d3d3;" height="500" width="800 "></canvas>
+                </div>
+                <div class="col-md-1">
+                    <img id="ir" src="./image/ruler.png" alt="Generic placeholder image" width="90" height="50" >
+                    <h4>Ruler</h4>
+                </div>
+
+                <div class="col-md-1">
+                    <img id="ic" src="./image/compass.png" alt="Generic placeholder image" width="50" height="50" >
+                    <h4>Compass</h4>
+                </div>
+
+                <div class="col-md-1">
+                    <img id="il" src="./image/label.png" alt="Generic placeholder image" width="50" height="50" >
+                    <h4>Label</h4>
+                </div>
 
             </div>
-            <!-- End Panel -->
 
-				
+            <div class="col-md-9"></div>
+            <div class="col-md-1">
+                <img id="im" src="./image/divider.jpg" alt="Generic placeholder image" width="50" height="50">
+                <h4>Divider</h4>
+            </div>
 
 
-            
-            <div class="panel panel-warning">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Administration</h3>
+            <div class="col-md-9"></div>
+            <span class="input-group-addon" id="textlabel">Click on Ruler, Compass or Label</span>
+            <div class="col-md-9"></div>
+            <div class="col-md-3" id="functions">
+                <!--Ruler-->
+                <div id="ruler">
+                    <h2>Ruler</h2>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon1" style="display:none">X1</span>
+                        <input type="number" class="form-control" name="x1value" id="x1" placeholder="cm" style="display:none"></input>
                     </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <input type="button" class="btn btn-default" onclick="loaddrawingcalls()" value="Load Drawing API Calls">
-                            </div>
-                            <div class="col-lg-3">
-                                <input type="button" class="btn btn-default" onclick="loaddrawing()" value="Load Drawing">
-                            </div>
-                            <div class="col-lg-3">
-                                <input type="button" class="btn btn-default" onclick="undodrawing()" value="Undo Drawing">
-                            </div>
-                            <div class="col-lg-3">
-                                <input type="button" class="btn btn-default" onclick="clearAll()" value="Clear Drawing">
-                            </div>
-							<div class="col-lg-3">
-                                <input type="button" class="btn btn-default" onclick="drawsvg()" value="SVG">
-                            </div>
-                        </div>
-                        <br>
-                        <br>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <textarea id="inputTextToSave" style="width:512px;height:256px"></textarea>
-                            </div>
-                            <div class="col-lg-2">
-                                <h4><span class="label label-default">Filename to Save As: </span></h4></div>
-                            <div class="col-lg-2">
-                                <input type="text" class="form-control" id="inputFileNameToSaveAs"></input>
-                            </div>
-                            <div class="col-lg-2">
-                                <input type="button" class="btn btn-default" onclick="saveTextAsFile()" value="Save to File"> </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon2" style="display:none">Y1</span>
+                        <input type="number" class="form-control" name="y1value" id="y1" placeholder="cm" style="display:none"></input>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon3"style="display:none">Extend</span>
+                        <input type="number" class="form-control" name="extend1" id="e1" placeholder="cm" style="display:none"></input>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon4" style="display:none">X2</span>
+                        <input type="number" class="form-control" name="x2value" id="x2" placeholder="cm"style="display:none"></input>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon5"style="display:none">Y2</span>
+                        <input type="number" class="form-control" name="y2value" id="y2" placeholder="cm" style="display:none"></input>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon6"style="display:none">Extend</span>
+                        <input type="number" class="form-control" name="extend2" id="e2" placeholder="cm" style="display:none"></input>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="sizing-addon7">Color</span>
+                        <input type="color" class="form-control" name="color" id="clr"></input>
+                    </div>
 
-                            <br>
-                            <br>
-                            <div class="row">
-                                <div class="col-lg-6"></div>
-                                <div class="col-lg-2">
-                                    <h4><span class="label label-default">Select a File to Load: </span></h4></div>
-                                <div class="col-lg-2">
-                                    <input type="file" id="fileToLoad" class="form-control">
-                                </div>
-                                <div class="col-lg-2">
-                                    <input type="button" class="btn btn-default" onclick="loadFileAsText()" value="Load Selected File">
-                                </div>
-                            </div>
-                        </div>
-					</div>
-			</div>
-						
-		</div>
+                    <input type="button" class="btn btn-default"  value="Extend Upwards" id="ext1"></input>
+					<input type="button" class="btn btn-default"  value="Extend Left" id="ext3"></input>
+					<input type="button" class="btn btn-default"  value="Extend Right" id="ext4"></input>
+					<input type="button" class="btn btn-default"  value="Extend Downwards" id="ext2"></input>
+                    <input type="button" class="btn btn-default" id="pickA" value="Pick A (X1,Y1)"></input>
+                    <input type="button" class="btn btn-default" id="pickB" value="Pick B (X2,Y2)"></input>
 
-    <script type="text/javascript" src="./js/toolbox.js"></script>
-	<script type="text/javascript" src="./js/tool.js"></script>
+                </div>
+                <!--END Ruler -->
+
+                <!--Compass-->
+                <div id="compass">
+                    <h2>Compass</h2>
+                    <div class="input-group input-group-sm"style="display:none">
+                        <span class="input-group-addon" id="cx">X</span>
+                        <input type="number" class="form-control" name="xvalue" id="x" placeholder="cm"></input>
+                    </div>
+                    <div class="input-group input-group-sm"style="display:none">
+                        <span class="input-group-addon" id="cy">Y</span>
+                        <input type="number" class="form-control" name="yvalue" id="y" placeholder="cm"></input>
+                    </div>
+                    <div class="input-group input-group-sm"style="display:none">
+                        <span class="input-group-addon" id="cr">Radius</span>
+                        <input type="number" class="form-control" name="r" id="radius" placeholder="cm"></input>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="rad">
+							<label class="radio-inline"><input type="radio" name="opt" id="rad1" value="lock"></input>Lock</label>     
+							<label class="radio-inline"><input type="radio" name="opt" id ="rad2" checked="true" value="unlock"></input>Unlock</label>
+							<label class="radio-inline"><input type="radio" name="opt" id="rad3" value="lock"></input>Same Center</label>     
+							<label class="radio-inline"><input type="radio" name="opt" id ="rad4" value="unlock"></input>Circle</label>
+						</span>
+                    </div>
+                    <div class="input-group input-group-sm" style="display:none">
+                        <span class="input-group-addon" id="cs">Start Angle</span>
+                        <input type="number" class="form-control" id="sa" placeholder="degree"></input>
+                    </div>
+                    <div class="input-group input-group-sm"style="display:none">
+                        <span class="input-group-addon" id="ce">End Angle</span>
+                        <input type="number" class="form-control" id="ea" placeholder="degree"></input>
+                    </div>
+
+                    <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="angle">
+								<label class="radio-inline"><input type="radio" name="optradio" id="rotation1" checked="true">Counterclockwise</label>     
+								<label class="radio-inline"><input type="radio" name="optradio" id ="rotation2" >Clockwise</label>
+								</span>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="colorpick">Color</span>
+                        <input type="color" class="form-control" name="color" id="clc"></input>
+                    </div>
+                    <div>
+                        <input type="button" class="btn btn-default" onclick="compass()" value="Draw Arc"style="display:none"></input>
+                        <input type="button" class="btn btn-default" id="pickC" value="Pick Center"style="display:none"></input>
+                    </div>
+
+                </div>
+                <!--END compass -->
+
+
+                <!--Lable-->
+                <div id="label">
+                    <h2>Label</h2>
+
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon" id="lx" style="display: none;">X</span>
+                        <input type="number" class="form-control" name="xvalue" id="xx" placeholder="cm" style="display: none;"></input>
+                    </div>
+
+                    <div class="input-group input-group-sm" >
+                        <span class="input-group-addon" id="ly" style="display: none;">Y</span>
+                        <input type="number" class="form-control" name="yvalue" id="yy" placeholder="cm" style="display: none;"></input>
+                    </div>
+
+                    <div class="input-group input-group-sm" style="display: none;">
+                        <span class="input-group-addon" id="lt">Text</span>
+                        <input type="text" name="text" class="form-control" id="txt"></input>
+                    </div>
+
+
+                    <input type="button" class="btn btn-default" onclick="label()" value="Label Item" style="display: none;"></input>
+                    <input type="button" class="btn btn-default" value="Locate (X,Y)" id="pickL"></input>
+
+                </div>
+                <!--END Label -->
+
+            </div> <!--End Functions-->
+
+        </div>
+        <!-- End Panel Body -->
+
+
+    </div>
+    <!-- End Panel -->
+
+
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h3 class="panel-title">Administration</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-3">
+                    <input type="button" class="btn btn-default" onclick="loaddrawingcalls()" value="Load Drawing API Calls"></input>
+                </div>
+                <div class="col-lg-3">
+                    <input type="button" class="btn btn-default" onclick="undodrawing()" value="Undo Drawing"></input>
+                </div>
+                <div class="col-lg-3">
+                    <input type="button" class="btn btn-default" onclick="clearAll()" value="Clear Drawing"></input>
+                </div>
+                <div class="col-lg-3">
+                    <input type="button" class="btn btn-default" onclick="drawsvg()" value="SVG"></input>
+                </div>
+                <div class="col-lg-3">
+                    <input type="button" class="btn btn-default" onclick="loaddrawing()" value="Load Drawing" style="display:none"></input>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-lg-6">
+                    <textarea id="inputTextToSave" style="width:512px;height:256px"></textarea>
+                </div>
+                <div class="col-lg-2">
+                    <h4><span class="label label-default">Filename to Save As: </span></h4></div>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" id="inputFileNameToSaveAs" title="Diagram.svg"></input>
+                </div>
+                <div class="col-lg-2">
+                    <input type="button" class="btn btn-default" onclick="saveTextAsFile()" value="Save to File"></input></div>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-lg-6"></div>
+                    <div class="col-lg-2">
+                        <h4><span class="label label-default">Select a File to Load: </span></h4></div>
+                    <div class="col-lg-2">
+                        <input type="file" id="fileToLoad" class="form-control"></input>
+                    </div>
+                    <div class="col-lg-2">
+                        <input type="button" class="btn btn-default" onclick="loadFileAsText()" value="Load Selected File">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="./js/toolbox.js"></script>
+<script type="text/javascript" src="./js/tool.js"></script>
 </body>
 
 </html>

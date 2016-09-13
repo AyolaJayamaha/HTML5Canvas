@@ -1,6 +1,10 @@
 {
     "version": "0.0.1",
-    "name": "paint",
+    "name": "mathematics",
+	"repository": {
+    "url": ""
+	},
+	
     "devDependencies": {
         "http-server": "^0.6.1"
     },
