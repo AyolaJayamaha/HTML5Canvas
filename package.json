@@ -9,7 +9,7 @@
         "http-server": "^0.6.1"
     },
     "dependencies": {
-        "jquery": "~2.1.4"
+        "jquery": ">=3.5.0"
     },
     "scripts": {
         "prestart": "npm install",
